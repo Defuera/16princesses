@@ -1,50 +1,42 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: [CONSTITUTION_VERSION] → 1.0.0 (initial)
+List of modified principles: All principles created from template
+Added sections: All core sections established
+Removed sections: None
+Templates requiring updates: ✅ All templates compatible with new principles
+Follow-up TODOs: None
+-->
+
+# Princess Personality Graph Website Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. User Experience First
+The user's enjoyment and engagement MUST be the primary consideration in every design decision. Features must be intuitive, delightful, and create a sense of discovery. If a technical choice conflicts with user experience, prioritize UX unless security or data integrity is at risk. All interactions should feel smooth and responsive, with clear visual feedback.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Static & Simple Architecture
+The website MUST remain a static site with minimal dependencies. No server-side processing, databases, or complex build pipelines required. All functionality achievable through HTML, CSS, and vanilla JavaScript. This ensures fast loading, easy deployment, and minimal maintenance overhead. External dependencies must be justified and kept to an absolute minimum.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Interactive & Engaging Design
+Every element should encourage user interaction and exploration. The scatter plot must be clickable, hoverable, and responsive. Princess selection should feel engaging through animations, transitions, and personality-based feedback messages. Visual design must be playful yet professional, appealing to diverse audiences while maintaining readability and clarity.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Data Accuracy & Consistency
+Princess personality data from GRAPH.md is the single source of truth and MUST be accurately represented in all visualizations. Any modifications to princess ratings require explicit justification and documentation. The scatter plot coordinates must precisely reflect the Feminism and Bitchiness percentages. Character names, sources, and values must remain consistent throughout the interface.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Accessibility & Inclusivity
+The website MUST be usable by people with disabilities and across different devices. Include proper ARIA labels, keyboard navigation support, color contrast compliance (WCAG 2.1 AA), and responsive design for mobile/tablet/desktop. Text alternatives for visual elements, proper heading structure, and screen reader compatibility are non-negotiable requirements.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Quality Standards
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+All code must be readable, well-commented, and maintainable. CSS should follow consistent naming conventions. JavaScript must handle edge cases gracefully with appropriate error messages. The site must load completely within 3 seconds on standard broadband connections. Browser compatibility required for Chrome, Firefox, Safari, and Edge (last 2 major versions).
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Changes to princess data require validation against source materials. Visual design changes must be tested across different screen sizes and accessibility tools. All interactive elements must be tested with both mouse/touch and keyboard navigation. Code reviews should verify UX consistency, accessibility compliance, and performance impact.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices for this project. Amendments require clear justification and must maintain the core principles of simplicity, user focus, and accessibility. All feature additions must demonstrate clear user value without compromising site performance or accessibility standards.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-09-27 | **Last Amended**: 2025-09-27

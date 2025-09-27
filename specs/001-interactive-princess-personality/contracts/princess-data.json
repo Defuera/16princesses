@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "16Princesses Test Data Contract",
+  "description": "JSON schema for princess personality data used in the 16Princesses Test website",
+  "type": "object",
+  "required": ["version", "lastUpdated", "princesses", "metadata"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Data format version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "example": "1.0.0"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when data was last updated",
+      "example": "2025-09-27"
+    },
+    "princesses": {
+      "type": "array",
+      "description": "Array of princess personality data",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {
+        "$ref": "#/definitions/princess"
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["totalCount", "dataSource", "generator"],
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "description": "Total number of princesses",
+          "const": 16
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "Original source of personality data",
+          "const": "GRAPH.md"
+        },
+        "generator": {
+          "type": "string",
+          "description": "Tool used to generate JSON from source",
+          "example": "conversion-script v1.0"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "princess": {
+      "type": "object",
+      "required": ["id", "name", "source", "feminismPercentage", "bitchinessPercentage", "personalityMessage"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier in kebab-case",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "minLength": 2,
+          "maxLength": 30,
+          "examples": ["snow-white", "princess-mononoke", "elsa"]
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the princess",
+          "minLength": 1,
+          "maxLength": 50,
+          "examples": ["Snow White", "Princess Mononoke", "Elsa"]
+        },
+        "source": {
+          "type": "string", 
+          "description": "Source material (movie, anime, etc.)",
+          "minLength": 1,
+          "maxLength": 100,
+          "examples": ["Snow White and the Seven Dwarfs", "Princess Mononoke", "Frozen"]
+        },
+        "feminismPercentage": {
+          "type": "integer",
+          "description": "Feminism score (X-axis position on graph)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [5, 50, 100]
+        },
+        "bitchinessPercentage": {
+          "type": "integer", 
+          "description": "Assertiveness score (Y-axis position on graph)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [5, 50, 95]
+        },
+        "personalityMessage": {
+          "type": "string",
+          "description": "Generated personality message based on trait combination",
+          "minLength": 10,
+          "maxLength": 200,
+          "examples": [
+            "You're such a sweetheart! 💖",
+            "You're a fierce, independent force! 👑",
+            "You're a gentle revolutionary! 🌸"
+          ]
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Optional relative path to princess image",
+          "format": "uri-reference",
+          "examples": ["assets/images/snow-white.png", "assets/images/elsa.jpg"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "version": "1.0.0",
+      "lastUpdated": "2025-09-27",
+      "princesses": [
+        {
+          "id": "snow-white",
+          "name": "Snow White",
+          "source": "Snow White and the Seven Dwarfs",
+          "feminismPercentage": 5,
+          "bitchinessPercentage": 5,
+          "personalityMessage": "You're such a sweetheart! 💖"
+        },
+        {
+          "id": "elsa",
+          "name": "Elsa", 
+          "source": "Frozen",
+          "feminismPercentage": 100,
+          "bitchinessPercentage": 85,
+          "personalityMessage": "You're a fierce, independent force! 👑"
+        }
+      ],
+      "metadata": {
+        "totalCount": 16,
+        "dataSource": "GRAPH.md",
+        "generator": "conversion-script v1.0"
+      }
+    }
+  ]
+}
