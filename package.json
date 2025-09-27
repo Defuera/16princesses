@@ -12,7 +12,12 @@
     "deploy:gh-pages": "npm run build && npx gh-pages -d dist",
     "serve": "npx serve dist"
   },
-  "keywords": ["react", "typescript", "vite", "personality-test"],
+  "keywords": [
+    "react",
+    "typescript",
+    "vite",
+    "personality-test"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -27,5 +32,8 @@
     "react-router-dom": "^7.9.3",
     "typescript": "^5.9.2",
     "vite": "^7.1.7"
+  },
+  "devDependencies": {
+    "terser": "^5.44.0"
   }
 }

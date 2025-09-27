@@ -93,7 +93,7 @@ const PrincessGraph: React.FC<PrincessGraphProps> = ({
           text: config.xAxis.label,
           font: {
             size: 14,
-            weight: 'bold',
+            weight: 'bold' as const,
           },
         },
         min: config.xAxis.min,
@@ -113,7 +113,7 @@ const PrincessGraph: React.FC<PrincessGraphProps> = ({
           text: config.yAxis.label,
           font: {
             size: 14,
-            weight: 'bold',
+            weight: 'bold' as const,
           },
         },
         min: config.yAxis.min,
