@@ -3,9 +3,15 @@ import { BrowserRouter, Routes, Route, useParams, useNavigate } from 'react-rout
 import PrincessList from './components/PrincessList';
 import PrincessGraph from './components/PrincessGraph';
 import PrincessMessage from './components/PrincessMessage';
+import QuizStart from './components/quiz/QuizStart';
+import QuizQuestion from './components/quiz/QuizQuestion';
+import QuizProgress from './components/quiz/QuizProgress';
+import QuizResults from './components/quiz/QuizResults';
 import { getAllPrincesses, getPrincessById } from './data/princessData';
+import { useQuiz } from './hooks/useQuiz';
 import './styles/index.css';
 import './styles/components.css';
+import './styles/quiz.css';
 
 const ResultPage: React.FC = () => {
   const { princessId } = useParams<{ princessId: string }>();
