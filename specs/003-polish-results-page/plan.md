@@ -1,8 +1,8 @@
 
-# Implementation Plan: [FEATURE]
+# Implementation Plan: Polished Results Page with Animated Graph
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Branch**: `003-polish-results-page` | **Date**: 2025-09-27 | **Spec**: [spec.md](./spec.md)  
+**Input**: Feature specification from `/Users/admin/dev/projects/DM/princesses/specs/003-polish-results-page/spec.md`
 
 ## Execution Flow (/plan command scope)
 ```
@@ -31,23 +31,51 @@
 - Phase 3-4: Implementation execution (manual or via tools)
 
 ## Summary
-[Extract from feature spec: primary requirement + technical approach from research]
+Create an engaging animated results page that replaces static quiz results with a step-by-step cross-axis graph animation (1.5s per line + 2s delays), intersection marker with princess name, reveal.json descriptions, and interactive carousel for exploring all princesses. Must integrate seamlessly with existing React/TypeScript quiz infrastructure while maintaining performance and accessibility standards.
 
 ## Technical Context
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: TypeScript 5.9+ with React 19.1.1  
+**Primary Dependencies**: React, Vite 7.1.7, Chart.js 4.5.0, react-router-dom 7.9.3  
+**Storage**: Static JSON files (reveal.json, princesses.json, quizData.json)  
+**Testing**: Vitest (configured but not actively used for this feature)  
+**Target Platform**: Modern web browsers (Chrome, Firefox, Safari, Edge last 2 versions)  
+**Project Type**: Single-page web application with static build  
+**Performance Goals**: 60fps animations, <100ms interaction response, smooth scrolling  
+**Constraints**: Static site deployment (GitHub Pages), no backend, mobile-responsive  
+**Scale/Scope**: ~18 princess profiles, ~16 quiz questions, single-user experience
 
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+**I. User Experience First**: ✅ PASS
+- Animations enhance engagement and create sense of discovery
+- Step-by-step reveal builds anticipation and understanding
+- Interactive carousel encourages exploration
+- Instant skip functionality respects user control
+
+**II. Development Speed First**: ✅ PASS  
+- Uses existing React/TypeScript infrastructure
+- Leverages CSS animations and React state (simple, fast)
+- No new external dependencies required
+- Static site compatibility maintained
+
+**III. Interactive & Engaging Design**: ✅ PASS
+- Multiple interaction points: graph, carousel, princess selection
+- Visual feedback through animations and highlighting
+- Personality-based reveal messages from reveal.json
+- Responsive design considerations included
+
+**IV. Data Accuracy & Consistency**: ✅ PASS
+- Uses existing princess data from established sources
+- Graph coordinates remain accurate (no data modifications)
+- Reveal.json provides consistent personality descriptions
+- Maintains character names and source attribution
+
+**V. Accessibility & Inclusivity**: ⚠️ REQUIRES ATTENTION
+- Animation controls needed (respect prefers-reduced-motion)
+- Keyboard navigation for carousel must be implemented
+- ARIA labels for dynamic content updates
+- Screen reader announcements for animation phases
 
 ## Project Structure
 
@@ -63,50 +91,38 @@ specs/[###-feature]/
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+├── components/
+│   ├── quiz/
+│   │   ├── AnimatedResultsGraph.tsx    # New: Step-by-step graph animation
+│   │   ├── PrincessRevealCarousel.tsx  # New: Interactive princess exploration
+│   │   ├── QuizResults.tsx             # Modified: Integrate new components
+│   │   └── [existing quiz components]
+│   ├── PrincessGraph.tsx               # Existing: Chart.js integration
+│   └── [other existing components]
+├── data/
+│   ├── princessData.ts                 # Existing: Princess graph coordinates
+│   ├── quizScoring.ts                  # Existing: Quiz result calculation
+│   └── quizData.json                   # Existing: Question data
+├── styles/
+│   ├── quiz.css                        # Modified: Add animation styles
+│   └── [existing styles]
+├── types/
+│   ├── princess.ts                     # Existing: Type definitions
+│   └── quiz.ts                         # Existing: Quiz types
+└── [existing app structure]
+
+docs/
+└── reveal.json                         # New: Princess personality descriptions
 
 tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+├── components/                         # Existing structure
+├── integration/                        # Existing structure  
+└── accessibility/                      # Existing structure
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: React single-page application with component-based architecture. New animated components integrate into existing quiz flow while maintaining separation of concerns.
 
 ## Phase 0: Outline & Research
 1. **Extract unknowns from Technical Context** above:
@@ -162,23 +178,42 @@ directories captured above]
 
 **Output**: data-model.md, /contracts/*, failing tests, quickstart.md, agent-specific file
 
-## Phase 2: Task Planning Approach
+## Phase 2: Task Planning Approach  
 *This section describes what the /tasks command will do - DO NOT execute during /plan*
 
 **Task Generation Strategy**:
 - Load `.specify/templates/tasks-template.md` as base
 - Generate tasks from Phase 1 design docs (contracts, data model, quickstart)
-- Each contract → contract test task [P]
-- Each entity → model creation task [P] 
-- Each user story → integration test task
-- Implementation tasks to make tests pass
+- Animation State interfaces → TypeScript definition tasks [P]
+- Component contracts → component creation tasks with prop interfaces [P]
+- Accessibility requirements → A11y implementation tasks
+- CSS animation requirements → styling and keyframe tasks [P]
+- Integration requirements → QuizResults modification tasks
+- Each quickstart scenario → integration test task
 
 **Ordering Strategy**:
-- TDD order: Tests before implementation 
-- Dependency order: Models before services before UI
-- Mark [P] for parallel execution (independent files)
+1. **Foundation** (parallel): TypeScript interfaces, CSS animations, accessibility setup
+2. **Components**: AnimatedResultsGraph → PrincessRevealCarousel → integration
+3. **Testing**: Component tests → integration tests → accessibility tests
+4. **Polish**: Performance optimization, browser compatibility, mobile responsiveness
 
-**Estimated Output**: 25-30 numbered, ordered tasks in tasks.md
+**Specific Task Categories Expected**:
+- **Type Definitions** (3-4 tasks): AnimationState, CarouselState, RevealMessage interfaces
+- **Animation Implementation** (4-5 tasks): SVG graph, CSS keyframes, timing control, user interaction
+- **Carousel Implementation** (3-4 tasks): Navigation, selection, graph highlighting, reveal messages
+- **Integration** (2-3 tasks): QuizResults updates, routing, data flow
+- **Accessibility** (3-4 tasks): ARIA labels, keyboard navigation, screen reader support, reduced motion
+- **Testing** (4-5 tasks): Component tests, integration scenarios, accessibility audits, performance benchmarks
+- **Styling & Polish** (3-4 tasks): CSS modules, responsive design, cross-browser compatibility
+
+**Dependency-Aware Ordering**:
+- CSS animations and TypeScript interfaces can run in parallel [P]
+- AnimatedResultsGraph must complete before PrincessRevealCarousel integration
+- Accessibility tasks can run parallel to component development [P]
+- Integration tasks require both components complete
+- Testing tasks follow TDD where possible (failing tests first)
+
+**Estimated Output**: 22-27 numbered, ordered tasks in tasks.md
 
 **IMPORTANT**: This phase is executed by the /tasks command, NOT by /plan
 
@@ -202,18 +237,18 @@ directories captured above]
 *This checklist is updated during execution flow*
 
 **Phase Status**:
-- [ ] Phase 0: Research complete (/plan command)
-- [ ] Phase 1: Design complete (/plan command)
-- [ ] Phase 2: Task planning complete (/plan command - describe approach only)
+- [x] Phase 0: Research complete (/plan command)
+- [x] Phase 1: Design complete (/plan command)
+- [x] Phase 2: Task planning complete (/plan command - describe approach only)
 - [ ] Phase 3: Tasks generated (/tasks command)
 - [ ] Phase 4: Implementation complete
 - [ ] Phase 5: Validation passed
 
 **Gate Status**:
-- [ ] Initial Constitution Check: PASS
-- [ ] Post-Design Constitution Check: PASS
-- [ ] All NEEDS CLARIFICATION resolved
-- [ ] Complexity deviations documented
+- [x] Initial Constitution Check: PASS (with accessibility attention noted)
+- [x] Post-Design Constitution Check: PASS (accessibility addressed in design)
+- [x] All NEEDS CLARIFICATION resolved (via clarify workflow)
+- [x] Complexity deviations documented (none required)
 
 ---
 *Based on Constitution v2.1.1 - See `/memory/constitution.md`*

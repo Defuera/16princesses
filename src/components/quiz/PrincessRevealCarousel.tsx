@@ -1,104 +1,197 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  PrincessRevealCarouselProps, 
+  CarouselState, 
+  RevealData,
+  RevealMessage 
+} from '../../types/animation';
 import { Princess } from '../../types/princess';
-import { QuizResult } from '../../types/quiz';
-import { getAllPrincesses } from '../../data/princessData';
+import { 
+  announceToScreenReader, 
+  KeyboardNavigation, 
+  focusManager 
+} from '../../utils/accessibility';
 
-interface RevealPrincess {
-  name: string;
-  description: string;
-}
-
-interface PrincessRevealCarouselProps {
-  quizResult: QuizResult;
-  revealed?: boolean;
-  onPrincessSelect?: (princess: Princess) => void;
-}
-
-export const PrincessRevealCarousel: React.FC<PrincessRevealCarouselProps> = ({
+const PrincessRevealCarousel: React.FC<PrincessRevealCarouselProps> = ({
   quizResult,
+  allPrincesses,
   revealed = false,
-  onPrincessSelect
+  onPrincessSelect,
+  selectedPrincess,
+  className = ''
 }) => {
-  const [allPrincesses, setAllPrincesses] = useState<Princess[]>([]);
-  const [revealPrincesses, setRevealPrincesses] = useState<RevealPrincess[]>([]);
-  const [selectedCarouselIndex, setSelectedCarouselIndex] = useState<number>(0);
-  const [isCarouselVisible, setIsCarouselVisible] = useState<boolean>(false);
+  const [carouselState, setCarouselState] = useState<CarouselState>({
+    selectedIndex: 0,
+    isVisible: false,
+    selectedPrincess: null,
+    isTransitioning: false
+  });
 
+  const [revealData, setRevealData] = useState<RevealData>({ princesses: [] });
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const keyboardNavRef = useRef<KeyboardNavigation | null>(null);
+
+  // Initialize carousel with user's matched princess
   useEffect(() => {
-    const princesses = getAllPrincesses();
-    setAllPrincesses(princesses);
-    
-    // Find the index of the matched princess for carousel
-    const matchedIndex = princesses.findIndex(p => p.id === quizResult.matchedPrincess.id);
+    const matchedIndex = allPrincesses.findIndex(p => p.id === quizResult.matchedPrincess.id);
     if (matchedIndex >= 0) {
-      setSelectedCarouselIndex(matchedIndex);
+      setCarouselState(prev => ({
+        ...prev,
+        selectedIndex: matchedIndex,
+        selectedPrincess: allPrincesses[matchedIndex]
+      }));
     }
-  }, [quizResult.matchedPrincess.id]);
+  }, [allPrincesses, quizResult.matchedPrincess.id]);
 
+  // Load reveal.json data
   useEffect(() => {
-    // Load reveal data
     const loadRevealData = async () => {
       try {
         const response = await fetch('/docs/reveal.json');
         const data = await response.json();
-        setRevealPrincesses(data.princesses);
+        setRevealData(data);
       } catch (error) {
-        console.error('Failed to load reveal data:', error);
-        // Fallback to empty array
-        setRevealPrincesses([]);
+        console.warn('Failed to load reveal data:', error);
+        setRevealData({ princesses: [] });
       }
     };
 
     loadRevealData();
   }, []);
 
+  // Set up keyboard navigation
+  useEffect(() => {
+    if (carouselRef.current) {
+      const thumbnails = carouselRef.current.querySelectorAll('[data-princess-id]') as NodeListOf<HTMLElement>;
+      
+      keyboardNavRef.current = new KeyboardNavigation(
+        Array.from(thumbnails),
+        (index, item) => {
+          const princessId = item.getAttribute('data-princess-id');
+          const princess = allPrincesses.find(p => p.id === princessId);
+          if (princess) {
+            handlePrincessSelect(princess, index);
+          }
+        }
+      );
+    }
+
+    return () => {
+      keyboardNavRef.current = null;
+    };
+  }, [allPrincesses]);
+
+  // Handle carousel visibility
   useEffect(() => {
     if (revealed) {
-      // Show carousel after a delay
       const timer = setTimeout(() => {
-        setIsCarouselVisible(true);
+        setCarouselState(prev => ({ ...prev, isVisible: true }));
       }, 2000);
       return () => clearTimeout(timer);
     }
   }, [revealed]);
 
+  // Sync external selection with internal state
+  useEffect(() => {
+    if (selectedPrincess) {
+      const index = allPrincesses.findIndex(p => p.id === selectedPrincess.id);
+      if (index >= 0 && index !== carouselState.selectedIndex) {
+        setCarouselState(prev => ({
+          ...prev,
+          selectedIndex: index,
+          selectedPrincess: selectedPrincess
+        }));
+      }
+    }
+  }, [selectedPrincess, allPrincesses, carouselState.selectedIndex]);
+
+  // Get reveal message for a princess
   const getRevealMessage = (princessName: string): string => {
-    const revealPrincess = revealPrincesses.find(p => p.name === princessName);
-    return revealPrincess?.description || "You're a unique princess archetype! Your combination of traits creates an interesting personality profile.";
+    const revealPrincess = revealData.princesses.find(p => p.name === princessName);
+    return revealPrincess?.description || 
+      "You're a unique princess archetype! Your combination of traits creates an interesting personality profile.";
   };
 
-  const handleCarouselNavigation = (direction: 'prev' | 'next') => {
-    if (direction === 'prev') {
-      setSelectedCarouselIndex(prev => 
-        prev === 0 ? allPrincesses.length - 1 : prev - 1
-      );
-    } else {
-      setSelectedCarouselIndex(prev => 
-        prev === allPrincesses.length - 1 ? 0 : prev + 1
-      );
-    }
-  };
-
-  const handlePrincessClick = (princess: Princess) => {
-    const princessIndex = allPrincesses.findIndex(p => p.id === princess.id);
+  // Handle princess selection
+  const handlePrincessSelect = (princess: Princess, index?: number) => {
+    const princessIndex = index !== undefined ? index : allPrincesses.findIndex(p => p.id === princess.id);
+    
     if (princessIndex >= 0) {
-      setSelectedCarouselIndex(princessIndex);
+      setCarouselState(prev => ({
+        ...prev,
+        selectedIndex: princessIndex,
+        selectedPrincess: princess,
+        isTransitioning: true
+      }));
+
+      // Update keyboard navigation focus
+      keyboardNavRef.current?.setCurrentIndex(princessIndex);
+
+      // Call callback for graph highlighting
+      onPrincessSelect?.(princess);
+
+      // Announce selection to screen readers
+      announceToScreenReader(
+        `Selected ${princess.name} from ${princess.source}. ${princess.feminismPercentage}% Heroine, ${princess.bitchinessPercentage}% Bitch.`
+      );
+
+      // Clear transition state after animation
+      setTimeout(() => {
+        setCarouselState(prev => ({ ...prev, isTransitioning: false }));
+      }, 300);
     }
-    onPrincessSelect?.(princess);
   };
 
-  const currentCarouselPrincess = allPrincesses[selectedCarouselIndex];
-  const carouselRevealMessage = currentCarouselPrincess ? getRevealMessage(currentCarouselPrincess.name) : '';
+  // Navigation handlers
+  const handleNavigation = (direction: 'prev' | 'next') => {
+    const currentIndex = carouselState.selectedIndex;
+    let newIndex: number;
+
+    if (direction === 'prev') {
+      newIndex = currentIndex === 0 ? allPrincesses.length - 1 : currentIndex - 1;
+    } else {
+      newIndex = currentIndex === allPrincesses.length - 1 ? 0 : currentIndex + 1;
+    }
+
+    const newPrincess = allPrincesses[newIndex];
+    if (newPrincess) {
+      handlePrincessSelect(newPrincess, newIndex);
+    }
+  };
+
+  // Keyboard event handler
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (keyboardNavRef.current?.handleKeyDown(event.nativeEvent)) {
+      // Keyboard navigation handled the event
+      return;
+    }
+
+    // Additional carousel-specific keyboard shortcuts
+    switch (event.key) {
+      case 'Home':
+        event.preventDefault();
+        handlePrincessSelect(allPrincesses[0], 0);
+        break;
+      case 'End':
+        event.preventDefault();
+        const lastIndex = allPrincesses.length - 1;
+        handlePrincessSelect(allPrincesses[lastIndex], lastIndex);
+        break;
+    }
+  };
+
+  const currentPrincess = carouselState.selectedPrincess || quizResult.matchedPrincess;
+  const currentRevealMessage = getRevealMessage(currentPrincess.name);
 
   return (
-    <div className="princess-reveal-carousel">
+    <div className={`princess-reveal-carousel ${className}`}>
       {/* Main reveal message for matched princess */}
       {revealed && (
-        <div className="reveal-message-container fade-in">
+        <div className="reveal-message-container fade-in" role="article" aria-label="Your princess match">
           <div className="matched-princess-card">
             <div className="princess-image-placeholder">
-              <div className="image-placeholder">
-                <span className="placeholder-text">👑</span>
+              <div className="image-placeholder" role="img" aria-label="Princess image placeholder">
+                <span className="placeholder-text" aria-hidden="true">👑</span>
                 <span className="image-label">Princess Image</span>
               </div>
             </div>
@@ -126,85 +219,116 @@ export const PrincessRevealCarousel: React.FC<PrincessRevealCarouselProps> = ({
         </div>
       )}
 
-      {/* Princess carousel for exploration */}
-      {isCarouselVisible && allPrincesses.length > 0 && (
-        <div className="princess-carousel slide-up">
+      {/* Princess exploration carousel */}
+      {carouselState.isVisible && allPrincesses.length > 0 && (
+        <div 
+          className="princess-carousel slide-up"
+          role="region"
+          aria-label="Princess carousel for exploration"
+          ref={carouselRef}
+        >
           <div className="carousel-header">
             <h4>Explore All Princesses</h4>
+            <p className="sr-only">Use arrow keys to navigate, Enter or Space to select princesses</p>
             <p>Click on any princess to see their description and position on the graph</p>
           </div>
 
           {/* Current princess display */}
-          {currentCarouselPrincess && (
-            <div className="current-princess-display">
-              <div className="carousel-princess-card">
-                <div className="carousel-image-placeholder">
-                  <div className="image-placeholder">
-                    <span className="placeholder-text">👑</span>
-                  </div>
-                </div>
-                
-                <div className="carousel-princess-details">
-                  <h5 className="carousel-princess-name">{currentCarouselPrincess.name}</h5>
-                  <p className="carousel-princess-source">from {currentCarouselPrincess.source}</p>
-                  
-                  <div className="carousel-reveal-message">
-                    <p>{carouselRevealMessage}</p>
-                  </div>
-                  
-                  <div className="carousel-princess-stats">
-                    <div className="carousel-stat">
-                      <span>Heroine: {currentCarouselPrincess.feminismPercentage}%</span>
-                    </div>
-                    <div className="carousel-stat">
-                      <span>Bitch: {currentCarouselPrincess.bitchinessPercentage}%</span>
-                    </div>
-                  </div>
+          <div className="current-princess-display">
+            <div className={`carousel-princess-card ${carouselState.isTransitioning ? 'transitioning' : ''}`}>
+              <div className="carousel-image-placeholder">
+                <div className="image-placeholder" role="img" aria-label={`${currentPrincess.name} image placeholder`}>
+                  <span className="placeholder-text" aria-hidden="true">👑</span>
                 </div>
               </div>
               
-              {/* Navigation controls */}
-              <div className="carousel-controls">
-                <button 
-                  className="carousel-nav-btn prev"
-                  onClick={() => handleCarouselNavigation('prev')}
-                >
-                  ← Previous
-                </button>
-                <span className="carousel-counter">
-                  {selectedCarouselIndex + 1} of {allPrincesses.length}
-                </span>
-                <button 
-                  className="carousel-nav-btn next"
-                  onClick={() => handleCarouselNavigation('next')}
-                >
-                  Next →
-                </button>
+              <div className="carousel-princess-details">
+                <h5 className="carousel-princess-name">{currentPrincess.name}</h5>
+                <p className="carousel-princess-source">from {currentPrincess.source}</p>
+                
+                <div className="carousel-reveal-message">
+                  <p>{currentRevealMessage}</p>
+                </div>
+                
+                <div className="carousel-princess-stats">
+                  <div className="carousel-stat">
+                    <span>Heroine: {currentPrincess.feminismPercentage}%</span>
+                  </div>
+                  <div className="carousel-stat">
+                    <span>Bitch: {currentPrincess.bitchinessPercentage}%</span>
+                  </div>
+                </div>
               </div>
             </div>
-          )}
-
-          {/* Princess thumbnail grid */}
-          <div className="princess-thumbnails">
-            <div className="thumbnails-grid">
-              {allPrincesses.map((princess, index) => (
-                <button
-                  key={princess.id}
-                  className={`princess-thumbnail ${index === selectedCarouselIndex ? 'active' : ''} ${princess.id === quizResult.matchedPrincess.id ? 'matched' : ''}`}
-                  onClick={() => handlePrincessClick(princess)}
-                  title={`${princess.name} - ${princess.source}`}
-                >
-                  <div className="thumbnail-image">
-                    <span className="thumbnail-placeholder">👑</span>
-                  </div>
-                  <span className="thumbnail-name">{princess.name}</span>
-                  {princess.id === quizResult.matchedPrincess.id && (
-                    <div className="match-indicator">★ Your Match</div>
-                  )}
-                </button>
-              ))}
+            
+            {/* Navigation controls */}
+            <div className="carousel-controls">
+              <button 
+                type="button"
+                className="carousel-nav-btn prev"
+                onClick={() => handleNavigation('prev')}
+                aria-label="Previous princess"
+              >
+                ← Previous
+              </button>
+              <span className="carousel-counter" aria-live="polite">
+                {carouselState.selectedIndex + 1} of {allPrincesses.length}
+              </span>
+              <button 
+                type="button"
+                className="carousel-nav-btn next"
+                onClick={() => handleNavigation('next')}
+                aria-label="Next princess"
+              >
+                Next →
+              </button>
             </div>
           </div>
+
+          {/* Princess thumbnail grid */}
+          <div 
+            className="princess-thumbnails"
+            onKeyDown={handleKeyDown}
+            tabIndex={0}
+            role="grid"
+            aria-label="Princess selection grid"
+          >
+            <div className="thumbnails-grid" role="row">
+              {allPrincesses.map((princess, index) => {
+                const isSelected = index === carouselState.selectedIndex;
+                const isUserMatch = princess.id === quizResult.matchedPrincess.id;
+                
+                return (
+                  <button
+                    key={princess.id}
+                    type="button"
+                    className={`princess-thumbnail ${isSelected ? 'selected' : ''} ${isUserMatch ? 'user-match' : ''}`}
+                    onClick={() => handlePrincessSelect(princess, index)}
+                    data-princess-id={princess.id}
+                    role="gridcell"
+                    aria-label={`${princess.name} from ${princess.source}. ${princess.feminismPercentage}% Heroine, ${princess.bitchinessPercentage}% Bitch. ${isUserMatch ? 'Your matched princess' : ''}`}
+                    tabIndex={isSelected ? 0 : -1}
+                  >
+                    <div className="thumbnail-image">
+                      <span className="thumbnail-placeholder" aria-hidden="true">👑</span>
+                    </div>
+                    <span className="thumbnail-name">{princess.name}</span>
+                    {isUserMatch && (
+                      <div className="match-indicator" aria-label="Your match">★ Your Match</div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Live region for selection announcements */}
+          <div 
+            id="carousel-live-region"
+            className="live-region" 
+            aria-live="polite" 
+            aria-atomic="true"
+          />
         </div>
       )}
     </div>

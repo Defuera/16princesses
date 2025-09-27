@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { QuizResult } from '../../types/quiz';
 import { Princess } from '../../types/princess';
 import PrincessGraph from '../PrincessGraph';
-import PrincessMessage from '../PrincessMessage';
+import AnimatedResultsGraph from './AnimatedResultsGraph';
+import PrincessRevealCarousel from './PrincessRevealCarousel';
 import { getAllPrincesses } from '../../data/princessData';
 import { generatePersonalityMessage } from '../../data/quizScoring';
 
@@ -25,6 +26,8 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
   const navigate = useNavigate();
   const [allPrincesses, setAllPrincesses] = useState<Princess[]>([]);
   const [isVisible, setIsVisible] = useState(false);
+  const [animationComplete, setAnimationComplete] = useState(false);
+  const [selectedExplorePrincess, setSelectedExplorePrincess] = useState<Princess | null>(null);
 
   // Load all princesses for the graph
   useEffect(() => {
@@ -37,6 +40,14 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleAnimationComplete = () => {
+    setAnimationComplete(true);
+  };
+
+  const handlePrincessExplore = (princess: Princess) => {
+    setSelectedExplorePrincess(princess);
+  };
 
   const handleRetakeQuiz = () => {
     setIsVisible(false);
@@ -82,7 +93,7 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
     };
   };
 
-  const { archetype, personalityMessage, matchAccuracy } = getResultSummary();
+  const { archetype, matchAccuracy } = getResultSummary();
 
   if (isLoading) {
     return (
@@ -142,50 +153,64 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
 
       {/* Main Results Content */}
       <main className="results-content">
-        <div className="results-grid">
-          {/* Interactive Graph */}
-          <section className="graph-section">
-            <h3>Your Position on the Princess Graph</h3>
-            <div className="graph-container">
-              <PrincessGraph 
-                princesses={allPrincesses}
-                selectedPrincess={quizResult.matchedPrincess}
-                userCoordinates={{
-                  x: quizResult.xScore,
-                  y: quizResult.yScore,
-                  name: 'You',
-                  isUser: true
-                }}
-              />
-            </div>
-            <div className="graph-explanation">
-              <p>
-                The red dot shows your calculated position based on your quiz responses. 
-                You're closest to <strong>{quizResult.matchedPrincess.name}</strong> from{' '}
-                <em>{quizResult.matchedPrincess.source}</em>.
-              </p>
-            </div>
-          </section>
+        {/* Animated Results Graph */}
+        <section className="animated-graph-section">
+          <h3>Your Princess Journey</h3>
+          <div className="animated-graph-container">
+            <AnimatedResultsGraph
+              quizResult={quizResult}
+              onAnimationComplete={handleAnimationComplete}
+              onUserInteraction={() => {
+                // Handle user interaction during animations
+                console.log('Animation interaction detected');
+              }}
+              className="main-results-graph"
+            />
+          </div>
+          <div className="graph-explanation">
+            <p>
+              Watch as your personality unfolds step by step! The intersection shows your unique position—
+              closest to <strong>{quizResult.matchedPrincess.name}</strong> from{' '}
+              <em>{quizResult.matchedPrincess.source}</em>.
+            </p>
+            <p className="interaction-hint">
+              <em>Click anywhere on the graph or press Enter to skip animation phases</em>
+            </p>
+          </div>
+        </section>
 
-          {/* Personality Message */}
-          <section className="message-section">
-            <h3>Your Princess Profile</h3>
-            <div className="personality-card">
-              <div className="personality-message">
-                <h4>{personalityMessage}</h4>
+        {/* Princess Reveal and Exploration */}
+        <section className="reveal-carousel-section">
+          <PrincessRevealCarousel
+            quizResult={quizResult}
+            allPrincesses={allPrincesses}
+            revealed={animationComplete}
+            onPrincessSelect={handlePrincessExplore}
+            selectedPrincess={selectedExplorePrincess}
+            className="main-carousel"
+          />
+        </section>
+
+        {/* Fallback: Traditional Graph (for accessibility/preference) */}
+        {animationComplete && (
+          <section className="fallback-graph-section" style={{ marginTop: '2rem' }}>
+            <details>
+              <summary>View Static Graph</summary>
+              <div className="static-graph-container">
+                <PrincessGraph 
+                  princesses={allPrincesses}
+                  selectedPrincess={selectedExplorePrincess || quizResult.matchedPrincess}
+                  userCoordinates={{
+                    x: quizResult.xScore,
+                    y: quizResult.yScore,
+                    name: 'You',
+                    isUser: true
+                  }}
+                />
               </div>
-              
-              <PrincessMessage 
-                princess={quizResult.matchedPrincess}
-                isQuizResult={true}
-                userScores={{
-                  xScore: quizResult.xScore,
-                  yScore: quizResult.yScore
-                }}
-              />
-            </div>
+            </details>
           </section>
-        </div>
+        )}
       </main>
 
       {/* Action Buttons */}
