@@ -1,4 +1,4 @@
-import{r as t,R as e}from"./vendor-Buw_ZZ_m.js";
+import{r as t,R as e}from"./vendor-BeWr1jcL.js";
 /*!
  * @kurkle/color v0.3.4
  * https://github.com/kurkle/color#readme
