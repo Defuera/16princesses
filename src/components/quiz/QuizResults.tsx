@@ -195,15 +195,6 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
             Explore Princesses
           </button>
         </div>
-        
-        <div className="results-stats">
-          <span className="stat">
-            Based on {quizResult.answeredQuestions} of {quizResult.totalQuestions} questions
-          </span>
-          <span className="stat">
-            Distance from {quizResult.matchedPrincess.name}: {quizResult.matchingDistance.toFixed(1)} units
-          </span>
-        </div>
       </footer>
     </div>
   );
