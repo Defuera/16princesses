@@ -4,46 +4,29 @@ interface QuizProgressProps {
   currentQuestion: number;
   totalQuestions: number;
   progressPercentage: number;
-  canGoBack: boolean;
-  canGoForward: boolean;
-  onPrevious: () => void;
-  onNext: () => void;
-  onSubmit?: () => void;
-  isComplete?: boolean;
   hasCurrentAnswer?: boolean;
 }
 
 /**
- * Quiz progress component with navigation and progress tracking
- * Shows current question, progress bar, and navigation buttons
+ * Quiz progress component - shows only progress tracking
+ * Navigation moved to bottom of page for better UX
  */
 export const QuizProgress: React.FC<QuizProgressProps> = ({
   currentQuestion,
   totalQuestions,
   progressPercentage,
-  canGoBack,
-  canGoForward,
-  onPrevious,
-  onNext,
-  onSubmit,
-  isComplete = false,
   hasCurrentAnswer = false
 }) => {
   
-  const handleNext = () => {
-    if (isComplete && onSubmit) {
-      onSubmit();
-    } else if (canGoForward) {
-      onNext();
-    }
-  };
-
   return (
     <div className="quiz-progress-container">
-      {/* Question Counter */}
+      {/* Compact Question Counter with Remaining */}
       <div className="question-counter">
         <span className="counter-text">
           Question <strong>{currentQuestion}</strong> of <strong>{totalQuestions}</strong>
+        </span>
+        <span className="remaining-text">
+          {totalQuestions - currentQuestion} remaining
         </span>
       </div>
 
@@ -55,75 +38,18 @@ export const QuizProgress: React.FC<QuizProgressProps> = ({
             style={{ width: `${progressPercentage}%` }}
           />
         </div>
-        <div className="progress-text">
-          {progressPercentage}% Complete
-        </div>
       </div>
 
-      {/* Navigation Buttons */}
-      <div className="quiz-navigation">
-        <button
-          className="nav-button nav-back"
-          onClick={onPrevious}
-          disabled={!canGoBack}
-          title={canGoBack ? 'Previous question' : 'Already at first question'}
-        >
-          <span className="button-icon">⬅️</span>
-          Back
-        </button>
-
-        <div className="nav-center">
-          {hasCurrentAnswer ? (
-            <span className="answer-status answered">
-              ✅ Answered
-            </span>
-          ) : (
-            <span className="answer-status unanswered">
-              Please select an answer
-            </span>
-          )}
-        </div>
-
-        <button
-          className={`nav-button nav-forward ${isComplete ? 'submit-button' : ''}`}
-          onClick={handleNext}
-          disabled={!hasCurrentAnswer && !isComplete}
-          title={
-            isComplete 
-              ? 'Submit quiz and see results'
-              : hasCurrentAnswer
-                ? 'Next question'
-                : 'Please answer current question first'
-          }
-        >
-          {isComplete ? (
-            <>
-              <span className="button-icon">🏁</span>
-              See Results
-            </>
-          ) : (
-            <>
-              Next
-              <span className="button-icon">➡️</span>
-            </>
-          )}
-        </button>
-      </div>
-
-      {/* Quiz Status */}
-      <div className="quiz-status">
-        {isComplete ? (
-          <div className="status-complete">
-            <span className="status-icon">🎉</span>
-            <span className="status-text">Quiz complete! Ready to see your results?</span>
-          </div>
+      {/* Answer Status */}
+      <div className="answer-status-container">
+        {hasCurrentAnswer ? (
+          <span className="answer-status answered">
+            ✅ Answered
+          </span>
         ) : (
-          <div className="status-in-progress">
-            <span className="status-icon">⏳</span>
-            <span className="status-text">
-              {totalQuestions - currentQuestion} questions remaining
-            </span>
-          </div>
+          <span className="answer-status unanswered">
+            Select your answer below
+          </span>
         )}
       </div>
     </div>

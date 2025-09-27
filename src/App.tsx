@@ -6,6 +6,7 @@ import PrincessMessage from './components/PrincessMessage';
 import QuizStart from './components/quiz/QuizStart';
 import QuizQuestion from './components/quiz/QuizQuestion';
 import QuizProgress from './components/quiz/QuizProgress';
+import QuizNavigation from './components/quiz/QuizNavigation';
 import QuizResults from './components/quiz/QuizResults';
 import { getAllPrincesses, getPrincessById } from './data/princessData';
 import { useQuiz } from './hooks/useQuiz';
@@ -140,12 +141,6 @@ const QuizQuestionsPage: React.FC = () => {
         currentQuestion={progress.current}
         totalQuestions={progress.total}
         progressPercentage={progress.percentage}
-        canGoBack={canGoBack}
-        canGoForward={canGoForward || isComplete}
-        onPrevious={previousQuestion}
-        onNext={nextQuestion}
-        onSubmit={handleSubmitQuiz}
-        isComplete={isComplete}
         hasCurrentAnswer={currentAnswer !== undefined}
       />
       
@@ -154,6 +149,16 @@ const QuizQuestionsPage: React.FC = () => {
         selectedValue={currentAnswer}
         onAnswerSelect={answerQuestion}
         isLoading={isLoading}
+      />
+
+      <QuizNavigation
+        canGoBack={canGoBack}
+        canGoForward={canGoForward || isComplete}
+        onPrevious={previousQuestion}
+        onNext={nextQuestion}
+        onSubmit={handleSubmitQuiz}
+        isComplete={isComplete}
+        hasCurrentAnswer={currentAnswer !== undefined}
       />
     </div>
   );

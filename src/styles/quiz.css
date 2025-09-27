@@ -157,56 +157,96 @@
 
 .quiz-progress-container {
   background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
   position: sticky;
-  top: 1rem;
+  top: 0.5rem;
   z-index: 10;
 }
 
 .question-counter {
-  text-align: center;
-  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
 }
 
 .counter-text {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   color: #4a5568;
+  font-weight: 500;
+}
+
+.remaining-text {
+  font-size: 0.8rem;
+  color: #718096;
+  font-weight: 400;
 }
 
 .progress-bar-container {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .progress-bar {
   width: 100%;
-  height: 8px;
+  height: 4px;
   background: #e2e8f0;
-  border-radius: 4px;
+  border-radius: 2px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
   background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-  border-radius: 4px;
+  border-radius: 2px;
   transition: width 0.3s ease;
 }
 
 .progress-text {
+  display: none; /* Hide percentage text to save space */
+}
+
+.answer-status-container {
   text-align: center;
   margin-top: 0.5rem;
-  color: #718096;
-  font-size: 0.9rem;
+}
+
+.answer-status {
+  font-size: 0.85rem;
+}
+
+.answer-status.answered {
+  color: #48bb78;
+  font-weight: 500;
+}
+
+.answer-status.unanswered {
+  color: #ed8936;
+}
+
+/* ==============================================
+   Quiz Bottom Navigation
+   ============================================== */
+
+.quiz-navigation-container {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  padding: 1rem;
+  margin-top: 2rem;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .quiz-navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .nav-button {
@@ -220,57 +260,113 @@
   color: #4a5568;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1rem;
+  flex-shrink: 0;
+  min-width: 120px;
+  justify-content: center;
 }
 
 .nav-button:hover:not(:disabled) {
   border-color: #667eea;
   color: #667eea;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
 }
 
 .nav-button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  transform: none;
 }
 
 .nav-forward.submit-button {
   background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
   color: white;
   border-color: transparent;
+  box-shadow: 0 2px 8px rgba(72, 187, 120, 0.2);
+}
+
+.nav-forward.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(72, 187, 120, 0.3);
 }
 
 .nav-center {
+  flex: 1;
   text-align: center;
+  min-width: 0;
 }
 
-.answer-status.answered {
-  color: #48bb78;
-  font-weight: 500;
+.nav-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
 }
 
-.answer-status.unanswered {
-  color: #ed8936;
+.nav-hint-text {
+  color: #a0aec0;
   font-size: 0.9rem;
+  font-style: italic;
 }
 
-.quiz-status {
-  text-align: center;
-  padding-top: 1rem;
-  border-top: 1px solid #e2e8f0;
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .quiz-progress-container {
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .question-counter {
+    margin-bottom: 0.4rem;
+  }
+  
+  .counter-text {
+    font-size: 0.8rem;
+  }
+  
+  .remaining-text {
+    font-size: 0.7rem;
+  }
+  
+  .progress-bar-container {
+    margin-bottom: 0.5rem;
+  }
+  
+  .answer-status {
+    font-size: 0.75rem;
+  }
+
+  /* Mobile navigation */
+  .quiz-navigation-container {
+    padding: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  
+  .quiz-navigation {
+    gap: 0.75rem;
+  }
+  
+  .nav-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+  
+  .nav-hint-text {
+    font-size: 0.8rem;
+  }
 }
 
-.status-complete {
-  color: #48bb78;
-  font-weight: 500;
-}
+/* ==============================================
+   Quiz Page Layout
+   ============================================== */
 
-.status-in-progress {
-  color: #718096;
-}
-
-.status-icon {
-  margin-right: 0.5rem;
+.quiz-page {
+  min-height: 100vh;
+  padding-bottom: 120px; /* Space for sticky navigation */
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
 }
 
 /* ==============================================
