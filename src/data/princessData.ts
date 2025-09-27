@@ -120,3 +120,48 @@ export function getDefaultGraphConfig() {
     }
   };
 }
+
+/**
+ * Get graph configuration optimized for quiz results
+ */
+export function getQuizGraphConfig() {
+  const baseConfig = getDefaultGraphConfig();
+  return {
+    ...baseConfig,
+    title: "Your Princess Personality Match",
+    xAxis: {
+      ...baseConfig.xAxis,
+      label: "Damsel → Heroine"
+    },
+    yAxis: {
+      ...baseConfig.yAxis,
+      label: "Sweet → Fierce"
+    }
+  };
+}
+
+/**
+ * Filter princesses by archetype quadrant
+ * Useful for showing similar princesses to quiz results
+ */
+export function getPrincessesByQuadrant(
+  feminismThreshold: number = 50,
+  bitchinessThreshold: number = 50
+) {
+  const princesses = getAllPrincesses();
+  
+  return {
+    independentWarriors: princesses.filter(p => 
+      p.feminismPercentage >= feminismThreshold && p.bitchinessPercentage >= bitchinessThreshold
+    ),
+    gentleRevolutionaries: princesses.filter(p => 
+      p.feminismPercentage >= feminismThreshold && p.bitchinessPercentage < bitchinessThreshold
+    ),
+    traditionalLeaders: princesses.filter(p => 
+      p.feminismPercentage < feminismThreshold && p.bitchinessPercentage >= bitchinessThreshold
+    ),
+    sweethearts: princesses.filter(p => 
+      p.feminismPercentage < feminismThreshold && p.bitchinessPercentage < bitchinessThreshold
+    )
+  };
+}

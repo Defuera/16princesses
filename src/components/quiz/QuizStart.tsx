@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 interface QuizStartProps {
   onStartQuiz: () => void;
@@ -16,11 +15,8 @@ export const QuizStart: React.FC<QuizStartProps> = ({
   isLoading = false, 
   error = null 
 }) => {
-  const navigate = useNavigate();
-
   const handleStartQuiz = () => {
     onStartQuiz();
-    navigate('/quiz');
   };
 
   if (error) {

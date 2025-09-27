@@ -847,6 +847,107 @@
 }
 
 /* ==============================================
+   Graph User Position Legend
+   ============================================== */
+
+.user-position-legend {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #ff4757;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.legend-item:last-child {
+  margin-bottom: 0;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-dot.user-dot {
+  background: #ff4757;
+  border: 2px solid #ff3742;
+}
+
+.legend-dot.princess-dot {
+  background: #667eea;
+  border: 2px solid #5a67d8;
+}
+
+.legend-text {
+  font-size: 0.9rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+/* ==============================================
+   Quiz Result Badge and Comparison
+   ============================================== */
+
+.quiz-result-badge {
+  margin-top: 0.5rem;
+}
+
+.badge-text {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.quiz-comparison {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.quiz-comparison h4 {
+  margin-bottom: 0.75rem;
+  color: #2d3748;
+  font-size: 1rem;
+}
+
+.comparison-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.comparison-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comparison-label {
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.comparison-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #667eea;
+}
+
+/* ==============================================
    Theme Variations (based on princess references)
    ============================================== */
 

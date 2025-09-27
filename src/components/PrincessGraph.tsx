@@ -19,50 +19,78 @@ ChartJS.register(
   ScatterController
 );
 
+interface UserCoordinates {
+  x: number;
+  y: number;
+  name: string;
+  isUser?: boolean;
+}
+
 interface PrincessGraphProps {
   princesses: Princess[];
   selectedPrincess?: Princess;
+  userCoordinates?: UserCoordinates;
 }
 
 const PrincessGraph: React.FC<PrincessGraphProps> = ({
   princesses,
   selectedPrincess,
+  userCoordinates,
 }) => {
   const config = getDefaultGraphConfig();
   const chartData = transformForChart(princesses);
 
-  const data = {
-    datasets: [
-      {
-        label: 'Princesses',
-        data: chartData.map((item) => ({
-          x: item.x,
-          y: item.y,
-          princess: item.princess,
-        })),
-        backgroundColor: chartData.map((item) =>
-          selectedPrincess && item.princess.id === selectedPrincess.id
-            ? config.styling.selectedPrincess.color
-            : config.styling.unselectedPrincess.color
-        ),
-        borderColor: chartData.map((item) =>
-          selectedPrincess && item.princess.id === selectedPrincess.id
-            ? config.styling.selectedPrincess.color
-            : config.styling.unselectedPrincess.color
-        ),
-        borderWidth: chartData.map((item) =>
-          selectedPrincess && item.princess.id === selectedPrincess.id
-            ? config.styling.selectedPrincess.borderWidth
-            : 1
-        ),
-        pointRadius: chartData.map((item) =>
-          selectedPrincess && item.princess.id === selectedPrincess.id
-            ? config.styling.selectedPrincess.size
-            : config.styling.unselectedPrincess.size
-        ),
-      },
-    ],
-  };
+  const datasets = [
+    {
+      label: 'Princesses',
+      data: chartData.map((item) => ({
+        x: item.x,
+        y: item.y,
+        princess: item.princess,
+        isUser: false,
+      })),
+      backgroundColor: chartData.map((item) =>
+        selectedPrincess && item.princess.id === selectedPrincess.id
+          ? config.styling.selectedPrincess.color
+          : config.styling.unselectedPrincess.color
+      ),
+      borderColor: chartData.map((item) =>
+        selectedPrincess && item.princess.id === selectedPrincess.id
+          ? config.styling.selectedPrincess.color
+          : config.styling.unselectedPrincess.color
+      ),
+      borderWidth: chartData.map((item) =>
+        selectedPrincess && item.princess.id === selectedPrincess.id
+          ? config.styling.selectedPrincess.borderWidth
+          : 1
+      ),
+      pointRadius: chartData.map((item) =>
+        selectedPrincess && item.princess.id === selectedPrincess.id
+          ? config.styling.selectedPrincess.size
+          : config.styling.unselectedPrincess.size
+      ),
+    },
+  ];
+
+  // Add user position if provided
+  if (userCoordinates) {
+    datasets.push({
+      label: 'Your Position',
+      data: [{
+        x: userCoordinates.x,
+        y: userCoordinates.y,
+        user: userCoordinates,
+        isUser: true,
+      }],
+      backgroundColor: ['#ff4757'], // Bright red for user
+      borderColor: ['#ff3742'],
+      borderWidth: [3],
+      pointRadius: [8], // Larger point for user
+      pointHoverRadius: [10],
+    });
+  }
+
+  const data = { datasets };
 
   const options = {
     responsive: true,
@@ -74,12 +102,24 @@ const PrincessGraph: React.FC<PrincessGraphProps> = ({
       tooltip: {
         callbacks: {
           label: (context: any) => {
-            const princess = context.raw.princess;
-            return `${princess.name} (${context.parsed.x}%, ${context.parsed.y}%)`;
+            const { isUser, princess, user } = context.raw;
+            
+            if (isUser && user) {
+              return `${user.name} (${context.parsed.x.toFixed(1)}%, ${context.parsed.y.toFixed(1)}%)`;
+            } else if (princess) {
+              return `${princess.name} (${context.parsed.x}%, ${context.parsed.y}%)`;
+            }
+            return `(${context.parsed.x}%, ${context.parsed.y}%)`;
           },
           afterLabel: (context: any) => {
-            const princess = context.raw.princess;
-            return princess.source;
+            const { isUser, princess } = context.raw;
+            
+            if (isUser) {
+              return 'Your calculated position from quiz';
+            } else if (princess) {
+              return princess.source;
+            }
+            return '';
           },
         },
       },
@@ -143,6 +183,25 @@ const PrincessGraph: React.FC<PrincessGraphProps> = ({
           <p><strong>X-Axis:</strong> Patriarchal (left) to Feminist (right)</p>
           <p><strong>Y-Axis:</strong> Sweet (bottom) to Assertive (top)</p>
         </div>
+        
+        {userCoordinates && (
+          <div className="user-position-legend">
+            <div className="legend-item">
+              <span className="legend-dot user-dot"></span>
+              <span className="legend-text">
+                Your position: {userCoordinates.x.toFixed(1)}% Heroine, {userCoordinates.y.toFixed(1)}% Fierce
+              </span>
+            </div>
+            {selectedPrincess && (
+              <div className="legend-item">
+                <span className="legend-dot princess-dot"></span>
+                <span className="legend-text">
+                  Closest match: {selectedPrincess.name}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

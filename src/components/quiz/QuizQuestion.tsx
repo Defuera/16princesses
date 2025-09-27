@@ -63,13 +63,24 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
           onChange={() => handleOptionSelect(option)}
           disabled={isLoading}
           className="quiz-option-input"
+          aria-describedby={`question-${question.id}-title question-${question.id}-instruction`}
+          aria-label={`Option ${index + 1}: ${option.text}`}
         />
         <label 
           htmlFor={optionId}
           className="quiz-option-label"
+          tabIndex={0}
+          role="radio"
+          aria-checked={isSelected}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleOptionSelect(option);
+            }
+          }}
         >
           <div className="option-content">
-            <div className="option-indicator">
+            <div className="option-indicator" aria-hidden="true">
               {isSelected ? (
                 <span className="selected-indicator">●</span>
               ) : (
@@ -130,10 +141,14 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
   }
 
   return (
-    <div className={`quiz-question-container ${isAnimating ? 'animating' : ''} theme-${getQuestionTheme()}`}>
+    <div 
+      className={`quiz-question-container ${isAnimating ? 'animating' : ''} theme-${getQuestionTheme()}`}
+      role="main"
+      aria-live="polite"
+    >
       {/* Question Header */}
       <div className="question-header">
-        <div className="question-meta">
+        <div className="question-meta" role="group" aria-label="Question metadata">
           <span className="question-type">
             {question.type === 'multiple' ? 'Multiple Choice' : 'Choose One'}
           </span>
@@ -150,11 +165,11 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
 
       {/* Question Text */}
       <div className="question-content">
-        <h2 className="question-text">
+        <h2 className="question-text" id={`question-${question.id}-title`}>
           {question.text}
         </h2>
         
-        <p className="question-instruction">
+        <p className="question-instruction" id={`question-${question.id}-instruction`}>
           {getQuestionTypeLabel()}
         </p>
       </div>

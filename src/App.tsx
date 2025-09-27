@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, useParams, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useParams, useNavigate, useLocation } from 'react-router-dom';
 import PrincessList from './components/PrincessList';
 import PrincessGraph from './components/PrincessGraph';
 import PrincessMessage from './components/PrincessMessage';
@@ -67,13 +67,140 @@ const NotFoundPage: React.FC = () => {
   );
 };
 
+// Quiz Start Page Component  
+const QuizStartPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleStartQuiz = () => {
+    navigate('/quiz');
+  };
+
+  return <QuizStart onStartQuiz={handleStartQuiz} />;
+};
+
+// Quiz Questions Page Component
+const QuizQuestionsPage: React.FC = () => {
+  const {
+    isLoading,
+    error,
+    isComplete,
+    currentQuestion,
+    currentAnswer,
+    canGoForward,
+    canGoBack,
+    progress,
+    answerQuestion,
+    nextQuestion,
+    previousQuestion,
+    calculateResult,
+  } = useQuiz();
+
+  const navigate = useNavigate();
+
+  // Handle quiz completion and navigation to results
+  React.useEffect(() => {
+    if (isComplete) {
+      const result = calculateResult();
+      if (result) {
+        // Navigate to results with quiz data
+        navigate('/quiz-results', { state: { quizResult: result } });
+      }
+    }
+  }, [isComplete, calculateResult, navigate]);
+
+  if (error) {
+    return (
+      <div className="quiz-error">
+        <h2>Quiz Error</h2>
+        <p>{error}</p>
+        <button onClick={() => navigate('/')}>Back to Start</button>
+      </div>
+    );
+  }
+
+  if (!currentQuestion) {
+    return (
+      <div className="quiz-loading">
+        <div className="loading-spinner large"></div>
+        <p>Loading question...</p>
+      </div>
+    );
+  }
+
+  const handleSubmitQuiz = () => {
+    const result = calculateResult();
+    if (result) {
+      navigate('/quiz-results', { state: { quizResult: result } });
+    }
+  };
+
+  return (
+    <div className="quiz-page">
+      <QuizProgress
+        currentQuestion={progress.current}
+        totalQuestions={progress.total}
+        progressPercentage={progress.percentage}
+        canGoBack={canGoBack}
+        canGoForward={canGoForward || isComplete}
+        onPrevious={previousQuestion}
+        onNext={nextQuestion}
+        onSubmit={handleSubmitQuiz}
+        isComplete={isComplete}
+        hasCurrentAnswer={currentAnswer !== undefined}
+      />
+      
+      <QuizQuestion
+        question={currentQuestion}
+        selectedValue={currentAnswer}
+        onAnswerSelect={answerQuestion}
+        isLoading={isLoading}
+      />
+    </div>
+  );
+};
+
+const QuizResultsPage: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const quizResult = location.state?.quizResult;
+
+  if (!quizResult) {
+    return (
+      <div className="quiz-error">
+        <h2>No Quiz Results</h2>
+        <p>Please complete the quiz first.</p>
+        <button onClick={() => navigate('/')}>Take Quiz</button>
+      </div>
+    );
+  }
+
+  const handleRetakeQuiz = () => {
+    navigate('/', { replace: true });
+  };
+
+  return (
+    <QuizResults 
+      quizResult={quizResult} 
+      onRetakeQuiz={handleRetakeQuiz}
+    />
+  );
+};
+
 const App: React.FC = () => {
   return (
     <BrowserRouter basename="/16princesses">
       <div className="App">
         <Routes>
-          <Route path="/" element={<PrincessList />} />
+          {/* Quiz flow (new primary flow) */}
+          <Route path="/" element={<QuizStartPage />} />
+          <Route path="/quiz" element={<QuizQuestionsPage />} />
+          <Route path="/quiz-results" element={<QuizResultsPage />} />
+          
+          {/* Legacy princess selection (keep for compatibility) */}
+          <Route path="/princesses" element={<PrincessList />} />
           <Route path="/result/:princessId" element={<ResultPage />} />
+          
+          {/* 404 handler */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
