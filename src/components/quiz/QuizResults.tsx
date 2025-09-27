@@ -109,48 +109,6 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
 
   return (
     <div className={`quiz-results-container ${isVisible ? 'visible' : ''}`}>
-      {/* Results Header */}
-      <header className="results-header">
-        <div className="results-title">
-          <h1>Your Princess Archetype</h1>
-          <h2 className="archetype-name">{archetype}</h2>
-        </div>
-        
-        <div className="results-summary">
-          <div className="score-display">
-            <div className="score-item heroine">
-              <span className="score-label">Heroine Level</span>
-              <span className="score-value">{quizResult.xScore}%</span>
-              <div className="score-bar">
-                <div 
-                  className="score-fill heroine-fill"
-                  style={{ width: `${quizResult.xScore}%` }}
-                />
-              </div>
-            </div>
-            
-            <div className="score-item fierce">
-              <span className="score-label">Fierce Factor</span>
-              <span className="score-value">{quizResult.yScore}%</span>
-              <div className="score-bar">
-                <div 
-                  className="score-fill fierce-fill"
-                  style={{ width: `${quizResult.yScore}%` }}
-                />
-              </div>
-            </div>
-          </div>
-          
-          <div className="match-info">
-            <div className="matched-princess">
-              <span className="match-label">Your closest match:</span>
-              <span className="princess-name">{quizResult.matchedPrincess.name}</span>
-              <span className="match-accuracy">{matchAccuracy}% match</span>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Results Content */}
       <main className="results-content">
         {/* Animated Results Graph */}

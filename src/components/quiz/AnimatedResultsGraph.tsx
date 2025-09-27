@@ -397,32 +397,67 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
           );
         })}
 
-        {/* Axis labels */}
+        {/* Axis labels with arrows */}
         <g className="axis-labels">
+          {/* X-axis labels - Damsel on left, Heroine on right */}
           <text
-            x={width / 2}
-            y={height - 20}
-            textAnchor="middle"
+            x={margin}
+            y={height - margin + 25}
+            textAnchor="start"
             className="axis-label"
             fill="#495057"
-            fontSize="16"
+            fontSize="14"
             fontWeight="600"
           >
-            Damsel ← → Heroine
+            Damsel
           </text>
           
           <text
-            x={25}
-            y={height / 2}
+            x={width - margin}
+            y={height - margin + 25}
+            textAnchor="end"
+            className="axis-label"
+            fill="#495057"
+            fontSize="14"
+            fontWeight="600"
+          >
+            Heroine
+          </text>
+          
+          {/* Y-axis labels - Sweet at bottom, Bitch at top */}
+          <text
+            x={margin - 25}
+            y={height - margin}
             textAnchor="middle"
             className="axis-label"
             fill="#495057"
-            fontSize="16"
+            fontSize="14"
             fontWeight="600"
-            transform={`rotate(-90, 25, ${height / 2})`}
           >
-            Sweet ← → Bitch
+            Sweet
           </text>
+          
+          <text
+            x={margin}
+            y={margin - 15}
+            textAnchor="end"
+            className="axis-label"
+            fill="#495057"
+            fontSize="14"
+            fontWeight="600"
+          >
+            Bitch
+          </text>
+          
+          {/* Y-axis directional arrow (at the very top) */}
+          <g className="axis-arrow" stroke="#495057" strokeWidth="2" fill="#495057">
+            <polygon points={`${margin-4},${margin + 10} ${margin},${margin} ${margin+4},${margin + 10}`} />
+          </g>
+          
+          {/* X-axis directional arrow (at the very end) */}
+          <g className="axis-arrow" stroke="#495057" strokeWidth="2" fill="#495057">
+            <polygon points={`${width - margin - 10},${height - margin - 4} ${width - margin},${height - margin} ${width - margin - 10},${height - margin + 4}`} />
+          </g>
         </g>
 
         {/* Score values on axes */}
@@ -467,6 +502,7 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
           <text x={margin + 10} y={margin + 20}>Bitch Damsel</text>
           <text x={width - margin - 100} y={margin + 20}>Bitch Heroine</text>
         </g>
+
       </svg>
     </div>
   );

@@ -1,0 +1,206 @@
+[
+    {
+      "id": 1,
+      "text": "Inspired by Cinderella's midnight curfew... In a rut at work, what feels most natural?",
+      "axis": "X",
+      "type": "multiple",
+      "reverse": true,
+      "options": [
+        {"text": "Stick it out, figuring someone will spot your potential.", "value": 33},
+        {"text": "Jump ship impulsively, chasing that dream vibe.", "value": 0},
+        {"text": "Quietly explore side options while staying stable.", "value": 66},
+        {"text": "Plan a bold exit, lining up resources despite couch-surfing.", "value": 100}
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Like Rapunzel’s hair... Faced with overbearing rules, which path calls you?",
+      "axis": "X",
+      "type": "forced",
+      "reverse": false,
+      "options": [
+        {"text": "Wait for a rescuer to shake things up.", "value": 0},
+        {"text": "Break free solo, even if it isolates you.", "value": 100},
+        {"text": "Neither—hint at changes and hope it evolves.", "value": 33}
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Echoing Aurora’s slumber... An opportunity slips away. Your vibe?",
+      "axis": "X",
+      "type": "multiple",
+      "reverse": false,
+      "options": [
+        {"text": "Shrug and scroll socials, trusting fate.", "value": 0},
+        {"text": "Vent to friends, hoping for new doors.", "value": 33},
+        {"text": "Hunt alternatives solo, learning from loss.", "value": 66},
+        {"text": "Turn setback into fuel, launching a venture despite grind.", "value": 100}
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Like Mulan’s secret warrior... A family conflict exposes lies. How do you handle it?",
+      "axis": "X",
+      "type": "multiple",
+      "reverse": false,
+      "options": [
+        {"text": "Keep quiet, preserving harmony.", "value": 0},
+        {"text": "Seek an ally to mediate while staying low.", "value": 33},
+        {"text": "Speak up with evidence, risking tension.", "value": 66},
+        {"text": "Dismantle drama, starting anew even if alienated.", "value": 100}
+      ]
+    },
+    {
+      "id": 5,
+      "text": "From Nausicaä’s toxic jungle... A trusted system fails you. Your move?",
+      "axis": "X",
+      "type": "multiple",
+      "reverse": true,
+      "options": [
+        {"text": "Retreat, hoping for better days.", "value": 33},
+        {"text": "Lash out loudly without a plan.", "value": 0},
+        {"text": "Dig into the cause alone, sharing later.", "value": 66},
+        {"text": "Build a new path, starting from scratch.", "value": 100}
+      ]
+    },
+    {
+      "id": 6,
+      "text": "Echoing Belle’s quiet strength... A friend ruins something precious. Your gut reaction?",
+      "axis": "Y",
+      "type": "multiple",
+      "reverse": false,
+      "options": [
+        {"text": "Forgive softly, prioritizing their feelings.", "value": 0},
+        {"text": "Mention it gently, expecting amends.", "value": 33},
+        {"text": "Call it out with a clever jab, staying friendly.", "value": 66},
+        {"text": "Set a hard boundary with flair, risking the friendship.", "value": 100}
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Like Jasmine’s tiger swagger... A party foul (spilled drink) disrupts your vibe. How do you roll?",
+      "axis": "Y",
+      "type": "forced",
+      "reverse": false,
+      "options": [
+        {"text": "Laugh it off, helping the culprit.", "value": 0},
+        {"text": "Make a bold scene, demanding amends with a smirk.", "value": 100},
+        {"text": "Neither—ignore but stew quietly.", "value": 33}
+      ]
+    },
+    {
+      "id": 8,
+      "text": "Inspired by Elsa’s icy heart... A breakup leaves you raw. How do you process?",
+      "axis": "Y",
+      "type": "multiple",
+      "reverse": true,
+      "options": [
+        {"text": "Bake treats, hiding pain completely.", "value": 0},
+        {"text": "Share hurt softly with a confidant.", "value": 33},
+        {"text": "Over-dramatize online, seeking validation.", "value": 66},
+        {"text": "Channel into bold goals, cutting ties coldly.", "value": 100}
+      ]
+    },
+    {
+      "id": 9,
+      "text": "From Chihiro’s bathhouse... A soul-crushing job grinds you down. How do you push back?",
+      "axis": "Y",
+      "type": "multiple",
+      "reverse": false,
+      "options": [
+        {"text": "Work quietly, hoping effort shines.", "value": 0},
+        {"text": "Befriend coworkers for small rebellions.", "value": 33},
+        {"text": "Hustle side projects with sharp-witted flair.", "value": 66},
+        {"text": "Face the boss head-on, reclaiming your spark.", "value": 100}
+      ]
+    },
+    {
+      "id": 10,
+      "text": "Like Sheeta’s sky adventure... A cursed object complicates life. Your vibe?",
+      "axis": "Y",
+      "type": "multiple",
+      "reverse": false,
+      "options": [
+        {"text": "Share its light kindly with others.", "value": 0},
+        {"text": "Warn others cautiously, dodging dangers.", "value": 33},
+        {"text": "Use it for daring moves with sassy confidence.", "value": 66},
+        {"text": "Unleash its power, even if it isolates you.", "value": 100}
+      ]
+    },
+    {
+      "id": 11,
+      "text": "Like Pocahontas facing invaders... A crisis hits your town. What’s your instinct?",
+      "axis": "XY",
+      "type": "multiple",
+      "reverse": false,
+      "options": [
+        {"text": "Hope leaders fix it, staying kind and quiet.", "xValue": 0, "yValue": 0},
+        {"text": "Join group efforts, gently nudging plans.", "xValue": 33, "yValue": 33},
+        {"text": "Propose your own fix with bold conviction.", "xValue": 66, "yValue": 66},
+        {"text": "Lead the charge solo, ending up exiled but unbowed.", "xValue": 100, "yValue": 100}
+      ]
+    },
+    {
+      "id": 12,
+      "text": "Inspired by Moana’s ocean call... A mentor’s betrayal rocks you. How do you respond?",
+      "axis": "XY",
+      "type": "multiple",
+      "reverse": false,
+      "options": [
+        {"text": "Stay silent, swallowing hurt to keep peace.", "xValue": 0, "yValue": 0},
+        {"text": "Seek allies to mediate, expressing soft hurt.", "xValue": 33, "yValue": 33},
+        {"text": "Confront firmly, carving your own path.", "xValue": 66, "yValue": 66},
+        {"text": "Call them out epically, sailing off alone.", "xValue": 100, "yValue": 100}
+      ]
+    },
+    {
+      "id": 13,
+      "text": "Twisted from Mononoke’s wolf fury... An eco-disaster threatens all. Your approach?",
+      "axis": "XY",
+      "type": "multiple",
+      "reverse": false,
+      "options": [
+        {"text": "Pray for miracles, sharing resources sweetly.", "xValue": 0, "yValue": 0},
+        {"text": "Rally others quietly, warning of dangers.", "xValue": 33, "yValue": 33},
+        {"text": "Fight solo with fierce strategy.", "xValue": 66, "yValue": 66},
+        {"text": "Charge the source, ending up scarred but legendary.", "xValue": 100, "yValue": 100}
+      ]
+    },
+    {
+      "id": 14,
+      "text": "Like Anna’s frozen quest... A friend needs saving, but it’s risky. What’s your call?",
+      "axis": "XY",
+      "type": "forced",
+      "reverse": false,
+      "options": [
+        {"text": "Wait for someone stronger to step in, cheering softly.", "xValue": 0, "yValue": 0},
+        {"text": "Rush in boldly, even if it means getting lost.", "xValue": 100, "yValue": 100},
+        {"text": "Neither—offer support but stay cautious.", "xValue": 33, "yValue": 33}
+      ]
+    },
+    {
+      "id": 15,
+      "text": "From Kaguya’s lunar drama... Your “perfect” life feels wrong. Your choice?",
+      "axis": "XY",
+      "type": "forced",
+      "reverse": false,
+      "options": [
+        {"text": "Float along, keeping things gentle and safe.", "xValue": 0, "yValue": 0},
+        {"text": "Reject it all, crashing back with fierce defiance.", "xValue": 100, "yValue": 100},
+        {"text": "Neither—tweak it quietly over time.", "xValue": 33, "yValue": 33}
+      ]
+    },
+    {
+      "id": 16,
+      "text": "Like Sophie’s cursed aging... A life upheaval hits. How do you face it?",
+      "axis": "XY",
+      "type": "multiple",
+      "reverse": true,
+      "options": [
+        {"text": "Accept it quietly, knitting by the fire.", "xValue": 33, "yValue": 33},
+        {"text": "Lash out dramatically, demanding reversal.", "xValue": 0, "yValue": 0},
+        {"text": "Adapt with clever, bold moves.", "xValue": 66, "yValue": 66},
+        {"text": "Hunt the source, reshaping life despite scars.", "xValue": 100, "yValue": 100}
+      ]
+    }
+  ]
