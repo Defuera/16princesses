@@ -1,0 +1,179 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-09-27",
+  "princesses": [
+    {
+      "id": "snow-white",
+      "name": "Snow White",
+      "source": "Snow White and the Seven Dwarfs",
+      "feminismPercentage": 5,
+      "bitchinessPercentage": 5,
+      "personalityMessage": "You're such a sweetheart! 💖"
+    },
+    {
+      "id": "cinderella",
+      "name": "Cinderella",
+      "source": "Cinderella",
+      "feminismPercentage": 10,
+      "bitchinessPercentage": 10,
+      "personalityMessage": "You're such a sweetheart! 💖"
+    },
+    {
+      "id": "aurora",
+      "name": "Aurora",
+      "source": "Sleeping Beauty",
+      "feminismPercentage": 5,
+      "bitchinessPercentage": 5,
+      "personalityMessage": "You're such a sweetheart! 💖"
+    },
+    {
+      "id": "ariel",
+      "name": "Ariel",
+      "source": "The Little Mermaid",
+      "feminismPercentage": 30,
+      "bitchinessPercentage": 60,
+      "personalityMessage": "You're confidently traditional! 🌺"
+    },
+    {
+      "id": "belle",
+      "name": "Belle",
+      "source": "Beauty and the Beast",
+      "feminismPercentage": 50,
+      "bitchinessPercentage": 30,
+      "personalityMessage": "You're beautifully balanced! 💝"
+    },
+    {
+      "id": "jasmine",
+      "name": "Jasmine",
+      "source": "Aladdin",
+      "feminismPercentage": 60,
+      "bitchinessPercentage": 70,
+      "personalityMessage": "You're a balanced trailblazer! ✨"
+    },
+    {
+      "id": "pocahontas",
+      "name": "Pocahontas",
+      "source": "Pocahontas",
+      "feminismPercentage": 70,
+      "bitchinessPercentage": 50,
+      "personalityMessage": "You're a balanced trailblazer! ✨"
+    },
+    {
+      "id": "mulan",
+      "name": "Mulan",
+      "source": "Mulan",
+      "feminismPercentage": 90,
+      "bitchinessPercentage": 80,
+      "personalityMessage": "You're a fierce, independent force! 👑"
+    },
+    {
+      "id": "tiana",
+      "name": "Tiana",
+      "source": "The Princess and the Frog",
+      "feminismPercentage": 75,
+      "bitchinessPercentage": 40,
+      "personalityMessage": "You're a balanced trailblazer! ✨"
+    },
+    {
+      "id": "rapunzel",
+      "name": "Rapunzel",
+      "source": "Tangled",
+      "feminismPercentage": 60,
+      "bitchinessPercentage": 30,
+      "personalityMessage": "You're beautifully balanced! 💝"
+    },
+    {
+      "id": "merida",
+      "name": "Merida",
+      "source": "Brave",
+      "feminismPercentage": 95,
+      "bitchinessPercentage": 90,
+      "personalityMessage": "You're a fierce, independent force! 👑"
+    },
+    {
+      "id": "elsa",
+      "name": "Elsa",
+      "source": "Frozen",
+      "feminismPercentage": 100,
+      "bitchinessPercentage": 85,
+      "personalityMessage": "You're a fierce, independent force! 👑"
+    },
+    {
+      "id": "anna",
+      "name": "Anna",
+      "source": "Frozen",
+      "feminismPercentage": 70,
+      "bitchinessPercentage": 40,
+      "personalityMessage": "You're a balanced trailblazer! ✨"
+    },
+    {
+      "id": "moana",
+      "name": "Moana",
+      "source": "Moana",
+      "feminismPercentage": 85,
+      "bitchinessPercentage": 70,
+      "personalityMessage": "You're a fierce, independent force! 👑"
+    },
+    {
+      "id": "raya",
+      "name": "Raya",
+      "source": "Raya and the Last Dragon",
+      "feminismPercentage": 95,
+      "bitchinessPercentage": 95,
+      "personalityMessage": "You're a fierce, independent force! 👑"
+    },
+    {
+      "id": "princess-mononoke",
+      "name": "Princess Mononoke",
+      "source": "Princess Mononoke",
+      "feminismPercentage": 95,
+      "bitchinessPercentage": 90,
+      "personalityMessage": "You're a fierce, independent force! 👑"
+    },
+    {
+      "id": "nausicaa",
+      "name": "Nausicaä",
+      "source": "Nausicaä of the Valley of the Wind",
+      "feminismPercentage": 100,
+      "bitchinessPercentage": 40,
+      "personalityMessage": "You're a gentle revolutionary! 🌸"
+    },
+    {
+      "id": "kaguya",
+      "name": "Kaguya",
+      "source": "The Tale of the Princess Kaguya",
+      "feminismPercentage": 80,
+      "bitchinessPercentage": 30,
+      "personalityMessage": "You're a balanced trailblazer! ✨"
+    },
+    {
+      "id": "chihiro",
+      "name": "Chihiro",
+      "source": "Spirited Away",
+      "feminismPercentage": 70,
+      "bitchinessPercentage": 20,
+      "personalityMessage": "You're kindly progressive! 🦋"
+    },
+    {
+      "id": "sheeta",
+      "name": "Sheeta",
+      "source": "Castle in the Sky",
+      "feminismPercentage": 60,
+      "bitchinessPercentage": 25,
+      "personalityMessage": "You're beautifully balanced! 💝"
+    },
+    {
+      "id": "sophie",
+      "name": "Sophie",
+      "source": "Howl's Moving Castle",
+      "feminismPercentage": 85,
+      "bitchinessPercentage": 60,
+      "personalityMessage": "You're a balanced trailblazer! ✨"
+    }
+  ],
+  "metadata": {
+    "totalCount": 21,
+    "dataSource": "GRAPH.md",
+    "generator": "manual-conversion v1.0"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "princesses",
+  "version": "1.0.0",
+  "description": "16Princesses Test - Interactive Princess Personality Website",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "build:analyze": "npm run build && npx vite-bundle-analyzer dist/stats.html",
+    "deploy:netlify": "npm run build && npx netlify deploy --dir=dist --prod",
+    "deploy:gh-pages": "npm run build && npx gh-pages -d dist",
+    "serve": "npx serve dist"
+  },
+  "keywords": ["react", "typescript", "vite", "personality-test"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@types/react": "^19.1.14",
+    "@types/react-dom": "^19.1.9",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^5.0.4",
+    "chart.js": "^4.5.0",
+    "react": "^19.1.1",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.3",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.7"
+  }
+}

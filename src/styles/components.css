@@ -1,0 +1,268 @@
+/* Princess Graph Component Styles */
+.princess-graph-container {
+  width: 100%;
+  height: 100%;
+}
+
+.graph-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.axis-labels {
+  text-align: center;
+}
+
+.axis-description {
+  background: var(--secondary-color);
+  border-radius: 8px;
+  padding: var(--spacing-base);
+  font-size: var(--font-size-sm);
+}
+
+.axis-description p {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.axis-description strong {
+  color: var(--primary-color);
+}
+
+/* Princess Message Component Styles */
+.princess-message-container {
+  width: 100%;
+}
+
+.princess-result-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.princess-header {
+  text-align: center;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: var(--spacing-base);
+}
+
+.selected-princess-name {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.personality-message {
+  text-align: center;
+  margin: var(--spacing-lg) 0;
+}
+
+.main-message {
+  background: linear-gradient(135deg, var(--primary-color), #ff8fab);
+  color: white;
+  padding: var(--spacing-xl);
+  border-radius: 16px;
+  box-shadow: var(--shadow-medium);
+}
+
+.message-text {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  display: block;
+}
+
+.archetype-details {
+  background: var(--background-color);
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  border-left: 4px solid var(--primary-color);
+}
+
+.archetype-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.archetype-description {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: var(--font-size-base);
+}
+
+.princess-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-base);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.stat-label {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+}
+
+.stat-bar {
+  position: relative;
+  height: 24px;
+  background: var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.stat-fill {
+  height: 100%;
+  border-radius: 12px;
+  transition: width var(--transition-slow);
+  position: relative;
+}
+
+.feminism-fill {
+  background: linear-gradient(90deg, #ff6b9d, #c7ceea);
+}
+
+.assertiveness-fill {
+  background: linear-gradient(90deg, #ffd93d, #ff6b9d);
+}
+
+.stat-value {
+  position: absolute;
+  right: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  z-index: 2;
+}
+
+.result-actions {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+}
+
+/* Enhanced Mobile Styles */
+@media (max-width: 768px) {
+  .chart-wrapper {
+    height: 300px;
+  }
+  
+  .graph-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .selected-princess-name {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .main-message {
+    padding: var(--spacing-lg);
+  }
+  
+  .message-text {
+    font-size: var(--font-size-lg);
+  }
+  
+  .archetype-details {
+    padding: var(--spacing-base);
+  }
+  
+  .stat-bar {
+    height: 20px;
+  }
+}
+
+/* Princess Card Hover Animations */
+.princess-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.princess-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.1), transparent);
+  transition: left var(--transition-slow);
+}
+
+.princess-card:hover::before {
+  left: 100%;
+}
+
+/* Improved accessibility */
+.princess-card:focus-visible,
+.back-button:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Loading animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.princess-result-card {
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+.princess-card {
+  animation: fadeIn var(--transition-base) ease-out;
+}
+
+/* Chart responsive container */
+.chart-wrapper canvas {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Princess grid improvements for small screens */
+@media (max-width: 480px) {
+  .princess-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+  
+  .princess-card {
+    padding: var(--spacing-base);
+  }
+  
+  .princess-traits {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+  
+  .trait {
+    font-size: var(--font-size-xs);
+    padding: 2px var(--spacing-xs);
+  }
+}

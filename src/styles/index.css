@@ -1,0 +1,288 @@
+/* CSS Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Colors inspired by 16Personalities */
+  --primary-color: #ff6b9d;
+  --secondary-color: #c7ceea;
+  --accent-color: #ffd93d;
+  --background-color: #f8f9fa;
+  --card-background: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #6c757d;
+  --border-color: #e9ecef;
+  --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.2);
+  
+  /* Typography */
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-base: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* Breakpoints */
+  --breakpoint-mobile: 768px;
+  --breakpoint-tablet: 1024px;
+  --breakpoint-desktop: 1200px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+body {
+  font-family: var(--font-family-base);
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--background-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* App Container */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Princess List Styles */
+.princess-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: var(--spacing-3xl);
+}
+
+.app-header h1 {
+  font-size: var(--font-size-4xl);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-base);
+  font-weight: 700;
+}
+
+.app-header p {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.princess-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  flex: 1;
+}
+
+.princess-card {
+  background: var(--card-background);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-light);
+  text-align: left;
+  width: 100%;
+}
+
+.princess-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-2px);
+}
+
+.princess-card:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+}
+
+.princess-name {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.princess-source {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: var(--spacing-base);
+}
+
+.princess-traits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.trait {
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--secondary-color);
+  border-radius: 16px;
+  color: var(--text-primary);
+  width: fit-content;
+}
+
+.app-footer {
+  text-align: center;
+  margin-top: var(--spacing-3xl);
+  padding: var(--spacing-lg);
+}
+
+.app-footer p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+}
+
+/* Result Page Styles */
+.result-page {
+  min-height: 100vh;
+  padding: var(--spacing-xl);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.result-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2xl);
+  align-items: start;
+}
+
+.graph-section {
+  background: var(--card-background);
+  border-radius: 12px;
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-light);
+}
+
+.message-section {
+  background: var(--card-background);
+  border-radius: 12px;
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-light);
+}
+
+/* Error Container */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
+  padding: var(--spacing-2xl);
+}
+
+.error-container h2 {
+  font-size: var(--font-size-2xl);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-base);
+}
+
+.error-container p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Back Button */
+.back-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: var(--spacing-base) var(--spacing-lg);
+  border-radius: 8px;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.back-button:hover {
+  background: #e85a87;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-medium);
+}
+
+.back-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .princess-list-container {
+    padding: var(--spacing-base);
+  }
+  
+  .app-header h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .princess-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-base);
+  }
+  
+  .princess-card {
+    padding: var(--spacing-base);
+  }
+  
+  .result-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .result-page {
+    padding: var(--spacing-base);
+  }
+  
+  .graph-section,
+  .message-section {
+    padding: var(--spacing-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .princess-grid {
+    grid-template-columns: 1fr;
+  }
+}
