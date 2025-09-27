@@ -63,7 +63,7 @@ const NotFoundPage: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/16princesses">
       <div className="App">
         <Routes>
           <Route path="/" element={<PrincessList />} />
