@@ -1135,6 +1135,14 @@
   justify-content: center;
 }
 
+.princess-image-display .princess-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 .princess-image-display .princess-image-placeholder .image-placeholder {
   width: 120px;
   height: 120px;
@@ -1148,6 +1156,10 @@
   box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
 }
 
+.hidden {
+  display: none;
+}
+
 .princess-image-display .placeholder-text {
   font-size: 2.5rem;
   margin-bottom: 0.25rem;
@@ -1159,10 +1171,168 @@
   font-weight: 500;
 }
 
-/* 3. Carousel Section */
+/* 3. Horizontal Princess Carousel Section */
 .carousel-section {
   width: 100%;
   margin: 2rem 0;
+}
+
+.horizontal-princess-carousel {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.horizontal-princess-carousel h4 {
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.princess-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+  border-radius: 12px;
+}
+
+.princess-scroll-track {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  width: max-content;
+}
+
+.princess-scroll-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 100px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.princess-scroll-item:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  background: #f0f8ff;
+}
+
+.princess-scroll-item.selected {
+  border-color: #007bff;
+  background: #f0f8ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.princess-scroll-item.user-match {
+  border-color: #ff6b6b;
+  background: #fff5f5;
+}
+
+.princess-scroll-item.user-match.selected {
+  border-color: #ff6b6b;
+  background: #ffe5e5;
+}
+
+.princess-photo {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.carousel-princess-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: all 0.2s ease;
+}
+
+.photo-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a8a8a8 0%, #6a6a6a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.princess-scroll-item.selected .photo-placeholder {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+}
+
+.princess-scroll-item.user-match .photo-placeholder {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+}
+
+.match-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff6b6b;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
+}
+
+.princess-scroll-name {
+  font-size: 0.85rem;
+  color: #4a5568;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+  max-width: 100px;
+  word-wrap: break-word;
+}
+
+.princess-scroll-item.selected .princess-scroll-name {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.princess-scroll-item.user-match .princess-scroll-name {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+/* Scrollbar styling */
+.princess-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.princess-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.princess-scroll-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.princess-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
 
 /* Animated Results Graph Container */

@@ -66,8 +66,8 @@ const PrincessMessage: React.FC<PrincessMessageProps> = ({
   };
 
   // Get scores to use (user's calculated scores or princess's fixed scores)
-  const displayFeminism = userScores?.xScore ?? princess.feminismPercentage;
-  const displayAssertiveness = userScores?.yScore ?? princess.bitchinessPercentage;
+  const displayFeminism = userScores?.xScore ?? princess.heroineScore;
+  const displayAssertiveness = userScores?.yScore ?? princess.bitchScore;
   
   const { archetype, description } = getArchetypeDescription(displayFeminism, displayAssertiveness);
 
@@ -144,11 +144,11 @@ const PrincessMessage: React.FC<PrincessMessageProps> = ({
             <div className="comparison-stats">
               <div className="comparison-item">
                 <span className="comparison-label">{princess.name}'s Heroine Level:</span>
-                <span className="comparison-value">{princess.feminismPercentage}%</span>
+                <span className="comparison-value">{princess.heroineScore}%</span>
               </div>
               <div className="comparison-item">
                 <span className="comparison-label">{princess.name}'s Fierce Factor:</span>
-                <span className="comparison-value">{princess.bitchinessPercentage}%</span>
+                <span className="comparison-value">{princess.bitchScore}%</span>
               </div>
             </div>
           </div>

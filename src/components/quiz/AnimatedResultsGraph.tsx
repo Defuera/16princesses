@@ -19,6 +19,7 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
   quizResult,
   onAnimationComplete,
   onUserInteraction,
+  selectedPrincess,
   reducedMotion = prefersReducedMotion(),
   className = ''
 }) => {
@@ -378,21 +379,23 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
         {animationState.showOtherPrincesses && allPrincesses.map((princess, index) => {
           if (princess.id === quizResult.matchedPrincess.id) return null;
           
+          const isSelected = selectedPrincess?.id === princess.id;
+          
           return (
             <circle
               key={princess.id}
-              cx={scaleX(princess.feminismPercentage)}
-              cy={scaleY(princess.bitchinessPercentage)}
-              r="6"
-              fill="#adb5bd"
+              cx={scaleX(princess.heroineScore)}
+              cy={scaleY(princess.bitchScore)}
+              r={isSelected ? "10" : "6"}
+              fill={isSelected ? "#007bff" : "#adb5bd"}
               stroke="#fff"
-              strokeWidth="2"
-              className="other-princess-dot show"
+              strokeWidth={isSelected ? "3" : "2"}
+              className={`other-princess-dot show ${isSelected ? 'highlighted' : ''}`}
               style={{
                 animation: `fadeIn 0.5s ease-in-out ${index * 0.1}s both`
               }}
               data-testid="other-princess-dot"
-              aria-label={getPrincessAriaLabel(princess, princess.feminismPercentage, princess.bitchinessPercentage)}
+              aria-label={getPrincessAriaLabel(princess, princess.heroineScore, princess.bitchScore)}
             />
           );
         })}

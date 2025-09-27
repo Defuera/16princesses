@@ -2,10 +2,11 @@ export interface Princess {
   id: string;                    // Unique identifier (kebab-case name)
   name: string;                  // Display name
   source: string;                // Source material (movie/anime title)
-  feminismPercentage: number;    // 0-100, represents X-axis position
-  bitchinessPercentage: number;  // 0-100, represents Y-axis position  
+  heroineScore: number;          // 0-100, represents X-axis position (formerly feminismPercentage)
+  bitchScore: number;            // 0-100, represents Y-axis position (formerly bitchinessPercentage)
+  description: string;           // Sassy personality description from reveal data
+  imageUrl: string;              // Princess image URL
   personalityMessage: string;    // Generated message based on trait combination
-  imageUrl?: string;             // Optional princess image path
 }
 
 export interface PrincessData {

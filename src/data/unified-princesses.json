@@ -1,0 +1,187 @@
+{
+  "version": "2.0.0",
+  "lastUpdated": "2025-09-27",
+  "description": "Unified princess data with scores, descriptions, and images",
+  "princesses": [
+    {
+      "id": "snow-white",
+      "name": "Snow White",
+      "source": "Snow White and the Seven Dwarfs",
+      "heroineScore": 5,
+      "bitchScore": 5,
+      "description": "Oh, darling, you're the ultimate damsel who relies on woodland critters and a poisoned apple to spice up your day—because nothing says 'empowered' like waiting for a kiss from a stranger to wake you from eternal nap time.",
+      "imageUrl": "https://via.placeholder.com/200x200/ff9999/ffffff?text=Snow+White",
+      "personalityMessage": "You're such a sweetheart! 💖"
+    },
+    {
+      "id": "cinderella",
+      "name": "Cinderella", 
+      "source": "Cinderella",
+      "heroineScore": 10,
+      "bitchScore": 10,
+      "description": "Congrats, you're the queen of passive-aggressive chores, scrubbing floors while dreaming of ball gowns and glass slippers—because why seize your own fate when a fairy godmother and a shoe can do all the heavy lifting?",
+      "imageUrl": "https://via.placeholder.com/200x200/87ceeb/ffffff?text=Cinderella",
+      "personalityMessage": "You're such a sweetheart! 💖"
+    },
+    {
+      "id": "aurora",
+      "name": "Aurora",
+      "source": "Sleeping Beauty", 
+      "heroineScore": 5,
+      "bitchScore": 5,
+      "description": "Ah, yes, the sleeping beauty who spends most of her story in a coma, courtesy of a cursed spindle—proving that true love's kiss is the ultimate alarm clock for those too 'busy' napping through life's dramas.",
+      "imageUrl": "https://via.placeholder.com/200x200/ff69b4/ffffff?text=Aurora",
+      "personalityMessage": "You're such a sweetheart! 💖"
+    },
+    {
+      "id": "ariel",
+      "name": "Ariel",
+      "source": "The Little Mermaid",
+      "heroineScore": 37,
+      "bitchScore": 46,
+      "description": "You're the mermaid who trades her voice for legs and a shot at a prince—because muting yourself for a guy with a fancy boat is totally the pinnacle of underwater feminism, right?",
+      "imageUrl": "https://via.placeholder.com/200x200/00ced1/ffffff?text=Ariel",
+      "personalityMessage": "You're beautifully balanced! 💝"
+    },
+    {
+      "id": "belle",
+      "name": "Belle",
+      "source": "Beauty and the Beast",
+      "heroineScore": 75,
+      "bitchScore": 25,
+      "description": "Bookworm extraordinaire, you fall for a beastly captor while taming his temper tantrums—Stockholm syndrome never looked so intellectual, or so sarcastically sacrificial.",
+      "imageUrl": "https://via.placeholder.com/200x200/ffd700/ffffff?text=Belle", 
+      "personalityMessage": "You're a gentle revolutionary! 🌸"
+    },
+    {
+      "id": "jasmine",
+      "name": "Jasmine",
+      "source": "Aladdin",
+      "heroineScore": 65,
+      "bitchScore": 60,
+      "description": "Palace rebel with a tiger sidekick, you sneak out for adventure but still need a magic carpet ride to escape daddy's rules—freedom's just a genie wish away, isn't it, princess?",
+      "imageUrl": "https://via.placeholder.com/200x200/4169e1/ffffff?text=Jasmine",
+      "personalityMessage": "You're a balanced trailblazer! ✨"
+    },
+    {
+      "id": "pocahontas",
+      "name": "Pocahontas",
+      "source": "Pocahontas",
+      "heroineScore": 80,
+      "bitchScore": 55,
+      "description": "Nature's diplomat who dives off waterfalls and chats with trees to broker peace—because nothing screams 'independent' like risking it all for a colonizer with a questionable helmet.",
+      "imageUrl": "https://via.placeholder.com/200x200/8b4513/ffffff?text=Pocahontas",
+      "personalityMessage": "You're a balanced trailblazer! ✨"
+    },
+    {
+      "id": "mulan",
+      "name": "Mulan",
+      "source": "Mulan", 
+      "heroineScore": 90,
+      "bitchScore": 65,
+      "description": "Cross-dressing warrior who saves China but still gets credit only after the disguise drops—proving that kicking butt in drag is fine, as long as you end up with a man and a medal.",
+      "imageUrl": "https://via.placeholder.com/200x200/dc143c/ffffff?text=Mulan",
+      "personalityMessage": "You're a balanced trailblazer! ✨"
+    },
+    {
+      "id": "tiana",
+      "name": "Tiana",
+      "source": "The Princess and the Frog",
+      "heroineScore": 85,
+      "bitchScore": 45,
+      "description": "Workaholic frog-kisser who turns dreams into restaurants one beignet at a time—because true ambition means slaving away until a slimy prince shows you the 'magic' of compromise.",
+      "imageUrl": "https://via.placeholder.com/200x200/32cd32/ffffff?text=Tiana",
+      "personalityMessage": "You're kindly progressive! 🦋"
+    },
+    {
+      "id": "rapunzel",
+      "name": "Rapunzel",
+      "source": "Tangled",
+      "heroineScore": 70,
+      "bitchScore": 35,
+      "description": "Tower-bound artist with magical hair and a frying pan for defense—escape your kidnapper-mom just to tangle with thieves, because long locks are your only real superpower.",
+      "imageUrl": "https://via.placeholder.com/200x200/da70d6/ffffff?text=Rapunzel",
+      "personalityMessage": "You're kindly progressive! 🦋"
+    },
+    {
+      "id": "merida",
+      "name": "Merida",
+      "source": "Brave",
+      "heroineScore": 95,
+      "bitchScore": 75,
+      "description": "Archery ace who turns her mom into a bear to dodge an arranged marriage—family therapy via witchcraft, because nothing says 'feminist' like cursing your kin for freedom.",
+      "imageUrl": "https://via.placeholder.com/200x200/228b22/ffffff?text=Merida",
+      "personalityMessage": "You're a fierce, independent force! 👑"
+    },
+    {
+      "id": "elsa",
+      "name": "Elsa",
+      "source": "Frozen",
+      "heroineScore": 88,
+      "bitchScore": 70,
+      "description": "Ice queen who freezes her kingdom in a fit of repression, then belts out anthems about letting go—because isolation and blizzards are the chic way to handle family baggage.",
+      "imageUrl": "https://via.placeholder.com/200x200/87cefa/ffffff?text=Elsa",
+      "personalityMessage": "You're a fierce, independent force! 👑"
+    },
+    {
+      "id": "anna",
+      "name": "Anna",
+      "source": "Frozen",
+      "heroineScore": 75,
+      "bitchScore": 40,
+      "description": "Optimistic klutz who chases her icy sister through snowstorms for a hug—true love means freezing to death for family, because who needs boundaries when you've got eternal winter?",
+      "imageUrl": "https://via.placeholder.com/200x200/ff6347/ffffff?text=Anna",
+      "personalityMessage": "You're kindly progressive! 🦋"
+    },
+    {
+      "id": "moana",
+      "name": "Moana",
+      "source": "Moana",
+      "heroineScore": 92,
+      "bitchScore": 50,
+      "description": "Ocean-chosen voyager who defies her dad to save the world with a sassy demigod—because restoring a goddess's heart is easier than dealing with island patriarchy.",
+      "imageUrl": "https://via.placeholder.com/200x200/20b2aa/ffffff?text=Moana",
+      "personalityMessage": "You're a balanced trailblazer! ✨"
+    },
+    {
+      "id": "raya",
+      "name": "Raya",
+      "source": "Raya and the Last Dragon",
+      "heroineScore": 87,
+      "bitchScore": 68,
+      "description": "Trust-issues warrior princess swinging a sword through a fractured world—collect dragon gems like Pokémon, because betrayal and backstabbing are just part of the family reunion.",
+      "imageUrl": "https://via.placeholder.com/200x200/4682b4/ffffff?text=Raya",
+      "personalityMessage": "You're a balanced trailblazer! ✨"
+    },
+    {
+      "id": "princess-mononoke",
+      "name": "Princess Mononoke",
+      "source": "Princess Mononoke",
+      "heroineScore": 98,
+      "bitchScore": 85,
+      "description": "Wolf-raised eco-terrorist who stabs gods and humans alike for the forest—nature's vengeance wrapped in fur and fury, because harmony means biting the hand that pollutes.",
+      "imageUrl": "https://via.placeholder.com/200x200/8fbc8f/ffffff?text=Mononoke",
+      "personalityMessage": "You're a fierce, independent force! 👑"
+    },
+    {
+      "id": "nausicaa",
+      "name": "Nausicaä",
+      "source": "Nausicaä of the Valley of the Wind",
+      "heroineScore": 85,
+      "bitchScore": 30,
+      "description": "Post-apocalyptic glider girl who chats with giant bugs to stop wars—pacifism in a toxic jungle, proving that empathy wins, even if it means getting swallowed by ohmu slime.",
+      "imageUrl": "https://via.placeholder.com/200x200/9370db/ffffff?text=Nausicaa",
+      "personalityMessage": "You're kindly progressive! 🦋"
+    },
+    {
+      "id": "kaguya",
+      "name": "Kaguya",
+      "source": "The Tale of the Princess Kaguya",
+      "heroineScore": 60,
+      "bitchScore": 80,
+      "description": "Moon-bound bamboo baby who toys with suitors and rejects earthly life—celestial snobbery at its finest, because why settle for mortal drama when you can ghost back to the stars?",
+      "imageUrl": "https://via.placeholder.com/200x200/ffefd5/ffffff?text=Kaguya",
+      "personalityMessage": "You're assertive with traditional values! 💪"
+    }
+  ]
+}

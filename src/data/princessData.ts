@@ -1,11 +1,11 @@
 import { Princess, PrincessData } from '../types/princess';
-import princessesData from './princesses.json';
+import unifiedPrincessesData from './unified-princesses.json';
 
 /**
  * Load princess data from JSON file
  */
 export function loadPrincessData(): PrincessData {
-  return princessesData as PrincessData;
+  return unifiedPrincessesData as PrincessData;
 }
 
 /**

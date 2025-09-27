@@ -111,6 +111,7 @@ export interface AnimatedResultsGraphProps {
   quizResult: QuizResult;
   onAnimationComplete?: () => void;
   onUserInteraction?: () => void;
+  selectedPrincess?: Princess | null;
   reducedMotion?: boolean;
   className?: string;
 }

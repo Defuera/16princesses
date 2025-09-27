@@ -6,7 +6,6 @@ import PrincessGraph from '../PrincessGraph';
 import AnimatedResultsGraph from './AnimatedResultsGraph';
 import PrincessRevealCarousel from './PrincessRevealCarousel';
 import { getAllPrincesses } from '../../data/princessData';
-import { generatePersonalityMessage } from '../../data/quizScoring';
 
 interface QuizResultsProps {
   quizResult: QuizResult;
@@ -28,7 +27,6 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
   const [selectedExplorePrincess, setSelectedExplorePrincess] = useState<Princess | null>(null);
-  const [revealData, setRevealData] = useState<any>(null);
 
   // Load all princesses for the graph
   useEffect(() => {
@@ -36,26 +34,9 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
     setAllPrincesses(princesses);
   }, []);
 
-  // Load reveal.json data
-  useEffect(() => {
-    const loadRevealData = async () => {
-      try {
-        const response = await fetch('/docs/reveal.json');
-        const data = await response.json();
-        setRevealData(data);
-      } catch (error) {
-        console.warn('Failed to load reveal data:', error);
-        setRevealData({ princesses: [] });
-      }
-    };
-    loadRevealData();
-  }, []);
-
-  // Get reveal description for a princess
-  const getRevealDescription = (princessName: string) => {
-    if (!revealData?.princesses) return "You're a unique princess archetype! Your combination of traits creates an interesting personality profile.";
-    const princess = revealData.princesses.find((p: any) => p.name === princessName);
-    return princess?.description || "You're a unique princess archetype! Your combination of traits creates an interesting personality profile.";
+  // Get description from the unified princess data
+  const getRevealDescription = (princess: Princess) => {
+    return princess.description || "You're a unique princess archetype! Your combination of traits creates an interesting personality profile.";
   };
 
   // Animation effect
@@ -100,23 +81,6 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
     }
   };
 
-  const getResultSummary = () => {
-    const { xScore, yScore, matchingDistance } = quizResult;
-    
-    let archetype = '';
-    if (xScore >= 60 && yScore >= 60) archetype = 'Fierce Heroine';
-    else if (xScore >= 60 && yScore < 60) archetype = 'Gentle Heroine';
-    else if (xScore < 60 && yScore >= 60) archetype = 'Fierce Heart';
-    else archetype = 'Classic Princess';
-
-    return {
-      archetype,
-      personalityMessage: generatePersonalityMessage(quizResult),
-      matchAccuracy: Math.round((100 - matchingDistance) * 10) / 10
-    };
-  };
-
-  const { archetype, matchAccuracy } = getResultSummary();
 
   if (isLoading) {
     return (
@@ -140,15 +104,16 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
             {/* Left: Animated Results Graph */}
             <section className="graph-section">
               <div className="animated-graph-container">
-                <AnimatedResultsGraph
-                  quizResult={quizResult}
-                  onAnimationComplete={handleAnimationComplete}
-                  onUserInteraction={() => {
-                    // Handle user interaction during animations
-                    console.log('Animation interaction detected');
-                  }}
-                  className="main-results-graph"
-                />
+              <AnimatedResultsGraph
+                quizResult={quizResult}
+                onAnimationComplete={handleAnimationComplete}
+                onUserInteraction={() => {
+                  // Handle user interaction during animations
+                  console.log('Animation interaction detected');
+                }}
+                selectedPrincess={selectedExplorePrincess}
+                className="main-results-graph"
+              />
               </div>
             </section>
 
@@ -156,16 +121,27 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
             {animationComplete && (
               <section className="princess-info-section">
                 <div className="princess-description">
-                  <h3>{quizResult.matchedPrincess.name}</h3>
-                  <p className="princess-source">from {quizResult.matchedPrincess.source}</p>
+                  <h3>{(selectedExplorePrincess || quizResult.matchedPrincess).name}</h3>
+                  <p className="princess-source">from {(selectedExplorePrincess || quizResult.matchedPrincess).source}</p>
                   <div className="reveal-message">
-                    <p>{getRevealDescription(quizResult.matchedPrincess.name)}</p>
+                    <p>{getRevealDescription(selectedExplorePrincess || quizResult.matchedPrincess)}</p>
                   </div>
                 </div>
                 
                 <div className="princess-image-display">
                   <div className="princess-image-placeholder">
-                    <div className="image-placeholder" role="img" aria-label={`${quizResult.matchedPrincess.name} image placeholder`}>
+                    <img 
+                      src={(selectedExplorePrincess || quizResult.matchedPrincess).imageUrl}
+                      alt={`${(selectedExplorePrincess || quizResult.matchedPrincess).name} from ${(selectedExplorePrincess || quizResult.matchedPrincess).source}`}
+                      className="princess-image"
+                      onError={(e) => {
+                        // Fallback to placeholder if image fails to load
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        target.nextElementSibling?.classList.remove('hidden');
+                      }}
+                    />
+                    <div className="image-placeholder hidden" role="img" aria-label={`${(selectedExplorePrincess || quizResult.matchedPrincess).name} image placeholder`}>
                       <span className="placeholder-text" aria-hidden="true">👑</span>
                       <span className="image-label">Princess Image</span>
                     </div>
@@ -190,26 +166,6 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
           </section>
         )}
 
-        {/* Fallback: Traditional Graph (for accessibility/preference) */}
-        {animationComplete && (
-          <section className="fallback-graph-section">
-            <details>
-              <summary>View Static Graph</summary>
-              <div className="static-graph-container">
-                <PrincessGraph 
-                  princesses={allPrincesses}
-                  selectedPrincess={selectedExplorePrincess || quizResult.matchedPrincess}
-                  userCoordinates={{
-                    x: quizResult.xScore,
-                    y: quizResult.yScore,
-                    name: 'You',
-                    isUser: true
-                  }}
-                />
-              </div>
-            </details>
-          </section>
-        )}
       </main>
 
       {/* Action Buttons */}
