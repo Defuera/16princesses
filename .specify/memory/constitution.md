@@ -15,8 +15,8 @@ Follow-up TODOs: None
 ### I. User Experience First
 The user's enjoyment and engagement MUST be the primary consideration in every design decision. Features must be intuitive, delightful, and create a sense of discovery. If a technical choice conflicts with user experience, prioritize UX unless security or data integrity is at risk. All interactions should feel smooth and responsive, with clear visual feedback.
 
-### II. Static & Simple Architecture
-The website MUST remain a static site with minimal dependencies. No server-side processing, databases, or complex build pipelines required. All functionality achievable through HTML, CSS, and vanilla JavaScript. This ensures fast loading, easy deployment, and minimal maintenance overhead. External dependencies must be justified and kept to an absolute minimum.
+### II. Development Speed First
+The website MUST prioritize fast development and easy maintenance over technical purity. Modern development tools, frameworks, and build pipelines are encouraged if they accelerate development velocity. The final output MUST be a static site with no server-side processing or databases required. Choose tools that maximize developer productivity, enable hot reload, provide good error messages, and simplify code organization.
 
 ### III. Interactive & Engaging Design
 Every element should encourage user interaction and exploration. The scatter plot must be clickable, hoverable, and responsive. Princess selection should feel engaging through animations, transitions, and personality-based feedback messages. Visual design must be playful yet professional, appealing to diverse audiences while maintaining readability and clarity.
@@ -29,7 +29,7 @@ The website MUST be usable by people with disabilities and across different devi
 
 ## Quality Standards
 
-All code must be readable, well-commented, and maintainable. CSS should follow consistent naming conventions. JavaScript must handle edge cases gracefully with appropriate error messages. The site must load completely within 3 seconds on standard broadband connections. Browser compatibility required for Chrome, Firefox, Safari, and Edge (last 2 major versions).
+All code must be readable, well-commented, and maintainable. Use modern development practices that improve developer experience: TypeScript for better error catching, ESLint/Prettier for code consistency, hot reload for instant feedback. Prioritize developer productivity tools over performance micro-optimizations. Browser compatibility required for Chrome, Firefox, Safari, and Edge (last 2 major versions).
 
 ## Development Workflow
 
@@ -39,4 +39,4 @@ Changes to princess data require validation against source materials. Visual des
 
 This constitution supersedes all other development practices for this project. Amendments require clear justification and must maintain the core principles of simplicity, user focus, and accessibility. All feature additions must demonstrate clear user value without compromising site performance or accessibility standards.
 
-**Version**: 1.0.0 | **Ratified**: 2025-09-27 | **Last Amended**: 2025-09-27
+**Version**: 1.1.0 | **Ratified**: 2025-09-27 | **Last Amended**: 2025-09-27

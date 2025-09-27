@@ -1,0 +1,28 @@
+# princesses Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2025-09-27
+
+## Active Technologies
+- HTML5, CSS3, JavaScript ES6+ + Chart.js (scatter plot visualization), minimal external libraries (001-interactive-princess-personality)
+- React 18+ with TypeScript, Vite 5+ build tool + Chart.js with react-chartjs-2 wrapper, React Router for navigation (001-interactive-princess-personality)
+- Static JSON data file (from GRAPH.md), no database required (001-interactive-princess-personality)
+
+## Project Structure
+```
+backend/
+frontend/
+tests/
+```
+
+## Commands
+npm test [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES][ONLY COMMANDS FOR ACTIVE TECHNOLOGIES] npm run lint
+
+## Code Style
+HTML5, CSS3, JavaScript ES6+: Follow standard conventions
+
+## Recent Changes
+- 001-interactive-princess-personality: Added React 18+ with TypeScript, Vite 5+ build tool + Chart.js with react-chartjs-2 wrapper, React Router for navigation
+- 001-interactive-princess-personality: Added HTML5, CSS3, JavaScript ES6+ + Chart.js (scatter plot visualization), minimal external libraries
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->

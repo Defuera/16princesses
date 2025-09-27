@@ -10,41 +10,67 @@ Research completed for simple MVP static website implementation. All technical u
 
 ## Technology Stack Decisions
 
+### React + Vite Development Framework
+
+**Decision**: Use React with Vite build tool for optimal developer experience
+**Rationale**: 
+- Prioritizes development speed and maintainability per updated constitutional principle II
+- Hot reload for instant feedback during development
+- Component architecture improves code organization and maintainability
+- TypeScript integration provides better error catching and IDE support
+- Large ecosystem and community support
+- Compiles to static files (no server runtime required)
+
+**Alternatives Considered**:
+- **Vanilla HTML/CSS/JS**: Slower development, more repetitive code, harder to maintain
+- **Vue + Vite**: Lighter learning curve but smaller ecosystem
+- **Next.js**: More complex, server-side focused by default
+- **Svelte**: Smaller bundle but less mature ecosystem
+
+**Implementation Notes**:
+- Use TypeScript for better development experience
+- React Router for client-side navigation between princess list and graph
+- Component structure: PrincessList, PrincessGraph, PrincessMessage
+- CSS modules or styled-components for scoped styling
+
 ### Chart.js for Scatter Plot Visualization
 
-**Decision**: Use Chart.js library for scatter plot functionality
+**Decision**: Use Chart.js with react-chartjs-2 wrapper for scatter plot functionality
 **Rationale**: 
 - Provides built-in scatter plot functionality with minimal configuration
+- React wrapper simplifies integration with component lifecycle
 - Good accessibility support (ARIA labels, keyboard navigation)  
-- Reasonable bundle size (~60KB minified)
+- Reasonable bundle size (~60KB minified for Chart.js)
 - Well-documented API for customization
 - Strong browser compatibility
 
 **Alternatives Considered**:
 - **Native Canvas**: More complex to implement, requires custom accessibility features
 - **D3.js**: Overkill for simple scatter plot, large bundle size, steeper learning curve  
-- **SVG with vanilla JS**: Requires significant custom code for interactivity
-- **Plotly.js**: Too heavy for MVP, more features than needed
+- **Recharts**: React-native but more complex API for scatter plots
+- **Victory**: Good React integration but larger bundle size
 
 **Implementation Notes**:
-- Use CDN version for simplicity (aligns with minimal dependencies principle)
+- Install via npm: `chart.js` and `react-chartjs-2`
+- Create reusable PrincessGraph component
 - Configure for 2D scatter plot with hover tooltips
 - Custom styling to match 16Personalities aesthetic
 
 ### Responsive Design Strategy
 
-**Decision**: CSS Grid + Flexbox with mobile-first approach
+**Decision**: CSS Grid + Flexbox with mobile-first approach, using CSS modules for component styling
 **Rationale**:
 - Modern browser support meets constitutional requirements
 - Flexible layout system for princess list and graph display
-- Native CSS solution (no framework dependencies)
+- CSS modules provide scoped styling without conflicts
 - Excellent accessibility support
-- Performance benefits over JavaScript-based solutions
+- Integrates well with Vite build process
 
 **Alternatives Considered**:
-- **Bootstrap/CSS Frameworks**: Adds complexity and bundle size against minimal dependencies principle
-- **CSS Table Layouts**: Poor mobile experience, accessibility concerns
-- **JavaScript Layout Libraries**: Violates static architecture principle
+- **Styled-components**: Runtime CSS-in-JS adds bundle overhead
+- **Tailwind CSS**: Utility classes but larger learning curve and setup
+- **CSS-in-JS libraries**: More complex setup, runtime performance cost
+- **Global CSS**: Risk of style conflicts in larger applications
 
 **Implementation Notes**:
 - Mobile breakpoint: 768px
@@ -52,6 +78,7 @@ Research completed for simple MVP static website implementation. All technical u
 - Desktop: 1024px+
 - Princess list: vertical stack on mobile, grid on desktop
 - Graph: full-width responsive scaling
+- Use CSS modules (`.module.css`) for component-scoped styles
 
 ### Data Storage and Management
 
@@ -100,25 +127,35 @@ Low Bitchiness (<30%) + Low Feminism (<30%): "You're such a sweetheart! 💖"
 
 ### Project Structure
 
-**Decision**: Single-page application with navigation
+**Decision**: React Single-Page Application with client-side routing
 **Rationale**:
 - Meets 2-step flow requirement from clarifications
-- Simple deployment (2 HTML files)
-- Fast loading (pre-cached assets)
-- Easy maintenance and updates
+- Component-based architecture improves maintainability
+- React Router enables smooth navigation without page reloads
+- Single HTML template with dynamic content switching
+- Easy state management between navigation steps
 
-**Page Structure**:
-1. **index.html**: Princess selection list page
-2. **result.html**: Graph display with selected princess
+**Component Structure**:
+1. **PrincessList**: Princess selection list component
+2. **PrincessGraph**: Graph display component with selected princess
+3. **App**: Main routing component managing navigation flow
 
 ### Development Workflow
 
-**Decision**: Manual development with accessibility validation
+**Decision**: Modern React development with Vite tooling and automated validation
 **Rationale**:
-- Aligns with simple architecture principle
-- No complex build pipeline required
-- Direct HTML/CSS/JS development
-- Focus on constitutional accessibility requirements
+- Prioritizes development speed per updated constitutional principle II
+- Hot reload provides instant feedback for rapid iteration
+- TypeScript catches errors during development, not runtime
+- Integrated build process handles optimization automatically
+- Modern tooling improves developer productivity
+
+**Development Tools**:
+- Vite dev server with hot module replacement
+- TypeScript for compile-time error checking
+- ESLint + Prettier for code consistency
+- Vitest for unit testing React components
+- React Developer Tools for debugging
 
 **Validation Tools**:
 - WAVE Web Accessibility Evaluator

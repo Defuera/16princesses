@@ -34,18 +34,18 @@
 - Phase 3-4: Implementation execution (manual or via tools)
 
 ## Summary
-Create a simple MVP "16Princesses Test" website with 2-step user flow: (1) Choose princess from a selection list, (2) Navigate to graph page showing selected princess highlighted on scatter plot with funny personality-based message. Built as static HTML/CSS/JavaScript website following constitutional principles of simplicity, accessibility, and user experience focus.
+Create a simple MVP "16Princesses Test" website with 2-step user flow: (1) Choose princess from a selection list, (2) Navigate to graph page showing selected princess highlighted on scatter plot with funny personality-based message. Built with React + Vite for optimal developer experience, compiles to static files following constitutional principles of development speed, accessibility, and user experience focus.
 
 ## Technical Context
-**Language/Version**: HTML5, CSS3, JavaScript ES6+
-**Primary Dependencies**: Chart.js (scatter plot visualization), minimal external libraries
+**Language/Version**: React 18+ with TypeScript, Vite 5+ build tool
+**Primary Dependencies**: Chart.js with react-chartjs-2 wrapper, React Router for navigation
 **Storage**: Static JSON data file (from GRAPH.md), no database required
-**Testing**: Manual testing across browsers, accessibility validation tools
+**Testing**: Vitest for unit testing, React Testing Library, manual accessibility testing
 **Target Platform**: Modern web browsers (Chrome, Firefox, Safari, Edge last 2 versions)
-**Project Type**: single (static web application)
-**Performance Goals**: Fast loading on standard connections (no specific target per clarifications)
-**Constraints**: Static site only, no server-side processing, minimal dependencies
-**Scale/Scope**: 16 princesses, 2 pages, simple interaction model
+**Project Type**: single (React SPA compiled to static files)
+**Performance Goals**: Fast development iteration with hot reload (no specific runtime target per clarifications)
+**Constraints**: Static site output only, no server-side processing, prioritize developer productivity
+**Scale/Scope**: 16 princesses, 2 React components/pages, modern component architecture
 
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
@@ -78,24 +78,30 @@ specs/001-interactive-princess-personality/
 ### Source Code (repository root)
 ```
 src/
-├── index.html           # Princess selection page
-├── result.html          # Princess graph result page
-├── css/
-│   ├── styles.css       # Main styling
-│   └── responsive.css   # Mobile/tablet styles  
-├── js/
-│   ├── princess-data.js # Princess data and configuration
-│   ├── selection.js     # Princess list functionality
-│   └── graph.js         # Scatter plot visualization
-└── assets/
-    ├── images/          # Princess images (optional)
-    └── data/
-        └── princesses.json  # Princess data from GRAPH.md
+├── App.tsx              # Main app component with routing
+├── main.tsx             # React entry point
+├── index.html           # HTML template
+├── components/
+│   ├── PrincessList.tsx    # Princess selection component
+│   ├── PrincessGraph.tsx   # Graph display component
+│   └── PrincessMessage.tsx # Personality message component
+├── data/
+│   ├── princesses.json     # Princess data from GRAPH.md
+│   └── princessData.ts     # Data loading and validation
+├── styles/
+│   ├── index.css          # Global styles and CSS variables
+│   └── components.css     # Component-specific styles
+└── types/
+    └── princess.ts        # TypeScript interfaces
 
 tests/
-├── manual/              # Manual test procedures
-├── accessibility/       # WCAG compliance tests
-└── browser-compat/      # Cross-browser validation
+├── components/         # Component unit tests
+├── integration/        # User story integration tests
+└── accessibility/      # WCAG compliance tests
+
+public/
+└── assets/
+    └── images/         # Princess images (optional)
 ```
 
 **Structure Decision**: Single web project structure chosen based on static site constitutional requirement and simple 2-step user flow. No backend/frontend separation needed as all functionality is client-side.
