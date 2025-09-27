@@ -105,6 +105,10 @@
   stroke-dashoffset: 0%;
 }
 
+.animated-line.complete {
+  stroke-dashoffset: 0%;
+}
+
 .animated-line.instant {
   transition: none;
   stroke-dashoffset: 0%;

@@ -324,7 +324,10 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
             y2={userY}
             stroke="#007bff"
             strokeWidth="4"
-            className={`animated-line ${animationState.phase === AnimationPhase.X_AXIS ? 'animate' : ''}`}
+            className={`animated-line ${
+              animationState.phase === AnimationPhase.X_AXIS ? 'animate' : 
+              animationState.phase !== AnimationPhase.IDLE ? 'complete' : ''
+            }`}
             data-testid="x-axis-line"
           />
 
@@ -337,7 +340,9 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
               y2={scaleY(animationState.yProgress)}
               stroke="#28a745"
               strokeWidth="4"
-              className={`animated-line ${animationState.phase === AnimationPhase.Y_AXIS ? 'animate' : ''}`}
+              className={`animated-line ${
+                animationState.phase === AnimationPhase.Y_AXIS ? 'animate' : 'complete'
+              }`}
               data-testid="y-axis-line"
             />
           )}
