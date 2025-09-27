@@ -79,14 +79,13 @@ const PrincessGraph: React.FC<PrincessGraphProps> = ({
       data: [{
         x: userCoordinates.x,
         y: userCoordinates.y,
-        user: userCoordinates,
+        princess: null as any,
         isUser: true,
       }],
       backgroundColor: ['#ff4757'], // Bright red for user
       borderColor: ['#ff3742'],
       borderWidth: [3],
       pointRadius: [8], // Larger point for user
-      pointHoverRadius: [10],
     });
   }
 
@@ -102,10 +101,10 @@ const PrincessGraph: React.FC<PrincessGraphProps> = ({
       tooltip: {
         callbacks: {
           label: (context: any) => {
-            const { isUser, princess, user } = context.raw;
+            const { isUser, princess } = context.raw;
             
-            if (isUser && user) {
-              return `${user.name} (${context.parsed.x.toFixed(1)}%, ${context.parsed.y.toFixed(1)}%)`;
+            if (isUser) {
+              return `You (${context.parsed.x.toFixed(1)}%, ${context.parsed.y.toFixed(1)}%)`;
             } else if (princess) {
               return `${princess.name} (${context.parsed.x}%, ${context.parsed.y}%)`;
             }

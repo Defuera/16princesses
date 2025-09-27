@@ -1,6 +1,6 @@
-import { QuizQuestion, QuizAnswer, QuizResult, QuizScores } from '../types/quiz';
+import { QuizResult, QuizScores } from '../types/quiz';
 import { Princess } from '../types/princess';
-import { euclideanDistance, findClosestPoint, Coordinates } from '../utils/distance';
+import { findClosestPoint, Coordinates } from '../utils/distance';
 import { loadQuizQuestions } from './quizData';
 import { getAllPrincesses } from './princessData';
 
@@ -136,37 +136,12 @@ export function getCompletionPercentage(userAnswers: Map<number, number>): numbe
 export function generatePersonalityMessage(result: QuizResult): string {
   const { xScore, yScore, matchedPrincess } = result;
   
-  // Generate trait descriptions based on scores
-  const heroineLevel = getHeroineDescription(xScore);
-  const fierceLevel = getFierceDescription(yScore);
-  
   // Get fun trait based on princess and scores
   const funTrait = getFunTrait(matchedPrincess, xScore, yScore);
   
   return `You're ${xScore}% Heroine, ${yScore}% Fierce—like ${matchedPrincess.name} with a twist of ${funTrait}!`;
 }
 
-/**
- * Get heroine level description based on X score
- */
-function getHeroineDescription(xScore: number): string {
-  if (xScore >= 80) return 'Total Heroine';
-  if (xScore >= 60) return 'Strong Heroine';
-  if (xScore >= 40) return 'Emerging Heroine';
-  if (xScore >= 20) return 'Reluctant Heroine';
-  return 'Classic Damsel';
-}
-
-/**
- * Get fierce level description based on Y score
- */
-function getFierceDescription(yScore: number): string {
-  if (yScore >= 80) return 'Ultra Fierce';
-  if (yScore >= 60) return 'Quite Fierce';
-  if (yScore >= 40) return 'Mildly Fierce';
-  if (yScore >= 20) return 'Gentle Fierce';
-  return 'Pure Sweetness';
-}
 
 /**
  * Generate fun personality trait based on princess and scores

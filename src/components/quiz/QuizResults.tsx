@@ -67,7 +67,7 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
   };
 
   const getResultSummary = () => {
-    const { xScore, yScore, matchedPrincess, matchingDistance } = quizResult;
+    const { xScore, yScore, matchingDistance } = quizResult;
     
     let archetype = '';
     if (xScore >= 60 && yScore >= 60) archetype = 'Fierce Heroine';

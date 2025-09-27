@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { QuizQuestion, QuizState, QuizResult, ShuffledQuestion } from '../types/quiz';
+import { QuizState, QuizResult, ShuffledQuestion } from '../types/quiz';
 import { loadQuizQuestions, prepareQuestionsForQuiz } from '../data/quizData';
 import { generateQuizResult, isQuizComplete, getCompletionPercentage } from '../data/quizScoring';
 
