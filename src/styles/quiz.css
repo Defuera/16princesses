@@ -1071,6 +1071,100 @@
    ANIMATED RESULTS PAGE - NEW STYLES
    ============================================== */
 
+/* Single Unified Card Layout */
+.results-main-card {
+  margin-bottom: 3rem;
+}
+
+.main-results-card {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 2rem;
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border: 3px solid #e2e8f0;
+}
+
+/* Left: Graph Section */
+.graph-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: none;
+}
+
+/* Right: Princess Info Section */
+.princess-info-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-left: 2px solid #f1f5f9;
+  padding-left: 2rem;
+  background: none;
+}
+
+.princess-description {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.princess-description h3 {
+  font-size: 1.8rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.princess-source {
+  color: #718096;
+  font-style: italic;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.reveal-message p {
+  color: #4a5568;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.princess-image-display {
+  display: flex;
+  justify-content: center;
+}
+
+.princess-image-display .princess-image-placeholder .image-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.princess-image-display .placeholder-text {
+  font-size: 2.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.princess-image-display .image-label {
+  font-size: 0.7rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* 3. Carousel Section */
+.carousel-section {
+  width: 100%;
+  margin: 2rem 0;
+}
+
 /* Animated Results Graph Container */
 .animated-graph-section {
   margin: 2rem 0;
@@ -1089,16 +1183,14 @@
 .animated-graph-container {
   display: flex;
   justify-content: center;
-  margin: 2rem 0;
-  padding: 1rem;
-  border-radius: 12px;
-  background: #f8f9fa;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin: 0;
+  padding: 0;
 }
 
 .main-results-graph {
   max-width: 100%;
   width: 100%;
+  background: none;
 }
 
 .graph-explanation {
@@ -1521,6 +1613,22 @@
 
 /* Tablet Styles */
 @media (max-width: 768px) {
+  /* Switch to mobile column layout within the unified card */
+  .main-results-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  /* Remove left border on mobile */
+  .princess-info-section {
+    border-left: none;
+    padding-left: 0;
+    border-top: 2px solid #f1f5f9;
+    padding-top: 1.5rem;
+  }
+  
   .animated-graph-section h3 {
     font-size: 1.5rem;
   }

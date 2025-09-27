@@ -259,9 +259,9 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
           y={margin}
           width={graphWidth}
           height={graphHeight}
-          fill="#f8f9fa"
+          fill="transparent"
           stroke="#dee2e6"
-          strokeWidth="2"
+        strokeWidth="2"
           rx="4"
         />
 

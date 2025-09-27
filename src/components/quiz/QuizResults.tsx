@@ -28,12 +28,35 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
   const [selectedExplorePrincess, setSelectedExplorePrincess] = useState<Princess | null>(null);
+  const [revealData, setRevealData] = useState<any>(null);
 
   // Load all princesses for the graph
   useEffect(() => {
     const princesses = getAllPrincesses();
     setAllPrincesses(princesses);
   }, []);
+
+  // Load reveal.json data
+  useEffect(() => {
+    const loadRevealData = async () => {
+      try {
+        const response = await fetch('/docs/reveal.json');
+        const data = await response.json();
+        setRevealData(data);
+      } catch (error) {
+        console.warn('Failed to load reveal data:', error);
+        setRevealData({ princesses: [] });
+      }
+    };
+    loadRevealData();
+  }, []);
+
+  // Get reveal description for a princess
+  const getRevealDescription = (princessName: string) => {
+    if (!revealData?.princesses) return "You're a unique princess archetype! Your combination of traits creates an interesting personality profile.";
+    const princess = revealData.princesses.find((p: any) => p.name === princessName);
+    return princess?.description || "You're a unique princess archetype! Your combination of traits creates an interesting personality profile.";
+  };
 
   // Animation effect
   useEffect(() => {
@@ -111,47 +134,65 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
     <div className={`quiz-results-container ${isVisible ? 'visible' : ''}`}>
       {/* Main Results Content */}
       <main className="results-content">
-        {/* Animated Results Graph */}
-        <section className="animated-graph-section">
-          <h3>Your Princess Journey</h3>
-          <div className="animated-graph-container">
-            <AnimatedResultsGraph
-              quizResult={quizResult}
-              onAnimationComplete={handleAnimationComplete}
-              onUserInteraction={() => {
-                // Handle user interaction during animations
-                console.log('Animation interaction detected');
-              }}
-              className="main-results-graph"
-            />
-          </div>
-          <div className="graph-explanation">
-            <p>
-              Watch as your personality unfolds step by step! The intersection shows your unique position—
-              closest to <strong>{quizResult.matchedPrincess.name}</strong> from{' '}
-              <em>{quizResult.matchedPrincess.source}</em>.
-            </p>
-            <p className="interaction-hint">
-              <em>Click anywhere on the graph or press Enter to skip animation phases</em>
-            </p>
-          </div>
-        </section>
+        {/* Single Card: Graph + Description Side by Side */}
+        <div className="results-main-card">
+          <div className="main-results-card">
+            {/* Left: Animated Results Graph */}
+            <section className="graph-section">
+              <div className="animated-graph-container">
+                <AnimatedResultsGraph
+                  quizResult={quizResult}
+                  onAnimationComplete={handleAnimationComplete}
+                  onUserInteraction={() => {
+                    // Handle user interaction during animations
+                    console.log('Animation interaction detected');
+                  }}
+                  className="main-results-graph"
+                />
+              </div>
+            </section>
 
-        {/* Princess Reveal and Exploration */}
-        <section className="reveal-carousel-section">
-          <PrincessRevealCarousel
-            quizResult={quizResult}
-            allPrincesses={allPrincesses}
-            revealed={animationComplete}
-            onPrincessSelect={handlePrincessExplore}
-            selectedPrincess={selectedExplorePrincess}
-            className="main-carousel"
-          />
-        </section>
+            {/* Right: Princess Description + Image */}
+            {animationComplete && (
+              <section className="princess-info-section">
+                <div className="princess-description">
+                  <h3>{quizResult.matchedPrincess.name}</h3>
+                  <p className="princess-source">from {quizResult.matchedPrincess.source}</p>
+                  <div className="reveal-message">
+                    <p>{getRevealDescription(quizResult.matchedPrincess.name)}</p>
+                  </div>
+                </div>
+                
+                <div className="princess-image-display">
+                  <div className="princess-image-placeholder">
+                    <div className="image-placeholder" role="img" aria-label={`${quizResult.matchedPrincess.name} image placeholder`}>
+                      <span className="placeholder-text" aria-hidden="true">👑</span>
+                      <span className="image-label">Princess Image</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+          </div>
+        </div>
+
+        {/* 3. Princess Exploration Carousel */}
+        {animationComplete && (
+          <section className="carousel-section">
+            <PrincessRevealCarousel
+              quizResult={quizResult}
+              allPrincesses={allPrincesses}
+              revealed={animationComplete}
+              onPrincessSelect={handlePrincessExplore}
+              selectedPrincess={selectedExplorePrincess}
+              className="main-carousel"
+            />
+          </section>
+        )}
 
         {/* Fallback: Traditional Graph (for accessibility/preference) */}
         {animationComplete && (
-          <section className="fallback-graph-section" style={{ marginTop: '2rem' }}>
+          <section className="fallback-graph-section">
             <details>
               <summary>View Static Graph</summary>
               <div className="static-graph-container">
