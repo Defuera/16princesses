@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { QuizResult } from '../../types/quiz';
 import { Princess } from '../../types/princess';
-import PrincessGraph from '../PrincessGraph';
 import AnimatedResultsGraph from './AnimatedResultsGraph';
 import PrincessRevealCarousel from './PrincessRevealCarousel';
 import { getAllPrincesses } from '../../data/princessData';
@@ -24,8 +23,6 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
 }) => {
   const navigate = useNavigate();
   const [allPrincesses, setAllPrincesses] = useState<Princess[]>([]);
-  const [isVisible, setIsVisible] = useState(false);
-  const [animationComplete, setAnimationComplete] = useState(false);
   const [selectedExplorePrincess, setSelectedExplorePrincess] = useState<Princess | null>(null);
 
   // Load all princesses for the graph
@@ -39,22 +36,11 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
     return princess.description || "You're a unique princess archetype! Your combination of traits creates an interesting personality profile.";
   };
 
-  // Animation effect
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 300);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleAnimationComplete = () => {
-    setAnimationComplete(true);
-  };
-
   const handlePrincessExplore = (princess: Princess) => {
     setSelectedExplorePrincess(princess);
   };
 
   const handleRetakeQuiz = () => {
-    setIsVisible(false);
     onRetakeQuiz();
     navigate('/');
   };
@@ -95,76 +81,70 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
   }
 
   return (
-    <div className={`quiz-results-container ${isVisible ? 'visible' : ''}`}>
+    <div className="quiz-results-container visible">
       {/* Main Results Content */}
       <main className="results-content">
         {/* Single Card: Graph + Description Side by Side */}
         <div className="results-main-card">
           <div className="main-results-card">
-            {/* Left: Animated Results Graph */}
+            {/* Left: Static Graph */}
             <section className="graph-section">
-              <div className="animated-graph-container">
-              <AnimatedResultsGraph
-                quizResult={quizResult}
-                onAnimationComplete={handleAnimationComplete}
-                onUserInteraction={() => {
-                  // Handle user interaction during animations
-                  console.log('Animation interaction detected');
-                }}
-                selectedPrincess={selectedExplorePrincess}
-                className="main-results-graph"
-              />
+              <div className="graph-container">
+                <AnimatedResultsGraph
+                  quizResult={quizResult}
+                  onAnimationComplete={() => {}}
+                  onUserInteraction={() => {}}
+                  selectedPrincess={selectedExplorePrincess}
+                  reducedMotion={true}
+                  className="main-results-graph"
+                />
               </div>
             </section>
 
             {/* Right: Princess Description + Image */}
-            {animationComplete && (
-              <section className="princess-info-section">
-                <div className="princess-description">
-                  <h3>{(selectedExplorePrincess || quizResult.matchedPrincess).name}</h3>
-                  <p className="princess-source">from {(selectedExplorePrincess || quizResult.matchedPrincess).source}</p>
-                  <div className="reveal-message">
-                    <p>{getRevealDescription(selectedExplorePrincess || quizResult.matchedPrincess)}</p>
+            <section className="princess-info-section">
+              <div className="princess-description">
+                <h3>{(selectedExplorePrincess || quizResult.matchedPrincess).name}</h3>
+                <p className="princess-source">from {(selectedExplorePrincess || quizResult.matchedPrincess).source}</p>
+                <div className="reveal-message">
+                  <p>{getRevealDescription(selectedExplorePrincess || quizResult.matchedPrincess)}</p>
+                </div>
+              </div>
+              
+              <div className="princess-image-display">
+                <div className="princess-image-placeholder">
+                  <img 
+                    src={(selectedExplorePrincess || quizResult.matchedPrincess).imageUrl}
+                    alt={`${(selectedExplorePrincess || quizResult.matchedPrincess).name} from ${(selectedExplorePrincess || quizResult.matchedPrincess).source}`}
+                    className="princess-image"
+                    onError={(e) => {
+                      // Fallback to placeholder if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      target.nextElementSibling?.classList.remove('hidden');
+                    }}
+                  />
+                  <div className="image-placeholder hidden" role="img" aria-label={`${(selectedExplorePrincess || quizResult.matchedPrincess).name} image placeholder`}>
+                    <span className="placeholder-text" aria-hidden="true">👑</span>
+                    <span className="image-label">Princess Image</span>
                   </div>
                 </div>
-                
-                <div className="princess-image-display">
-                  <div className="princess-image-placeholder">
-                    <img 
-                      src={(selectedExplorePrincess || quizResult.matchedPrincess).imageUrl}
-                      alt={`${(selectedExplorePrincess || quizResult.matchedPrincess).name} from ${(selectedExplorePrincess || quizResult.matchedPrincess).source}`}
-                      className="princess-image"
-                      onError={(e) => {
-                        // Fallback to placeholder if image fails to load
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        target.nextElementSibling?.classList.remove('hidden');
-                      }}
-                    />
-                    <div className="image-placeholder hidden" role="img" aria-label={`${(selectedExplorePrincess || quizResult.matchedPrincess).name} image placeholder`}>
-                      <span className="placeholder-text" aria-hidden="true">👑</span>
-                      <span className="image-label">Princess Image</span>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            )}
+              </div>
+            </section>
           </div>
         </div>
 
-        {/* 3. Princess Exploration Carousel */}
-        {animationComplete && (
-          <section className="carousel-section">
-            <PrincessRevealCarousel
-              quizResult={quizResult}
-              allPrincesses={allPrincesses}
-              revealed={animationComplete}
-              onPrincessSelect={handlePrincessExplore}
-              selectedPrincess={selectedExplorePrincess}
-              className="main-carousel"
-            />
-          </section>
-        )}
+        {/* Princess Exploration Carousel */}
+        <section className="carousel-section">
+          <PrincessRevealCarousel
+            quizResult={quizResult}
+            allPrincesses={allPrincesses}
+            revealed={true}
+            onPrincessSelect={handlePrincessExplore}
+            selectedPrincess={selectedExplorePrincess}
+            className="main-carousel"
+          />
+        </section>
 
       </main>
 
