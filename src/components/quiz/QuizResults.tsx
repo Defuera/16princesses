@@ -83,16 +83,14 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
         {/* Single Flattened Card: Graph + Princess Info */}
         <div className="main-results-card">
           {/* Left: Static Graph */}
-          <section className="graph-section">
-            <AnimatedResultsGraph
-              quizResult={quizResult}
-              onAnimationComplete={() => {}}
-              onUserInteraction={() => {}}
-              selectedPrincess={selectedExplorePrincess}
-              reducedMotion={true}
-              className="main-results-graph"
-            />
-          </section>
+          <AnimatedResultsGraph
+            quizResult={quizResult}
+            onAnimationComplete={() => {}}
+            onUserInteraction={() => {}}
+            selectedPrincess={selectedExplorePrincess}
+            reducedMotion={true}
+            className="main-results-graph graph-section"
+          />
 
           {/* Right: Princess Info */}
           <PrincessInfo 

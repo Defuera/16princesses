@@ -221,7 +221,7 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
   };
 
   return (
-    <div className={`animated-results-graph ${className}`}>
+    <>
       {/* Screen reader live region */}
       <div 
         id="animation-live-region"
@@ -236,12 +236,12 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
       </div>
 
       {/* Main SVG Graph */}
-      <svg 
+      <svg
         ref={svgRef}
         width={width} 
         height={height}
         viewBox={`0 0 ${width} ${height}`}
-        className="results-svg animate-performance"
+        className={`results-svg animate-performance ${className}`}
         role="img"
         aria-label="Interactive personality graph showing your position and matched princess"
         tabIndex={0}
@@ -507,7 +507,7 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
         </g>
 
       </svg>
-    </div>
+    </>
   );
 };
 
