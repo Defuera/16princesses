@@ -36,10 +36,21 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
     isSkippable: true
   });
 
-  // Graph dimensions and configuration
-  const width = 600;
-  const height = 600;
-  const margin = 80;
+  // Graph dimensions and configuration - responsive
+  const getResponsiveDimensions = () => {
+    if (typeof window !== 'undefined') {
+      const screenWidth = window.innerWidth;
+      if (screenWidth <= 480) {
+        return { width: Math.min(screenWidth - 40, 400), height: Math.min(screenWidth - 40, 400) };
+      } else if (screenWidth <= 768) {
+        return { width: 500, height: 500 };
+      }
+    }
+    return { width: 600, height: 600 };
+  };
+  
+  const { width, height } = getResponsiveDimensions();
+  const margin = width <= 400 ? 50 : 60; // Increased margins to prevent label clipping
   const graphWidth = width - 2 * margin;
   const graphHeight = height - 2 * margin;
 

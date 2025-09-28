@@ -102,6 +102,15 @@ const PrincessRevealCarousel: React.FC<PrincessRevealCarouselProps> = ({
       // Call callback for graph highlighting
       onPrincessSelect?.(princess);
 
+      // Scroll to description section
+      const descriptionElement = document.querySelector('.princess-info-section');
+      if (descriptionElement) {
+        descriptionElement.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+
       // Announce selection to screen readers
       announceToScreenReader(
         `Selected ${princess.name} from ${princess.source}. ${princess.heroineScore}% Heroine, ${princess.bitchScore}% Bitch.`
@@ -120,7 +129,6 @@ const PrincessRevealCarousel: React.FC<PrincessRevealCarouselProps> = ({
       {/* Horizontal Princess Scroll Carousel */}
       {revealed && (
         <div className="horizontal-princess-carousel">
-          <h4>Explore All Princesses</h4>
           <div 
             className="princess-scroll-container"
             role="region"

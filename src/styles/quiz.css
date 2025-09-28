@@ -1078,13 +1078,21 @@
 
 .main-results-card {
   display: grid;
-  grid-template-columns: 1fr 400px;
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
   background: white;
   border-radius: 16px;
   padding: 2rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   border: 3px solid #e2e8f0;
+}
+
+/* Flatten the left graph area so there's only a single outer card */
+.main-results-card .graph-section {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* Left: Graph Section */
@@ -1171,39 +1179,39 @@
   font-weight: 500;
 }
 
-/* 3. Horizontal Princess Carousel Section */
+/* 3. Horizontal Princess Carousel Section - Always Visible, Full Width */
 .carousel-section {
-  width: 100%;
-  margin: 2rem 0;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  order: 3; /* Ensure it's always after main card */
 }
 
 .horizontal-princess-carousel {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-}
-
-.horizontal-princess-carousel h4 {
-  font-size: 1.5rem;
-  color: #2d3748;
-  margin-bottom: 1.5rem;
-  text-align: center;
+  /* Remove card styling - no background, border-radius, padding, box-shadow */
+  padding: 1.5rem 0; /* Only vertical padding */
 }
 
 .princess-scroll-container {
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 0.5rem 0;
-  border-radius: 12px;
+  /* No padding – allow items to reach the viewport edges */
+  padding: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .princess-scroll-track {
   display: flex;
   gap: 1rem;
-  padding: 0.5rem;
   width: max-content;
+  /* No horizontal padding - let items go to viewport edges */
+  padding: 0.5rem 0;
 }
 
 .princess-scroll-item {
@@ -1219,6 +1227,16 @@
   min-width: 100px;
   flex-shrink: 0;
   position: relative;
+}
+
+/* First item should start from the edge */
+.princess-scroll-item:first-child {
+  margin-left: 1rem;
+}
+
+/* Last item needs padding to be fully visible */
+.princess-scroll-item:last-child {
+  margin-right: 1rem;
 }
 
 .princess-scroll-item:hover {
@@ -1781,8 +1799,38 @@
    RESPONSIVE DESIGN FOR ANIMATED COMPONENTS
    ============================================== */
 
+/* Container Responsive Setup */
+.results-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Ensure carousel is always visible below main card */
+.results-main-card {
+  order: 1;
+}
+
+.carousel-section {
+  order: 2;
+  flex-shrink: 0; /* Prevent carousel from being hidden */
+}
+
+.results-actions {
+  order: 3;
+}
+
 /* Tablet Styles */
 @media (max-width: 768px) {
+  .results-content {
+    padding: 0 0.5rem;
+    gap: 1.5rem;
+  }
+  
   /* Switch to mobile column layout within the unified card */
   .main-results-card {
     grid-template-columns: 1fr;
@@ -1840,6 +1888,16 @@
 
 /* Mobile Styles */
 @media (max-width: 480px) {
+  .results-content {
+    padding: 0 0.25rem;
+    gap: 1rem;
+  }
+  
+  .main-results-card {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
   .animated-graph-section h3 {
     font-size: 1.25rem;
   }
