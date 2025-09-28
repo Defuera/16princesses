@@ -368,70 +368,18 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
         {/* User intersection point - now part of selectable princesses */}
 
         {/* All princess dots including matched princess */}
-        {animationState.showOtherPrincesses && allPrincesses.map((princess, index) => {
-          const isMatched = princess.id === quizResult.matchedPrincess.id;
-          const isSelected = selectedPrincess?.id === princess.id;
-          const princessX = scaleX(princess.heroineScore);
-          const princessY = scaleY(princess.bitchScore);
-          
-          return (
-            <g key={princess.id}>
-              <circle
-                cx={princessX}
-                cy={princessY}
-                r={isSelected ? "12" : "6"}
-                fill={
-                  isSelected 
-                    ? "#ff6b6b" 
-                    : (hoveredPrincess?.id === princess.id ? "#6c757d" : "#adb5bd")
-                }
-                stroke="#fff"
-                strokeWidth={isSelected ? "3" : "2"}
-                className={`other-princess-dot show ${isSelected ? 'highlighted' : ''}`}
-                style={{
-                  animation: `fadeIn 0.5s ease-in-out ${index * 0.1}s both`,
-                  cursor: 'pointer',
-                  transition: 'fill 0.2s ease-out'
-                }}
-                data-testid={isMatched ? "matched-princess-dot" : "other-princess-dot"}
-                aria-label={getPrincessAriaLabel(princess, princess.heroineScore, princess.bitchScore)}
-                onClick={() => onUserInteraction && onUserInteraction(princess)}
-                onMouseEnter={() => setHoveredPrincess(princess)}
-                onMouseLeave={() => setHoveredPrincess(null)}
-              />
+        {animationState.showOtherPrincesses && (
+          <>
+            {/* Render lines first (behind everything) */}
+            {allPrincesses.map((princess) => {
+              const isSelected = selectedPrincess?.id === princess.id;
+              if (!isSelected) return null;
               
-              {/* Hover label for non-selected princesses */}
-              {!isSelected && hoveredPrincess?.id === princess.id && (
-                <text
-                  x={princessX}
-                  y={princessY - 12}
-                  textAnchor="middle"
-                  fill="#495057"
-                  fontSize="12"
-                  fontWeight="bold"
-                  pointerEvents="none"
-                >
-                  {princess.name}
-                </text>
-              )}
+              const princessX = scaleX(princess.heroineScore);
+              const princessY = scaleY(princess.bitchScore);
               
-              {/* Selected princess label, lines and scores */}
-              {isSelected && (
-                <>
-                  {/* Princess name label */}
-                  <text
-                    x={princessX}
-                    y={princessY - 20}
-                    textAnchor="middle"
-                    className="user-label show"
-                    fill="#495057"
-                    fontSize="14"
-                    fontWeight="bold"
-                    pointerEvents="none"
-                  >
-                    {princess.name}
-                  </text>
-                  
+              return (
+                <g key={`${princess.id}-lines`}>
                   {/* Horizontal line to Y-axis */}
                   <line
                     x1={margin}
@@ -453,37 +401,137 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
                     strokeWidth="2"
                     className="selected-princess-line"
                   />
+                </g>
+              );
+            })}
+            
+            {/* Render all markers */}
+            {allPrincesses.map((princess, index) => {
+              const isMatched = princess.id === quizResult.matchedPrincess.id;
+              const isSelected = selectedPrincess?.id === princess.id;
+              const princessX = scaleX(princess.heroineScore);
+              const princessY = scaleY(princess.bitchScore);
+              
+              return (
+                <circle
+                  key={`${princess.id}-dot`}
+                  cx={princessX}
+                  cy={princessY}
+                  r={isSelected ? "12" : "6"}
+                  fill={
+                    isSelected 
+                      ? "#ff6b6b" 
+                      : (hoveredPrincess?.id === princess.id ? "#6c757d" : "#adb5bd")
+                  }
+                  stroke="#fff"
+                  strokeWidth={isSelected ? "3" : "2"}
+                  className={`other-princess-dot show ${isSelected ? 'highlighted' : ''}`}
+                  style={{
+                    animation: `fadeIn 0.5s ease-in-out ${index * 0.1}s both`,
+                    cursor: 'pointer',
+                    transition: 'fill 0.2s ease-out'
+                  }}
+                  data-testid={isMatched ? "matched-princess-dot" : "other-princess-dot"}
+                  aria-label={getPrincessAriaLabel(princess, princess.heroineScore, princess.bitchScore)}
+                  onClick={() => onUserInteraction && onUserInteraction(princess)}
+                  onMouseEnter={() => setHoveredPrincess(princess)}
+                  onMouseLeave={() => setHoveredPrincess(null)}
+                />
+              );
+            })}
+            
+            {/* Render all labels and scores on top */}
+            {allPrincesses.map((princess) => {
+              const isSelected = selectedPrincess?.id === princess.id;
+              const princessX = scaleX(princess.heroineScore);
+              const princessY = scaleY(princess.bitchScore);
+              
+              return (
+                <g key={`${princess.id}-labels`} pointerEvents="none">
+                  {/* Hover label for non-selected princesses */}
+                  {!isSelected && hoveredPrincess?.id === princess.id && (
+                    <>
+                      <rect
+                        x={princessX - 35}
+                        y={princessY - 30}
+                        width="70"
+                        height="18"
+                        rx="3"
+                        fill="rgba(255, 255, 255, 0.95)"
+                        stroke="#ddd"
+                        strokeWidth="1"
+                      />
+                      <text
+                        x={princessX}
+                        y={princessY - 18}
+                        textAnchor="middle"
+                        fill="#495057"
+                        fontSize="12"
+                        fontWeight="bold"
+                      >
+                        {princess.name}
+                      </text>
+                    </>
+                  )}
                   
-                  {/* X-axis score */}
-                  <text
-                    x={princessX}
-                    y={height - margin + 25}
-                    textAnchor="middle"
-                    className="axis-score-label"
-                    fill="#007bff"
-                    fontSize="18"
-                    fontWeight="bold"
-                  >
-                    {princess.heroineScore}%
-                  </text>
-                  
-                  {/* Y-axis score */}
-                  <text
-                    x={margin - 35}
-                    y={princessY + 6}
-                    textAnchor="middle"
-                    className="axis-score-label"
-                    fill="#28a745"
-                    fontSize="18"
-                    fontWeight="bold"
-                  >
-                    {princess.bitchScore}%
-                  </text>
-                </>
-              )}
-            </g>
-          );
-        })}
+                  {/* Selected princess label and scores */}
+                  {isSelected && (
+                    <>
+                      {/* Princess name label with background */}
+                      <rect
+                        x={princessX - 40}
+                        y={princessY - 34}
+                        width="80"
+                        height="20"
+                        rx="3"
+                        fill="rgba(255, 255, 255, 0.95)"
+                        stroke="#ff6b6b"
+                        strokeWidth="1.5"
+                      />
+                      <text
+                        x={princessX}
+                        y={princessY - 20}
+                        textAnchor="middle"
+                        className="user-label show"
+                        fill="#495057"
+                        fontSize="14"
+                        fontWeight="bold"
+                      >
+                        {princess.name}
+                      </text>
+                      
+                      {/* X-axis score */}
+                      <text
+                        x={princessX}
+                        y={height - margin + 25}
+                        textAnchor="middle"
+                        className="axis-score-label"
+                        fill="#007bff"
+                        fontSize="18"
+                        fontWeight="bold"
+                      >
+                        {princess.heroineScore}%
+                      </text>
+                      
+                      {/* Y-axis score */}
+                      <text
+                        x={margin - 35}
+                        y={princessY + 6}
+                        textAnchor="middle"
+                        className="axis-score-label"
+                        fill="#28a745"
+                        fontSize="18"
+                        fontWeight="bold"
+                      >
+                        {princess.bitchScore}%
+                      </text>
+                    </>
+                  )}
+                </g>
+              );
+            })}
+          </>
+        )}
 
         {/* Axis labels with arrows */}
         <g className="axis-labels">
