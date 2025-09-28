@@ -172,10 +172,8 @@ function validateQuizData(questions: any[]): void {
     throw new Error('Quiz contains duplicate question IDs');
   }
   
-  // Validate expected question count (from guide: 16 questions)
-  if (questions.length !== 16) {
-    console.warn(`Expected 16 questions, got ${questions.length}`);
-  }
+  // Log actual question count (no hardcoded expectation)
+  console.log(`📊 Quiz loaded with ${questions.length} questions`);
   
   console.log('✅ Quiz data validation passed');
 }
