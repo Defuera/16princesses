@@ -1162,26 +1162,37 @@
 }
 
 .princess-image-display .princess-image {
-  width: 200px;
+  width: 300px; /* Significantly larger for maximum impact */
   height: auto;
-  border-radius: 12px;
+  border-radius: 16px; /* More elegant rounded corners */
   object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
   flex-shrink: 0; /* Prevent image from shrinking */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+.princess-image-display .princess-image:hover {
+  transform: translateY(-4px) scale(1.02); /* Subtle lift and scale on hover */
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.princess-image-display .princess-image-placeholder:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255, 107, 107, 0.4);
 }
 
 .princess-image-display .princess-image-placeholder .image-placeholder {
-  width: 200px;
-  height: 200px;
-  border-radius: 12px;
+  width: 300px; /* Match the larger image size */
+  height: 300px; /* Square for placeholder to match proportions */
+  border-radius: 16px; /* Match the image border radius */
   background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: white;
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-  transition: all 0.2s ease;
+  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.3); /* Enhanced shadow */
+  transition: all 0.3s ease;
 }
 
 .hidden {
