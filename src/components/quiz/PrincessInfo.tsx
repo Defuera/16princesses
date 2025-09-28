@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Princess } from '../../types/princess';
 
 interface PrincessInfoProps {
@@ -10,6 +10,8 @@ export const PrincessInfo: React.FC<PrincessInfoProps> = ({
   princess, 
   className = '' 
 }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
   return (
     <div className={`princess-info-section ${className}`}>
       {/* 1. Description */}
@@ -24,17 +26,24 @@ export const PrincessInfo: React.FC<PrincessInfoProps> = ({
             src={princess.imageUrl}
             alt={`${princess.name} from ${princess.source}`}
             className="princess-image"
-            onError={(e) => {
-              // Fallback to placeholder if image fails to load
-              const target = e.target as HTMLImageElement;
-              target.style.display = 'none';
-              target.nextElementSibling?.classList.remove('hidden');
+            onError={() => {
+              console.log('Image failed to load:', princess.imageUrl);
+              setImageError(true);
+              setImageLoaded(false);
             }}
+            onLoad={() => {
+              console.log('Image loaded successfully:', princess.imageUrl);
+              setImageLoaded(true);
+              setImageError(false);
+            }}
+            style={{ display: imageError ? 'none' : 'block' }}
           />
-          <div className="image-placeholder hidden" role="img" aria-label={`${princess.name} image placeholder`}>
-            <span className="placeholder-text" aria-hidden="true">👑</span>
-            <span className="image-label">Princess Image</span>
-          </div>
+          {imageError && (
+            <div className="image-placeholder" role="img" aria-label={`${princess.name} image placeholder`}>
+              <span className="placeholder-text" aria-hidden="true">👑</span>
+              <span className="image-label">Princess Image</span>
+            </div>
+          )}
         </div>
       </div>
 

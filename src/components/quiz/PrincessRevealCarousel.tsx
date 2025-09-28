@@ -9,6 +9,13 @@ import {
   KeyboardNavigation
 } from '../../utils/accessibility';
 
+interface ImageState {
+  [princessId: string]: {
+    loaded: boolean;
+    error: boolean;
+  };
+}
+
 const PrincessRevealCarousel: React.FC<PrincessRevealCarouselProps> = ({
   quizResult,
   allPrincesses,
@@ -24,6 +31,8 @@ const PrincessRevealCarousel: React.FC<PrincessRevealCarouselProps> = ({
     isTransitioning: false,
     highlightedOnGraph: null
   });
+
+  const [imageStates, setImageStates] = useState<ImageState>({});
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const keyboardNavRef = useRef<KeyboardNavigation | null>(null);
@@ -83,6 +92,21 @@ const PrincessRevealCarousel: React.FC<PrincessRevealCarouselProps> = ({
     }
   }, [selectedPrincess, allPrincesses, carouselState.selectedIndex]);
 
+
+  // Handle image loading states
+  const handleImageLoad = (princessId: string) => {
+    setImageStates(prev => ({
+      ...prev,
+      [princessId]: { loaded: true, error: false }
+    }));
+  };
+
+  const handleImageError = (princessId: string) => {
+    setImageStates(prev => ({
+      ...prev,
+      [princessId]: { loaded: false, error: true }
+    }));
+  };
 
   // Handle princess selection
   const handlePrincessSelect = (princess: Princess, index?: number) => {
@@ -152,16 +176,17 @@ const PrincessRevealCarousel: React.FC<PrincessRevealCarouselProps> = ({
                       src={princess.imageUrl}
                       alt={`${princess.name} from ${princess.source}`}
                       className="carousel-princess-image"
-                      onError={(e) => {
-                        // Fallback to placeholder if image fails to load
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        target.nextElementSibling?.classList.remove('hidden');
+                      onError={() => handleImageError(princess.id)}
+                      onLoad={() => handleImageLoad(princess.id)}
+                      style={{ 
+                        display: imageStates[princess.id]?.error ? 'none' : 'block'
                       }}
                     />
-                    <div className="photo-placeholder hidden">
-                      <span className="photo-icon" aria-hidden="true">👑</span>
-                    </div>
+                    {imageStates[princess.id]?.error && (
+                      <div className="photo-placeholder">
+                        <span className="photo-icon" aria-hidden="true">👑</span>
+                      </div>
+                    )}
                     {isUserMatch && (
                       <div className="match-badge" aria-label="Your match">★</div>
                     )}
