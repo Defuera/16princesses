@@ -1054,29 +1054,7 @@
   color: #667eea;
 }
 
-/* ==============================================
-   Theme Variations (based on princess references)
-   ============================================== */
-
-.quiz-question-container.theme-cinderella {
-  border-top: 4px solid #87ceeb;
-}
-
-.quiz-question-container.theme-mulan {
-  border-top: 4px solid #dc143c;
-}
-
-.quiz-question-container.theme-elsa {
-  border-top: 4px solid #87cefa;
-}
-
-.quiz-question-container.theme-merida {
-  border-top: 4px solid #228b22;
-}
-
-.quiz-question-container.theme-moana {
-  border-top: 4px solid #20b2aa;
-}
+/* Theme variations removed for cleaner UI */
 
 /* ==============================================
    ANIMATED RESULTS PAGE - NEW STYLES

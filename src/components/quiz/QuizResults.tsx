@@ -80,8 +80,7 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
     <div className="quiz-results-container visible">
       {/* Results Title */}
       <header className="results-header">
-        <h1 className="results-title">Your Princess Match</h1>
-        <p className="results-subtitle">Discover your royal archetype</p>
+        <h1 className="results-title">Your Highness!</h1>
       </header>
 
       {/* Main Results Content */}
