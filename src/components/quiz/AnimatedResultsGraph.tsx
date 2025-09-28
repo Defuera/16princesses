@@ -72,60 +72,12 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
   }, []);
 
   // Handle user interactions (click/keyboard)
-  const handleUserInteraction = () => {
-    if (animationState.isSkippable && onUserInteraction) {
-      onUserInteraction();
-      skipCurrentPhase();
+  const handleUserInteraction = (princess: Princess) => {
+    if (onUserInteraction) {
+      onUserInteraction(princess);
     }
   };
 
-  // Skip to next animation phase
-  const skipCurrentPhase = () => {
-    switch (animationState.phase) {
-      case AnimationPhase.X_AXIS:
-        setAnimationState(prev => ({
-          ...prev,
-          xProgress: quizResult.xScore,
-          phase: AnimationPhase.Y_AXIS
-        }));
-        announceToScreenReader('Animation skipped to vertical line');
-        break;
-      case AnimationPhase.Y_AXIS:
-        setAnimationState(prev => ({
-          ...prev,
-          yProgress: quizResult.yScore,
-          phase: AnimationPhase.INTERSECTION,
-          showIntersection: true
-        }));
-        announceToScreenReader('Animation skipped to intersection');
-        break;
-      case AnimationPhase.INTERSECTION:
-        setAnimationState(prev => ({
-          ...prev,
-          phase: AnimationPhase.REVEAL,
-          showRevealMessage: true
-        }));
-        announceToScreenReader('Animation skipped to princess reveal');
-        break;
-      case AnimationPhase.REVEAL:
-        setAnimationState(prev => ({
-          ...prev,
-          phase: AnimationPhase.OTHER_PRINCESSES,
-          showOtherPrincesses: true
-        }));
-        announceToScreenReader('Animation skipped to other princesses');
-        break;
-      case AnimationPhase.OTHER_PRINCESSES:
-        setAnimationState(prev => ({
-          ...prev,
-          phase: AnimationPhase.COMPLETE,
-          showCarousel: true
-        }));
-        announceToScreenReader('Animation complete');
-        onAnimationComplete?.();
-        break;
-    }
-  };
 
   // Animation sequence controller
   useEffect(() => {
@@ -259,11 +211,11 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
         role="img"
         aria-label="Interactive personality graph showing your position and matched princess"
         tabIndex={0}
-        onClick={handleUserInteraction}
+        onClick={() => handleUserInteraction(quizResult.matchedPrincess)}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            handleUserInteraction();
+            handleUserInteraction(quizResult.matchedPrincess);
           }
         }}
         data-testid="personality-graph"
@@ -433,7 +385,7 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
                   }}
                   data-testid={isMatched ? "matched-princess-dot" : "other-princess-dot"}
                   aria-label={getPrincessAriaLabel(princess, princess.heroineScore, princess.bitchScore)}
-                  onClick={() => onUserInteraction && onUserInteraction(princess)}
+                  onClick={() => handleUserInteraction(princess)}
                   onMouseEnter={() => setHoveredPrincess(princess)}
                   onMouseLeave={() => setHoveredPrincess(null)}
                 />

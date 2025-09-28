@@ -10,7 +10,6 @@ export const PrincessInfo: React.FC<PrincessInfoProps> = ({
   princess, 
   className = '' 
 }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   return (
     <div className={`princess-info-section ${className}`}>
@@ -29,13 +28,11 @@ export const PrincessInfo: React.FC<PrincessInfoProps> = ({
             onError={() => {
               console.log('Image failed to load:', princess.imageUrl);
               setImageError(true);
-              setImageLoaded(false);
             }}
-            onLoad={() => {
-              console.log('Image loaded successfully:', princess.imageUrl);
-              setImageLoaded(true);
-              setImageError(false);
-            }}
+                    onLoad={() => {
+                      console.log('Image loaded successfully:', princess.imageUrl);
+                      setImageError(false);
+                    }}
             style={{ display: imageError ? 'none' : 'block' }}
           />
           {imageError && (

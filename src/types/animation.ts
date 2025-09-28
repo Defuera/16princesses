@@ -110,7 +110,7 @@ export interface AnimationError {
 export interface AnimatedResultsGraphProps {
   quizResult: QuizResult;
   onAnimationComplete?: () => void;
-  onUserInteraction?: () => void;
+  onUserInteraction?: (princess: Princess) => void;
   selectedPrincess?: Princess | null;
   reducedMotion?: boolean;
   className?: string;

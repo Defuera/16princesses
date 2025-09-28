@@ -1,206 +1,132 @@
 [
     {
       "id": 1,
-      "text": "Inspired by Cinderella's midnight curfew... In a rut at work, what feels most natural?",
+      "text": "Like Cinderella waiting for her fairy godmother... You're stuck in a dead-end job. Do you:",
       "axis": "X",
       "type": "multiple",
-      "reverse": true,
+      "reverse": false,
       "options": [
-        {"text": "Stick it out, figuring someone will spot your potential eventually.", "value": 33},
-        {"text": "Jump ship impulsively without a backup plan, chasing that dream vibe.", "value": 0},
-        {"text": "Quietly explore side options while keeping things stable.", "value": 66},
-        {"text": "Plan a bold exit, but only after lining up resources—even if it means couch-surfing.", "value": 100}
+        {"text": "A) Hope a magical promotion falls into your lap while you keep sweeping floors?", "value": 0},
+        {"text": "B) Complain to friends and wait for someone to notice your potential?", "value": 33},
+        {"text": "C) Network quietly and apply for better gigs on the side?", "value": 66},
+        {"text": "D) Quit dramatically, start your own hustle, and end up sleeping under a bridge to build your empire?", "value": 100}
       ]
     },
     {
       "id": 2,
-      "text": "Like Rapunzel letting down her hair... Faced with a controlling situation (say, overbearing rules), which path calls to you?",
+      "text": "Channeling Aurora's eternal nap... Your dream vacation gets canceled last-minute. Your reaction:",
       "axis": "X",
-      "type": "forced",
+      "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "Wait for an outside rescuer to shake things up, like a charming climber.", "value": 0},
-        {"text": "Break free solo, even if it leaves you tangled and isolated in the unknown.", "value": 100},
-        {"text": "Neither—I'd hint at changes and hope it evolves naturally.", "value": 33}
+        {"text": "A) Curl up in bed, scroll TikTok, and let fate reschedule it someday?", "value": 0},
+        {"text": "B) Vent online and hope friends rally with alternatives?", "value": 33},
+        {"text": "C) Pivot to a solo road trip you've always secretly wanted?", "value": 66},
+        {"text": "D) Sue the airline, book a better adventure, and end up maxing out your credit cards to turn it into a viral story?", "value": 100}
       ]
     },
     {
       "id": 3,
-      "text": "Echoing Aurora's endless slumber... A big opportunity slips away. What's your vibe?",
+      "text": "Twisted like Rapunzel in her tower... You're in a toxic relationship. Deep down, you:",
       "axis": "X",
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "Shrug and scroll socials, trusting fate will bring another chance.", "value": 0},
-        {"text": "Vent to friends, hoping they'll nudge you toward new doors.", "value": 33},
-        {"text": "Hunt for alternatives on your own, learning from the loss.", "value": 66},
-        {"text": "Turn the setback into fuel, launching a solo venture despite the grind.", "value": 100}
+        {"text": "A) Stay put, dreaming of a prince to climb up and save you?", "value": 0},
+        {"text": "B) Hint at your unhappiness, waiting for them to change?", "value": 33},
+        {"text": "C) Set boundaries and seek therapy to untangle yourself?", "value": 66},
+        {"text": "D) Cut the metaphorical hair, walk out, and build a fortress of self-love?", "value": 100}
       ]
     },
     {
       "id": 4,
-      "text": "Twisted from Pocahontas' riverbend... A crisis threatens your community. What's your instinct?",
+      "text": "Insane like Pocahontas facing the unknown... Aliens invade Earth (hypothetically). You:",
       "axis": "X",
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "Hope leaders fix it while you stay out of the fray.", "value": 0},
-        {"text": "Join a group effort but lean on others' plans.", "value": 33},
-        {"text": "Propose your own solution, even if it's a solo slog.", "value": 66},
-        {"text": "Lead the charge and end up exiled for shaking things up too hard.", "value": 100}
+        {"text": "A) Hide in the woods, hoping world leaders handle it?", "value": 0},
+        {"text": "B) Join a support group for doomsday preppers?", "value": 33},
+        {"text": "C) Learn alien tech from scraps and form a resistance?", "value": 66},
+        {"text": "D) Negotiate peace single-handedly, and end up beaming up to their mothership alone?", "value": 100}
       ]
     },
     {
       "id": 5,
-      "text": "Like Mulan's secret warrior... A family conflict erupts, exposing lies. How do you handle it?",
+      "text": "Painful like Mulan's hidden identity... A family secret blows up at reunion dinner. Do you:",
       "axis": "X",
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "Keep quiet, preserving harmony at all costs.", "value": 0},
-        {"text": "Seek a trusted ally to mediate while you stay low.", "value": 33},
-        {"text": "Speak up with evidence, risking tension but seeking truth.", "value": 66},
-        {"text": "Dismantle the drama entirely, starting anew even if it alienates you.", "value": 100}
+        {"text": "A) Smile through it, pretending everything's fine forever?", "value": 0},
+        {"text": "B) Whisper to a sibling for backup before addressing it?", "value": 33},
+        {"text": "C) Confront it head-on with facts and feelings?", "value": 66},
+        {"text": "D) Rewrite the family narrative, disown the drama, and end up alienated but starting fresh?", "value": 100}
       ]
     },
     {
       "id": 6,
-      "text": "Inspired by Princess Mononoke's wolf pack... An environmental mess hits close to home. What do you do?",
-      "axis": "X",
+      "text": "Like Belle buried in books... Your best friend borrows your favorite novel and ruins it. You:",
+      "axis": "Y",
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "Pray for a miracle while hiding from the chaos.", "value": 0},
-        {"text": "Rally neighbors for a petition, hoping it gains traction.", "value": 33},
-        {"text": "Research fixes solo and test them quietly.", "value": 66},
-        {"text": "Fight the source head-on, ending up scarred but unyielding.", "value": 100}
+        {"text": "A) Forgive instantly with a hug, because kindness wins?", "value": 0},
+        {"text": "B) Politely ask for a replacement while hiding your annoyance?", "value": 33},
+        {"text": "C) Call them out with a witty roast, but offer to shop for a new one together?", "value": 66},
+        {"text": "D) Unleash a dramatic monologue about boundaries, then ghost them?", "value": 100}
       ]
     },
     {
       "id": 7,
-      "text": "Like Nausicaä's toxic jungle... A system you trusted fails you spectacularly. Your move?",
-      "axis": "X",
+      "text": "Funny like Jasmine's tiger tantrums... You're at a party, and someone spills wine on your outfit. Your vibe:",
+      "axis": "Y",
       "type": "multiple",
-      "reverse": true,
+      "reverse": false,
       "options": [
-        {"text": "Retreat and hope for better days to come.", "value": 33},
-        {"text": "Lash out loudly, demanding fixes without a plan.", "value": 0},
-        {"text": "Dig into the root cause alone, sharing findings later.", "value": 66},
-        {"text": "Build a new path forward, even if it means starting from scratch.", "value": 100}
+        {"text": "A) Laugh it off sweetly, offering them a napkin?", "value": 0},
+        {"text": "B) Smile through gritted teeth, changing topics gracefully?", "value": 33},
+        {"text": "C) Joke about it being \"fashionable tie-dye\" while demanding dry cleaning cash?", "value": 66},
+        {"text": "D) Roar like Rajah, douse them back, and declare party dominance?", "value": 100}
       ]
     },
     {
       "id": 8,
-      "text": "From Kaguya's lunar escape... Your \"perfect\" life feels like a trap. What's your choice?",
-      "axis": "X",
-      "type": "forced",
+      "text": "Deep like Elsa's ice isolation... You're overwhelmed by emotions after a breakup. How do you express it?",
+      "axis": "Y",
+      "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "Float along, waiting for the universe to rewrite your story.", "value": 0},
-        {"text": "Reject it all, crashing back to reality to forge your own path.", "value": 100},
-        {"text": "Neither—tweak it subtly while staying comfortable.", "value": 33}
+        {"text": "A) Bottle it up sweetly, baking cookies for everyone instead?", "value": 0},
+        {"text": "B) Cry quietly to a close friend, seeking comfort?", "value": 33},
+        {"text": "C) Journal fiercely, then share empowering posts online?", "value": 66},
+        {"text": "D) Build an emotional fortress, freeze out the ex, and conquer new horizons?", "value": 100}
       ]
     },
     {
       "id": 9,
-      "text": "Echoing Belle's quiet strength... A friend ruins something precious to you. What's your gut reaction?",
+      "text": "Insane like Merida's arrow antics... In a zombie apocalypse (because why not?), your survival style:",
       "axis": "Y",
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "Forgive softly, prioritizing their feelings over yours.", "value": 0},
-        {"text": "Mention it gently but expect them to make it right.", "value": 33},
-        {"text": "Call it out with a clever jab, keeping things friendly.", "value": 66},
-        {"text": "Set a hard boundary with flair, risking the friendship.", "value": 100}
+        {"text": "A) Hide sweetly in a bunker, sharing rations with survivors?", "value": 0},
+        {"text": "B) Form alliances gently, but whisper warnings about threats?", "value": 33},
+        {"text": "C) Lead raids with clever traps and sassy one-liners?", "value": 66},
+        {"text": "D) Go full feral, archery-zombie heads while yelling battle cries?", "value": 100}
       ]
     },
     {
       "id": 10,
-      "text": "Like Jasmine's tiger swagger... A party foul (like a spilled drink) disrupts your vibe. How do you roll?",
-      "axis": "Y",
-      "type": "forced",
-      "reverse": false,
-      "options": [
-        {"text": "Laugh it off, helping the culprit save face.", "value": 0},
-        {"text": "Turn it into a bold scene, demanding amends with a smirk.", "value": 100},
-        {"text": "Neither—ignore it but stew quietly.", "value": 33}
-      ]
-    },
-    {
-      "id": 11,
-      "text": "Inspired by Elsa's icy heart... A breakup leaves you raw. How do you process it?",
-      "axis": "Y",
-      "type": "multiple",
-      "reverse": true,
-      "options": [
-        {"text": "Bake treats for others, hiding your pain completely.", "value": 0},
-        {"text": "Share your hurt softly with a close confidant.", "value": 33},
-        {"text": "Over-dramatize it online, seeking validation.", "value": 66},
-        {"text": "Channel it into bold new goals, cutting ties coldly.", "value": 100}
-      ]
-    },
-    {
-      "id": 12,
-      "text": "Twisted from Merida's archery defiance... A zombie apocalypse hits (why not?). What's your style?",
+      "text": "Painful like Moana's ocean call... You discover a betrayal by a mentor figure. Your confrontation:",
       "axis": "Y",
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "Share supplies kindly, hoping for group safety.", "value": 0},
-        {"text": "Warn allies quietly about dangers you spot.", "value": 33},
-        {"text": "Set traps with witty taunts to fend off threats.", "value": 66},
-        {"text": "Go full warrior, slaying zombies but risking everything.", "value": 100}
-      ]
-    },
-    {
-      "id": 13,
-      "text": "Like Moana's ocean quest... A mentor betrays your trust. How do you confront it?",
-      "axis": "Y",
-      "type": "multiple",
-      "reverse": false,
-      "options": [
-        {"text": "Swallow the pain, keeping peace at all costs.", "value": 0},
-        {"text": "Express hurt softly, hoping for an apology.", "value": 33},
-        {"text": "Demand clarity with firm boundaries, ready to walk.", "value": 66},
-        {"text": "Call them out epically, sailing off alone into your own legend.", "value": 100}
-      ]
-    },
-    {
-      "id": 14,
-      "text": "From Chihiro's spirit bathhouse... A soul-crushing job grinds you down. How do you push back?",
-      "axis": "Y",
-      "type": "multiple",
-      "reverse": false,
-      "options": [
-        {"text": "Work quietly, hoping your effort shines through.", "value": 0},
-        {"text": "Befriend coworkers for small acts of rebellion.", "value": 33},
-        {"text": "Hustle side projects with sharp-witted flair.", "value": 66},
-        {"text": "Face the boss head-on, reclaiming your spark at any cost.", "value": 100}
-      ]
-    },
-    {
-      "id": 15,
-      "text": "Like Sheeta's sky adventure... A cursed object (say, a glowing pendant) complicates your life. Your vibe?",
-      "axis": "Y",
-      "type": "multiple",
-      "reverse": false,
-      "options": [
-        {"text": "Share its light kindly with those in need.", "value": 0},
-        {"text": "Warn others cautiously while dodging its dangers.", "value": 33},
-        {"text": "Use it for daring moves with sassy confidence.", "value": 66},
-        {"text": "Unleash its power fully, even if it isolates you forever.", "value": 100}
-      ]
-    },
-    {
-      "id": 16,
-      "text": "Inspired by Sophie's cursed aging... A sudden life change flips your world. How do you face it?",
-      "axis": "Y",
-      "type": "forced",
-      "reverse": false,
-      "options": [
-        {"text": "Accept it quietly, finding comfort in routine.", "value": 0},
-        {"text": "Fight it fiercely, reshaping your life despite the scars.", "value": 100},
-        {"text": "Neither—grumble but adapt slowly over time.", "value": 33}
+        {"text": "A) Swallow the hurt sweetly, preserving the peace?", "value": 0},
+        {"text": "B) Express disappointment softly, hoping for reconciliation?", "value": 33},
+        {"text": "C) Demand answers with firm boundaries and walk if needed?", "value": 66},
+        {"text": "D) Call them out epically, sever ties, and end up sailing into your own legend—bridge or no bridge?", "value": 100}
       ]
     }
   ]

@@ -90,8 +90,8 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
           {/* Left: Static Graph */}
           <AnimatedResultsGraph
             quizResult={quizResult}
-            onAnimationComplete={() => {}}
-            onUserInteraction={(princess) => setSelectedExplorePrincess(princess)}
+                  onAnimationComplete={() => {}}
+                  onUserInteraction={(princess: Princess) => setSelectedExplorePrincess(princess)}
             selectedPrincess={selectedExplorePrincess}
             reducedMotion={true}
             className="main-results-graph graph-section"

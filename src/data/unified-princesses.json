@@ -155,7 +155,7 @@
     },
     {
       "id": "princess-mononoke",
-      "name": "Princess Mononoke",
+      "name": "Mononoke",
       "source": "Princess Mononoke",
       "heroineScore": 95,
       "bitchScore": 88,
@@ -185,7 +185,7 @@
     },
     {
       "id": "fiona",
-      "name": "Princess Fiona",
+      "name": "Fiona",
       "source": "Shrek",
       "heroineScore": 88,
       "bitchScore": 76,
@@ -195,7 +195,7 @@
     },
     {
       "id": "anastasia",
-      "name": "Princess Anastasia",
+      "name": "Anastasia",
       "source": "Anastasia",
       "heroineScore": 62,
       "bitchScore": 58,
