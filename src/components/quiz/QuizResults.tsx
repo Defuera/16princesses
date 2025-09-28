@@ -135,14 +135,6 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
             <span className="button-icon">📤</span>
             Share Results
           </button>
-          
-          <button 
-            className="explore-button"
-            onClick={() => navigate('/')}
-          >
-            <span className="button-icon">🏰</span>
-            Explore Princesses
-          </button>
         </div>
       </footer>
     </div>

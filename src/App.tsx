@@ -1,10 +1,9 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, useParams, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import QuizStart from './components/quiz/QuizStart';
 import QuizQuestion from './components/quiz/QuizQuestion';
 import QuizProgress from './components/quiz/QuizProgress';
 import QuizResults from './components/quiz/QuizResults';
-import { getAllPrincesses } from './data/princessData';
 import { useQuiz } from './hooks/useQuiz';
 import './styles/index.css';
 import './styles/components.css';

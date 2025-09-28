@@ -65,13 +65,13 @@ export function validatePrincess(princess: any): princess is Princess {
     typeof princess.id === 'string' &&
     typeof princess.name === 'string' &&
     typeof princess.source === 'string' &&
-    typeof princess.feminismPercentage === 'number' &&
-    typeof princess.bitchinessPercentage === 'number' &&
+    typeof princess.heroineScore === 'number' &&
+    typeof princess.bitchScore === 'number' &&
     typeof princess.personalityMessage === 'string' &&
-    princess.feminismPercentage >= 0 &&
-    princess.feminismPercentage <= 100 &&
-    princess.bitchinessPercentage >= 0 &&
-    princess.bitchinessPercentage <= 100
+    princess.heroineScore >= 0 &&
+    princess.heroineScore <= 100 &&
+    princess.bitchScore >= 0 &&
+    princess.bitchScore <= 100
   );
 }
 
@@ -80,8 +80,8 @@ export function validatePrincess(princess: any): princess is Princess {
  */
 export function transformForChart(princesses: Princess[]) {
   return princesses.map(princess => ({
-    x: princess.feminismPercentage,
-    y: princess.bitchinessPercentage,
+    x: princess.heroineScore,
+    y: princess.bitchScore,
     label: princess.name,
     princess: princess
   }));
@@ -160,16 +160,16 @@ export function getPrincessesByQuadrant(
   
   return {
     independentWarriors: princesses.filter(p => 
-      p.feminismPercentage >= feminismThreshold && p.bitchinessPercentage >= bitchinessThreshold
+      p.heroineScore >= feminismThreshold && p.bitchScore >= bitchinessThreshold
     ),
     gentleRevolutionaries: princesses.filter(p => 
-      p.feminismPercentage >= feminismThreshold && p.bitchinessPercentage < bitchinessThreshold
+      p.heroineScore >= feminismThreshold && p.bitchScore < bitchinessThreshold
     ),
     traditionalLeaders: princesses.filter(p => 
-      p.feminismPercentage < feminismThreshold && p.bitchinessPercentage >= bitchinessThreshold
+      p.heroineScore < feminismThreshold && p.bitchScore >= bitchinessThreshold
     ),
     sweethearts: princesses.filter(p => 
-      p.feminismPercentage < feminismThreshold && p.bitchinessPercentage < bitchinessThreshold
+      p.heroineScore < feminismThreshold && p.bitchScore < bitchinessThreshold
     )
   };
 }

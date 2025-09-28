@@ -66,8 +66,8 @@ export function findClosestPrincess(xPercent: number, yPercent: number): { princ
   
   // Convert princesses to coordinate format for distance calculation
   const princessCoords = princesses.map(princess => ({
-    x: princess.feminismPercentage,
-    y: princess.bitchinessPercentage,
+    x: princess.heroineScore,
+    y: princess.bitchScore,
     princess: princess
   }));
   
