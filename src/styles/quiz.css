@@ -1162,18 +1162,18 @@
 }
 
 .princess-image-display .princess-image {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  width: 200px;
+  height: auto;
+  border-radius: 12px;
   object-fit: cover;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   flex-shrink: 0; /* Prevent image from shrinking */
 }
 
 .princess-image-display .princess-image-placeholder .image-placeholder {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
   background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
   display: flex;
   flex-direction: column;

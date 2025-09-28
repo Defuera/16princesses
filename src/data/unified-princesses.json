@@ -90,7 +90,7 @@
       "heroineScore": 85,
       "bitchScore": 45,
       "description": "Workaholic frog-kisser who turns dreams into restaurants one beignet at a time—because true ambition means slaving away until a slimy prince shows you the 'magic' of compromise.",
-      "imageUrl": "https://via.placeholder.com/200x200/32cd32/ffffff?text=Tiana",
+      "imageUrl": "/16princesses/images/tiana.png",
       "personalityMessage": "You're kindly progressive! 🦋"
     },
     {
@@ -110,7 +110,7 @@
       "heroineScore": 95,
       "bitchScore": 75,
       "description": "Archery ace who turns her mom into a bear to dodge an arranged marriage—family therapy via witchcraft, because nothing says 'feminist' like cursing your kin for freedom.",
-      "imageUrl": "https://via.placeholder.com/200x200/228b22/ffffff?text=Merida",
+      "imageUrl": "/16princesses/images/merida.png",
       "personalityMessage": "You're a fierce, independent force! 👑"
     },
     {
@@ -130,7 +130,7 @@
       "heroineScore": 75,
       "bitchScore": 40,
       "description": "Optimistic klutz who chases her icy sister through snowstorms for a hug—true love means freezing to death for family, because who needs boundaries when you've got eternal winter?",
-      "imageUrl": "https://via.placeholder.com/200x200/ff6347/ffffff?text=Anna",
+      "imageUrl": "/16princesses/images/anna.png",
       "personalityMessage": "You're kindly progressive! 🦋"
     },
     {
@@ -150,7 +150,7 @@
       "heroineScore": 87,
       "bitchScore": 68,
       "description": "Trust-issues warrior princess swinging a sword through a fractured world—collect dragon gems like Pokémon, because betrayal and backstabbing are just part of the family reunion.",
-      "imageUrl": "https://via.placeholder.com/200x200/4682b4/ffffff?text=Raya",
+      "imageUrl": "/16princesses/images/raya.png",
       "personalityMessage": "You're a balanced trailblazer! ✨"
     },
     {
@@ -170,7 +170,7 @@
       "heroineScore": 85,
       "bitchScore": 30,
       "description": "Post-apocalyptic glider girl who chats with giant bugs to stop wars—pacifism in a toxic jungle, proving that empathy wins, even if it means getting swallowed by ohmu slime.",
-      "imageUrl": "/16princesses/images/nausicaa.jpg",
+      "imageUrl": "/16princesses/images/nausicaa.png",
       "personalityMessage": "You're kindly progressive! 🦋"
     },
     {
@@ -180,7 +180,7 @@
       "heroineScore": 60,
       "bitchScore": 80,
       "description": "Moon-bound bamboo baby who toys with suitors and rejects earthly life—celestial snobbery at its finest, because why settle for mortal drama when you can ghost back to the stars?",
-      "imageUrl": "https://via.placeholder.com/200x200/ffefd5/ffffff?text=Kaguya",
+      "imageUrl": "/16princesses/images/kaguya.png",
       "personalityMessage": "You're assertive with traditional values! 💪"
     },
     {

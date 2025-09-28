@@ -452,9 +452,10 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
           </text>
           
           <text
-            x={margin}
-            y={margin - 15}
-            textAnchor="end"
+            x={margin - 25}
+            y={margin}
+            textAnchor="middle"
+            dominantBaseline="hanging"
             className="axis-label"
             fill="#495057"
             fontSize="14"
