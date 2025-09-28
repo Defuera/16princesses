@@ -45,38 +45,15 @@ export const QuizStart: React.FC<QuizStartProps> = ({
         <header className="quiz-header">
           <h1 className="quiz-title">16Princesses Test</h1>
           <p className="quiz-subtitle">
-            Discover which princess archetype matches your personality!
+            Find out which one you are
           </p>
         </header>
 
         <main className="quiz-intro">
           <div className="quiz-description">
-            <h2>How It Works</h2>
             <p>
-              Take our personality quiz to discover your inner princess archetype! 
-              You'll answer 16 questions about how you handle different life scenarios, 
-              and we'll map your responses to find your closest princess match.
+              There are different type of princesses. There are those who need to be rescued and those who plot against their own father, those with good manners and the rebellious ones. Those forced to marriage of convenience and those who destined to rule. There are ones who enjoy torturing not only their opponents, but their servants as much. And those who faint by the first sight of a blood drop on the tip of a finger. Princesses who will die on the streets and princesses who were born peasants. There are those who serve to their people and those who exploit.
             </p>
-            
-            <div className="quiz-axes">
-              <div className="axis-explanation">
-                <h3>📊 What We Measure:</h3>
-                <ul>
-                  <li><strong>Heroine Level</strong>: How much agency and independence you show</li>
-                  <li><strong>Fierce Factor</strong>: Your assertiveness and boldness in tough situations</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="quiz-features">
-              <h3>✨ What to Expect:</h3>
-              <ul>
-                <li>16 engaging scenario-based questions</li>
-                <li>Interactive results on a personality graph</li>
-                <li>Personalized princess match with fun insights</li>
-                <li>About 5-10 minutes to complete</li>
-              </ul>
-            </div>
           </div>
 
           <div className="disclaimer">
@@ -107,14 +84,10 @@ export const QuizStart: React.FC<QuizStartProps> = ({
               ) : (
                 <>
                   <span className="button-icon">👑</span>
-                  Start Your Journey
+                  Start Test
                 </>
               )}
             </button>
-            
-            <p className="quiz-note">
-              Ready to discover your princess archetype?
-            </p>
           </div>
         </main>
 

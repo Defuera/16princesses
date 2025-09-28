@@ -1,55 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, useParams, useNavigate, useLocation } from 'react-router-dom';
-import PrincessList from './components/PrincessList';
-import PrincessGraph from './components/PrincessGraph';
-import PrincessMessage from './components/PrincessMessage';
 import QuizStart from './components/quiz/QuizStart';
 import QuizQuestion from './components/quiz/QuizQuestion';
 import QuizProgress from './components/quiz/QuizProgress';
-import QuizNavigation from './components/quiz/QuizNavigation';
 import QuizResults from './components/quiz/QuizResults';
-import { getAllPrincesses, getPrincessById } from './data/princessData';
+import { getAllPrincesses } from './data/princessData';
 import { useQuiz } from './hooks/useQuiz';
 import './styles/index.css';
 import './styles/components.css';
 import './styles/quiz.css';
 
-const ResultPage: React.FC = () => {
-  const { princessId } = useParams<{ princessId: string }>();
-  const allPrincesses = getAllPrincesses();
-  const selectedPrincess = princessId ? getPrincessById(princessId) : undefined;
-
-  if (!selectedPrincess) {
-    return (
-      <div className="error-container">
-        <h2>Princess not found!</h2>
-        <p>The princess you're looking for doesn't exist.</p>
-        <button 
-          onClick={() => window.location.href = '/'}
-          className="back-button"
-        >
-          Back to Princess Selection
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <div className="result-page">
-      <div className="result-content">
-        <div className="graph-section">
-          <PrincessGraph 
-            princesses={allPrincesses}
-            selectedPrincess={selectedPrincess}
-          />
-        </div>
-        <div className="message-section">
-          <PrincessMessage princess={selectedPrincess} />
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
@@ -198,9 +158,6 @@ const App: React.FC = () => {
           <Route path="/quiz" element={<QuizQuestionsPage />} />
           <Route path="/quiz-results" element={<QuizResultsPage />} />
           
-          {/* Legacy princess selection (keep for compatibility) */}
-          <Route path="/princesses" element={<PrincessList />} />
-          <Route path="/result/:princessId" element={<ResultPage />} />
           
           {/* 404 handler */}
           <Route path="*" element={<NotFoundPage />} />

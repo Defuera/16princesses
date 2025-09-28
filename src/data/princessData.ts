@@ -5,7 +5,15 @@ import unifiedPrincessesData from './unified-princesses.json';
  * Load princess data from JSON file
  */
 export function loadPrincessData(): PrincessData {
-  return unifiedPrincessesData as PrincessData;
+  const data = {
+    ...unifiedPrincessesData,
+    metadata: {
+      totalCount: unifiedPrincessesData.princesses.length,
+      dataSource: "unified-princesses.json",
+      generator: "16Princesses Test"
+    }
+  };
+  return data as PrincessData;
 }
 
 /**
