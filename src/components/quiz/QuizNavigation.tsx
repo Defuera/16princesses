@@ -45,13 +45,6 @@ export const QuizNavigation: React.FC<QuizNavigationProps> = ({
         </button>
 
         <div className="nav-center">
-          <div className="nav-hint">
-            {!hasCurrentAnswer && !isComplete && (
-              <span className="nav-hint-text">
-                Choose an answer to continue
-              </span>
-            )}
-          </div>
         </div>
 
         <button

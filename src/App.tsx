@@ -142,6 +142,12 @@ const QuizQuestionsPage: React.FC = () => {
         totalQuestions={progress.total}
         progressPercentage={progress.percentage}
         hasCurrentAnswer={currentAnswer !== undefined}
+        canGoBack={canGoBack}
+        canGoForward={canGoForward || isComplete}
+        onPrevious={previousQuestion}
+        onNext={nextQuestion}
+        onSubmit={handleSubmitQuiz}
+        isComplete={isComplete}
       />
       
       <QuizQuestion
@@ -150,16 +156,6 @@ const QuizQuestionsPage: React.FC = () => {
         onAnswerSelect={answerQuestion}
         onAutoAdvance={isComplete ? handleSubmitQuiz : nextQuestion}
         isLoading={isLoading}
-      />
-
-      <QuizNavigation
-        canGoBack={canGoBack}
-        canGoForward={canGoForward || isComplete}
-        onPrevious={previousQuestion}
-        onNext={nextQuestion}
-        onSubmit={handleSubmitQuiz}
-        isComplete={isComplete}
-        hasCurrentAnswer={currentAnswer !== undefined}
       />
     </div>
   );

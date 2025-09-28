@@ -5,6 +5,13 @@ interface QuizProgressProps {
   totalQuestions: number;
   progressPercentage: number;
   hasCurrentAnswer?: boolean;
+  // Navigation props
+  canGoBack?: boolean;
+  canGoForward?: boolean;
+  onPrevious?: () => void;
+  onNext?: () => void;
+  onSubmit?: () => void;
+  isComplete?: boolean;
 }
 
 /**
@@ -15,8 +22,22 @@ export const QuizProgress: React.FC<QuizProgressProps> = ({
   currentQuestion,
   totalQuestions,
   progressPercentage,
-  hasCurrentAnswer = false
+  hasCurrentAnswer = false,
+  canGoBack = false,
+  canGoForward = false,
+  onPrevious,
+  onNext,
+  onSubmit,
+  isComplete = false
 }) => {
+  
+  const handleNext = () => {
+    if (isComplete && onSubmit) {
+      onSubmit();
+    } else if (canGoForward && onNext) {
+      onNext();
+    }
+  };
   
   return (
     <div className="quiz-progress-container">
@@ -40,8 +61,19 @@ export const QuizProgress: React.FC<QuizProgressProps> = ({
         </div>
       </div>
 
-      {/* Answer Status */}
+      {/* Answer Status with Navigation */}
       <div className="answer-status-container">
+        {/* Back Button - Left */}
+        <button
+          className="nav-button nav-back header-nav"
+          onClick={onPrevious}
+          disabled={!canGoBack}
+          title={canGoBack ? 'Previous question' : 'Already at first question'}
+        >
+          ⬅️ Back
+        </button>
+        
+        {/* Center Status */}
         {hasCurrentAnswer ? (
           <span className="answer-status answered">
             ✅ Answered
@@ -51,6 +83,30 @@ export const QuizProgress: React.FC<QuizProgressProps> = ({
             Select your answer below
           </span>
         )}
+        
+        {/* Next Button - Right */}
+        <button
+          className={`nav-button nav-forward header-nav ${isComplete ? 'submit-button' : ''}`}
+          onClick={handleNext}
+          disabled={!hasCurrentAnswer && !isComplete}
+          title={
+            isComplete 
+              ? 'Submit quiz and see results'
+              : hasCurrentAnswer
+                ? 'Next question'
+                : 'Please answer current question first'
+          }
+        >
+          {isComplete ? (
+            <>
+              🏁 Results
+            </>
+          ) : (
+            <>
+              Next ➡️
+            </>
+          )}
+        </button>
       </div>
     </div>
   );
