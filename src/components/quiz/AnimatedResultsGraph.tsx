@@ -36,6 +36,9 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
     isSkippable: true
   });
 
+  const [hoveredPrincess, setHoveredPrincess] = useState<Princess | null>(null);
+
+
   // Graph dimensions and configuration - responsive
   const getResponsiveDimensions = () => {
     if (typeof window !== 'undefined') {
@@ -326,88 +329,159 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
           />
         </g>
 
-        {/* Animated User Lines */}
-        <g className="user-lines">
-          {/* X-axis line (horizontal to user position) */}
-          <line
-            x1={margin}
-            y1={userY}
-            x2={scaleX(animationState.xProgress)}
-            y2={userY}
-            stroke="#007bff"
-            strokeWidth="4"
-            className={`animated-line ${
-              animationState.phase === AnimationPhase.X_AXIS ? 'animate' : 
-              animationState.phase !== AnimationPhase.IDLE ? 'complete' : ''
-            }`}
-            data-testid="x-axis-line"
-          />
-
-          {/* Y-axis line (vertical to user position) */}
-          {animationState.phase !== AnimationPhase.IDLE && animationState.phase !== AnimationPhase.X_AXIS && (
+        {/* Animated User Lines - only show during animation */}
+        {animationState.phase !== AnimationPhase.COMPLETE && (
+          <g className="user-lines">
+            {/* X-axis line (horizontal to user position) */}
             <line
-              x1={userX}
-              y1={height - margin}
-              x2={userX}
-              y2={scaleY(animationState.yProgress)}
-              stroke="#28a745"
+              x1={margin}
+              y1={userY}
+              x2={scaleX(animationState.xProgress)}
+              y2={userY}
+              stroke="#007bff"
               strokeWidth="4"
               className={`animated-line ${
-                animationState.phase === AnimationPhase.Y_AXIS ? 'animate' : 'complete'
+                animationState.phase === AnimationPhase.X_AXIS ? 'animate' : 
+                animationState.phase !== AnimationPhase.IDLE ? 'complete' : ''
               }`}
-              data-testid="y-axis-line"
+              data-testid="x-axis-line"
             />
-          )}
-        </g>
 
-        {/* User intersection point */}
-        {animationState.showIntersection && (
-          <g className="user-marker" data-testid="intersection-marker">
-            <circle
-              cx={userX}
-              cy={userY}
-              r="12"
-              fill="#ff6b6b"
-              stroke="#fff"
-              strokeWidth="3"
-              className="user-dot"
-            />
-            <text
-              x={userX}
-              y={userY - 20}
-              textAnchor="middle"
-              className="user-label show"
-              fill="#495057"
-              fontSize="14"
-              fontWeight="bold"
-            >
-              {quizResult.matchedPrincess.name}
-            </text>
+            {/* Y-axis line (vertical to user position) */}
+            {animationState.phase !== AnimationPhase.IDLE && animationState.phase !== AnimationPhase.X_AXIS && (
+              <line
+                x1={userX}
+                y1={height - margin}
+                x2={userX}
+                y2={scaleY(animationState.yProgress)}
+                stroke="#28a745"
+                strokeWidth="4"
+                className={`animated-line ${
+                  animationState.phase === AnimationPhase.Y_AXIS ? 'animate' : 'complete'
+                }`}
+                data-testid="y-axis-line"
+              />
+            )}
           </g>
         )}
 
-        {/* Other princess dots */}
+        {/* User intersection point - now part of selectable princesses */}
+
+        {/* All princess dots including matched princess */}
         {animationState.showOtherPrincesses && allPrincesses.map((princess, index) => {
-          if (princess.id === quizResult.matchedPrincess.id) return null;
-          
+          const isMatched = princess.id === quizResult.matchedPrincess.id;
           const isSelected = selectedPrincess?.id === princess.id;
+          const princessX = scaleX(princess.heroineScore);
+          const princessY = scaleY(princess.bitchScore);
           
           return (
-            <circle
-              key={princess.id}
-              cx={scaleX(princess.heroineScore)}
-              cy={scaleY(princess.bitchScore)}
-              r={isSelected ? "10" : "6"}
-              fill={isSelected ? "#007bff" : "#adb5bd"}
-              stroke="#fff"
-              strokeWidth={isSelected ? "3" : "2"}
-              className={`other-princess-dot show ${isSelected ? 'highlighted' : ''}`}
-              style={{
-                animation: `fadeIn 0.5s ease-in-out ${index * 0.1}s both`
-              }}
-              data-testid="other-princess-dot"
-              aria-label={getPrincessAriaLabel(princess, princess.heroineScore, princess.bitchScore)}
-            />
+            <g key={princess.id}>
+              <circle
+                cx={princessX}
+                cy={princessY}
+                r={isSelected ? "12" : "6"}
+                fill={
+                  isSelected 
+                    ? "#ff6b6b" 
+                    : (hoveredPrincess?.id === princess.id ? "#6c757d" : "#adb5bd")
+                }
+                stroke="#fff"
+                strokeWidth={isSelected ? "3" : "2"}
+                className={`other-princess-dot show ${isSelected ? 'highlighted' : ''}`}
+                style={{
+                  animation: `fadeIn 0.5s ease-in-out ${index * 0.1}s both`,
+                  cursor: 'pointer',
+                  transition: 'fill 0.2s ease-out'
+                }}
+                data-testid={isMatched ? "matched-princess-dot" : "other-princess-dot"}
+                aria-label={getPrincessAriaLabel(princess, princess.heroineScore, princess.bitchScore)}
+                onClick={() => onUserInteraction && onUserInteraction(princess)}
+                onMouseEnter={() => setHoveredPrincess(princess)}
+                onMouseLeave={() => setHoveredPrincess(null)}
+              />
+              
+              {/* Hover label for non-selected princesses */}
+              {!isSelected && hoveredPrincess?.id === princess.id && (
+                <text
+                  x={princessX}
+                  y={princessY - 12}
+                  textAnchor="middle"
+                  fill="#495057"
+                  fontSize="12"
+                  fontWeight="bold"
+                  pointerEvents="none"
+                >
+                  {princess.name}
+                </text>
+              )}
+              
+              {/* Selected princess label, lines and scores */}
+              {isSelected && (
+                <>
+                  {/* Princess name label */}
+                  <text
+                    x={princessX}
+                    y={princessY - 20}
+                    textAnchor="middle"
+                    className="user-label show"
+                    fill="#495057"
+                    fontSize="14"
+                    fontWeight="bold"
+                    pointerEvents="none"
+                  >
+                    {princess.name}
+                  </text>
+                  
+                  {/* Horizontal line to Y-axis */}
+                  <line
+                    x1={margin}
+                    y1={princessY}
+                    x2={princessX}
+                    y2={princessY}
+                    stroke="#28a745"
+                    strokeWidth="2"
+                    className="selected-princess-line"
+                  />
+                  
+                  {/* Vertical line to X-axis */}
+                  <line
+                    x1={princessX}
+                    y1={princessY}
+                    x2={princessX}
+                    y2={height - margin}
+                    stroke="#007bff"
+                    strokeWidth="2"
+                    className="selected-princess-line"
+                  />
+                  
+                  {/* X-axis score */}
+                  <text
+                    x={princessX}
+                    y={height - margin + 25}
+                    textAnchor="middle"
+                    className="axis-score-label"
+                    fill="#007bff"
+                    fontSize="18"
+                    fontWeight="bold"
+                  >
+                    {princess.heroineScore}%
+                  </text>
+                  
+                  {/* Y-axis score */}
+                  <text
+                    x={margin - 35}
+                    y={princessY + 6}
+                    textAnchor="middle"
+                    className="axis-score-label"
+                    fill="#28a745"
+                    fontSize="18"
+                    fontWeight="bold"
+                  >
+                    {princess.bitchScore}%
+                  </text>
+                </>
+              )}
+            </g>
           );
         })}
 
@@ -475,8 +549,8 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
           </g>
         </g>
 
-        {/* Score values on axes */}
-        {animationState.xProgress > 0 && (
+        {/* Score values on axes - only show during animation */}
+        {animationState.phase !== AnimationPhase.COMPLETE && animationState.xProgress > 0 && (
           <g className="axis-scores">
             {/* X-axis score (Heroine level) */}
             <text
@@ -493,7 +567,7 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
           </g>
         )}
         
-        {animationState.yProgress > 0 && (
+        {animationState.phase !== AnimationPhase.COMPLETE && animationState.yProgress > 0 && (
           <g className="axis-scores">
             {/* Y-axis score (Bitch factor) */}
             <text
@@ -519,6 +593,7 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
         </g>
 
       </svg>
+
     </>
   );
 };

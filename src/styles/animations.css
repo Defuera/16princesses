@@ -146,8 +146,6 @@
 }
 
 .other-princess-dot:hover {
-  opacity: 1;
-  transform: scale(1.1);
   cursor: pointer;
 }
 

@@ -24,7 +24,7 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
 }) => {
   const navigate = useNavigate();
   const [allPrincesses, setAllPrincesses] = useState<Princess[]>([]);
-  const [selectedExplorePrincess, setSelectedExplorePrincess] = useState<Princess | null>(null);
+  const [selectedExplorePrincess, setSelectedExplorePrincess] = useState<Princess | null>(quizResult.matchedPrincess);
 
   // Load all princesses for the graph
   useEffect(() => {
@@ -91,7 +91,7 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
           <AnimatedResultsGraph
             quizResult={quizResult}
             onAnimationComplete={() => {}}
-            onUserInteraction={() => {}}
+            onUserInteraction={(princess) => setSelectedExplorePrincess(princess)}
             selectedPrincess={selectedExplorePrincess}
             reducedMotion={true}
             className="main-results-graph graph-section"
