@@ -4,6 +4,7 @@ import QuizStart from './components/quiz/QuizStart';
 import QuizQuestion from './components/quiz/QuizQuestion';
 import QuizProgress from './components/quiz/QuizProgress';
 import QuizResults from './components/quiz/QuizResults';
+import QuizResultsPage from './components/quiz/QuizResultsPage';
 import { useQuiz } from './hooks/useQuiz';
 import './styles/index.css';
 import './styles/components.css';
@@ -62,8 +63,8 @@ const QuizQuestionsPage: React.FC = () => {
     if (isComplete) {
       const result = calculateResult();
       if (result) {
-        // Navigate to results with quiz data
-        navigate('/quiz-results', { state: { quizResult: result } });
+        // Navigate to specific princess results page
+        navigate(`/quiz-results/${result.matchedPrincess.id}`, { state: { quizResult: result } });
       }
     }
   }, [isComplete, calculateResult, navigate]);
@@ -90,7 +91,7 @@ const QuizQuestionsPage: React.FC = () => {
   const handleSubmitQuiz = () => {
     const result = calculateResult();
     if (result) {
-      navigate('/quiz-results', { state: { quizResult: result } });
+      navigate(`/quiz-results/${result.matchedPrincess.id}`, { state: { quizResult: result } });
     }
   };
 
@@ -120,7 +121,7 @@ const QuizQuestionsPage: React.FC = () => {
   );
 };
 
-const QuizResultsPage: React.FC = () => {
+const QuizResultsFromQuiz: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const quizResult = location.state?.quizResult;
@@ -140,8 +141,8 @@ const QuizResultsPage: React.FC = () => {
   };
 
   return (
-    <QuizResults 
-      quizResult={quizResult} 
+    <QuizResults
+      quizResult={quizResult}
       onRetakeQuiz={handleRetakeQuiz}
     />
   );
@@ -155,7 +156,9 @@ const App: React.FC = () => {
           {/* Quiz flow (new primary flow) */}
           <Route path="/" element={<QuizStartPage />} />
           <Route path="/quiz" element={<QuizQuestionsPage />} />
-          <Route path="/quiz-results" element={<QuizResultsPage />} />
+          <Route path="/quiz-results" element={<QuizResultsFromQuiz />} />
+          {/* Direct URL access to quiz results for specific princess */}
+          <Route path="/quiz-results/:princessId" element={<QuizResultsPage />} />
           
           
           {/* 404 handler */}
