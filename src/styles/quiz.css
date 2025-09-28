@@ -231,13 +231,18 @@
    ============================================== */
 
 .quiz-navigation-container {
-  position: sticky;
-  bottom: 0;
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
   background: white;
-  border-top: 1px solid #e2e8f0;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
   padding: 1rem;
-  margin-top: 2rem;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  max-width: 900px;
+  width: calc(100% - 2rem);
 }
 
 .quiz-navigation {
@@ -573,14 +578,20 @@
 
 .results-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   color: white;
 }
 
-.results-title h1 {
+.results-title {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   font-weight: bold;
+}
+
+.results-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 0;
 }
 
 .archetype-name {
@@ -1078,7 +1089,7 @@
 
 .main-results-card {
   display: grid;
-  grid-template-columns: 1fr 400px;
+  grid-template-columns: 3fr 2fr;
   gap: 2rem;
   background: white;
   border-radius: 16px;
@@ -1337,23 +1348,14 @@
   font-weight: 600;
 }
 
-/* Scrollbar styling */
+/* Hide scrollbar for cleaner look */
 .princess-scroll-container::-webkit-scrollbar {
-  height: 8px;
+  display: none;
 }
 
-.princess-scroll-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
-}
-
-.princess-scroll-container::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
-}
-
-.princess-scroll-container::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+.princess-scroll-container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* Animated Results Graph Container */

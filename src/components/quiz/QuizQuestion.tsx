@@ -5,6 +5,7 @@ interface QuizQuestionProps {
   question: ShuffledQuestion;
   selectedValue?: number;
   onAnswerSelect: (questionId: number, selectedValue: number) => void;
+  onAutoAdvance?: () => void;
   isLoading?: boolean;
 }
 
@@ -16,6 +17,7 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
   question,
   selectedValue,
   onAnswerSelect,
+  onAutoAdvance,
   isLoading = false
 }) => {
   const [selectedOption, setSelectedOption] = useState<number | undefined>(selectedValue);
@@ -38,6 +40,13 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
     
     setSelectedOption(option.value);
     onAnswerSelect(question.id, option.value);
+    
+    // Auto-advance to next question after a short delay
+    if (onAutoAdvance) {
+      setTimeout(() => {
+        onAutoAdvance();
+      }, 800); // 800ms delay to show selection feedback
+    }
   };
 
   const getOptionsToDisplay = (): QuizOption[] => {
@@ -146,22 +155,6 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
       role="main"
       aria-live="polite"
     >
-      {/* Question Header */}
-      <div className="question-header">
-        <div className="question-meta" role="group" aria-label="Question metadata">
-          <span className="question-type">
-            {question.type === 'multiple' ? 'Multiple Choice' : 'Choose One'}
-          </span>
-          <span className="question-axis">
-            {question.axis === 'X' ? 'Independence' : 'Assertiveness'} Question
-          </span>
-          {question.reverse && (
-            <span className="question-reverse" title="This question uses reverse scoring">
-              ⚡ Reverse
-            </span>
-          )}
-        </div>
-      </div>
 
       {/* Question Text */}
       <div className="question-content">
@@ -181,25 +174,6 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
         )}
       </div>
 
-      {/* Question Info */}
-      <div className="question-info">
-        <div className="question-stats">
-          <span className="option-count">
-            {getOptionsToDisplay().length} options
-          </span>
-          {question.type === 'multiple' && (
-            <span className="shuffle-note">
-              📝 Options randomized
-            </span>
-          )}
-        </div>
-        
-        {selectedOption !== undefined && (
-          <div className="selection-feedback">
-            ✅ Answer recorded
-          </div>
-        )}
-      </div>
 
       {/* Loading Overlay */}
       {isLoading && (

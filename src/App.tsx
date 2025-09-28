@@ -148,6 +148,7 @@ const QuizQuestionsPage: React.FC = () => {
         question={currentQuestion}
         selectedValue={currentAnswer}
         onAnswerSelect={answerQuestion}
+        onAutoAdvance={isComplete ? handleSubmitQuiz : nextQuestion}
         isLoading={isLoading}
       />
 

@@ -70,7 +70,7 @@ body {
 .princess-list-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-base) var(--spacing-xl);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -78,7 +78,7 @@ body {
 
 .app-header {
   text-align: center;
-  margin-bottom: var(--spacing-3xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .app-header h1 {
@@ -157,8 +157,8 @@ body {
 
 .app-footer {
   text-align: center;
-  margin-top: var(--spacing-3xl);
-  padding: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+  padding: var(--spacing-base);
 }
 
 .app-footer p {

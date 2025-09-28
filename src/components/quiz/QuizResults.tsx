@@ -78,6 +78,12 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
 
   return (
     <div className="quiz-results-container visible">
+      {/* Results Title */}
+      <header className="results-header">
+        <h1 className="results-title">Your Princess Match</h1>
+        <p className="results-subtitle">Discover your royal archetype</p>
+      </header>
+
       {/* Main Results Content */}
       <main className="results-content">
         {/* Single Flattened Card: Graph + Princess Info */}
@@ -99,7 +105,7 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
         </div>
 
         {/* Princess Exploration Carousel */}
-        <section className="carousel-section">
+        <section className="carousel-section" style={{ paddingTop: 0 }}>
           <PrincessRevealCarousel
             quizResult={quizResult}
             allPrincesses={allPrincesses}
