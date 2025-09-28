@@ -6,10 +6,10 @@
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "A) Hope a magical promotion falls into your lap while you keep sweeping floors?", "value": 0},
-        {"text": "B) Complain to friends and wait for someone to notice your potential?", "value": 33},
-        {"text": "C) Network quietly and apply for better gigs on the side?", "value": 66},
-        {"text": "D) Quit dramatically, start your own hustle, and end up sleeping under a bridge to build your empire?", "value": 100}
+        {"text": "Hope a magical promotion falls into your lap while you keep sweeping floors?", "value": 0},
+        {"text": "Complain to friends and wait for someone to notice your potential?", "value": 33},
+        {"text": "Network quietly and apply for better gigs on the side?", "value": 66},
+        {"text": "Quit dramatically, start your own hustle, and end up sleeping under a bridge to build your empire?", "value": 100}
       ]
     },
     {
@@ -19,10 +19,10 @@
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "A) Curl up in bed, scroll TikTok, and let fate reschedule it someday?", "value": 0},
-        {"text": "B) Vent online and hope friends rally with alternatives?", "value": 33},
-        {"text": "C) Pivot to a solo road trip you've always secretly wanted?", "value": 66},
-        {"text": "D) Sue the airline, book a better adventure, and end up maxing out your credit cards to turn it into a viral story?", "value": 100}
+        {"text": "Curl up in bed, scroll TikTok, and let fate reschedule it someday?", "value": 0},
+        {"text": "Vent online and hope friends rally with alternatives?", "value": 33},
+        {"text": "Pivot to a solo road trip you've always secretly wanted?", "value": 66},
+        {"text": "Sue the airline, book a better adventure, and end up maxing out your credit cards to turn it into a viral story?", "value": 100}
       ]
     },
     {
@@ -32,10 +32,10 @@
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "A) Stay put, dreaming of a prince to climb up and save you?", "value": 0},
-        {"text": "B) Hint at your unhappiness, waiting for them to change?", "value": 33},
-        {"text": "C) Set boundaries and seek therapy to untangle yourself?", "value": 66},
-        {"text": "D) Cut the metaphorical hair, walk out, and build a fortress of self-love?", "value": 100}
+        {"text": "Stay put, dreaming of a prince to climb up and save you?", "value": 0},
+        {"text": "Hint at your unhappiness, waiting for them to change?", "value": 33},
+        {"text": "Set boundaries and seek therapy to untangle yourself?", "value": 66},
+        {"text": "Cut the metaphorical hair, walk out, and build a fortress of self-love?", "value": 100}
       ]
     },
     {
@@ -45,10 +45,10 @@
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "A) Hide in the woods, hoping world leaders handle it?", "value": 0},
-        {"text": "B) Join a support group for doomsday preppers?", "value": 33},
-        {"text": "C) Learn alien tech from scraps and form a resistance?", "value": 66},
-        {"text": "D) Negotiate peace single-handedly, and end up beaming up to their mothership alone?", "value": 100}
+        {"text": "Hide in the woods, hoping world leaders handle it?", "value": 0},
+        {"text": "Join a support group for doomsday preppers?", "value": 33},
+        {"text": "Learn alien tech from scraps and form a resistance?", "value": 66},
+        {"text": "Negotiate peace single-handedly, and end up beaming up to their mothership alone?", "value": 100}
       ]
     },
     {
@@ -58,10 +58,10 @@
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "A) Smile through it, pretending everything's fine forever?", "value": 0},
-        {"text": "B) Whisper to a sibling for backup before addressing it?", "value": 33},
-        {"text": "C) Confront it head-on with facts and feelings?", "value": 66},
-        {"text": "D) Rewrite the family narrative, disown the drama, and end up alienated but starting fresh?", "value": 100}
+        {"text": "Smile through it, pretending everything's fine forever?", "value": 0},
+        {"text": "Whisper to a sibling for backup before addressing it?", "value": 33},
+        {"text": "Confront it head-on with facts and feelings?", "value": 66},
+        {"text": "Rewrite the family narrative, disown the drama, and end up alienated but starting fresh?", "value": 100}
       ]
     },
     {
@@ -71,10 +71,10 @@
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "A) Forgive instantly with a hug, because kindness wins?", "value": 0},
-        {"text": "B) Politely ask for a replacement while hiding your annoyance?", "value": 33},
-        {"text": "C) Call them out with a witty roast, but offer to shop for a new one together?", "value": 66},
-        {"text": "D) Unleash a dramatic monologue about boundaries, then ghost them?", "value": 100}
+        {"text": "Forgive instantly with a hug, because kindness wins?", "value": 0},
+        {"text": "Politely ask for a replacement while hiding your annoyance?", "value": 33},
+        {"text": "Call them out with a witty roast, but offer to shop for a new one together?", "value": 66},
+        {"text": "Unleash a dramatic monologue about boundaries, then ghost them?", "value": 100}
       ]
     },
     {
@@ -84,10 +84,10 @@
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "A) Laugh it off sweetly, offering them a napkin?", "value": 0},
-        {"text": "B) Smile through gritted teeth, changing topics gracefully?", "value": 33},
-        {"text": "C) Joke about it being \"fashionable tie-dye\" while demanding dry cleaning cash?", "value": 66},
-        {"text": "D) Roar like Rajah, douse them back, and declare party dominance?", "value": 100}
+        {"text": "Laugh it off sweetly, offering them a napkin?", "value": 0},
+        {"text": "Smile through gritted teeth, changing topics gracefully?", "value": 33},
+        {"text": "Joke about it being \"fashionable tie-dye\" while demanding dry cleaning cash?", "value": 66},
+        {"text": "Roar like Rajah, douse them back, and declare party dominance?", "value": 100}
       ]
     },
     {
@@ -97,10 +97,10 @@
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "A) Bottle it up sweetly, baking cookies for everyone instead?", "value": 0},
-        {"text": "B) Cry quietly to a close friend, seeking comfort?", "value": 33},
-        {"text": "C) Journal fiercely, then share empowering posts online?", "value": 66},
-        {"text": "D) Build an emotional fortress, freeze out the ex, and conquer new horizons?", "value": 100}
+        {"text": "Bottle it up sweetly, baking cookies for everyone instead?", "value": 0},
+        {"text": "Cry quietly to a close friend, seeking comfort?", "value": 33},
+        {"text": "Journal fiercely, then share empowering posts online?", "value": 66},
+        {"text": "Build an emotional fortress, freeze out the ex, and conquer new horizons?", "value": 100}
       ]
     },
     {
@@ -110,10 +110,10 @@
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "A) Hide sweetly in a bunker, sharing rations with survivors?", "value": 0},
-        {"text": "B) Form alliances gently, but whisper warnings about threats?", "value": 33},
-        {"text": "C) Lead raids with clever traps and sassy one-liners?", "value": 66},
-        {"text": "D) Go full feral, archery-zombie heads while yelling battle cries?", "value": 100}
+        {"text": "Hide sweetly in a bunker, sharing rations with survivors?", "value": 0},
+        {"text": "Form alliances gently, but whisper warnings about threats?", "value": 33},
+        {"text": "Lead raids with clever traps and sassy one-liners?", "value": 66},
+        {"text": "Go full feral, archery-zombie heads while yelling battle cries?", "value": 100}
       ]
     },
     {
@@ -123,10 +123,10 @@
       "type": "multiple",
       "reverse": false,
       "options": [
-        {"text": "A) Swallow the hurt sweetly, preserving the peace?", "value": 0},
-        {"text": "B) Express disappointment softly, hoping for reconciliation?", "value": 33},
-        {"text": "C) Demand answers with firm boundaries and walk if needed?", "value": 66},
-        {"text": "D) Call them out epically, sever ties, and end up sailing into your own legend—bridge or no bridge?", "value": 100}
+        {"text": "Swallow the hurt sweetly, preserving the peace?", "value": 0},
+        {"text": "Express disappointment softly, hoping for reconciliation?", "value": 33},
+        {"text": "Demand answers with firm boundaries and walk if needed?", "value": 66},
+        {"text": "Call them out epically, sever ties, and end up sailing into your own legend—bridge or no bridge?", "value": 100}
       ]
     }
   ]

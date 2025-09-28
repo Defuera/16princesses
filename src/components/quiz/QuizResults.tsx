@@ -25,6 +25,11 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
   const navigate = useNavigate();
   const [allPrincesses, setAllPrincesses] = useState<Princess[]>([]);
   const [selectedExplorePrincess, setSelectedExplorePrincess] = useState<Princess | null>(quizResult.matchedPrincess);
+  
+  // Debug log for state changes
+  useEffect(() => {
+    console.log('🔄 selectedExplorePrincess changed to:', selectedExplorePrincess?.name);
+  }, [selectedExplorePrincess]);
 
   // Load all princesses for the graph
   useEffect(() => {
@@ -91,7 +96,15 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
           <AnimatedResultsGraph
             quizResult={quizResult}
                   onAnimationComplete={() => {}}
-                  onUserInteraction={(princess: Princess) => setSelectedExplorePrincess(princess)}
+                  onUserInteraction={(princess: Princess) => {
+                    console.log('📞 QuizResults received princess selection:', princess.name);
+                    console.log('🔄 Current selectedExplorePrincess:', selectedExplorePrincess?.name);
+                    console.log('🔄 Setting selectedExplorePrincess to:', princess.name);
+                    setSelectedExplorePrincess(prev => {
+                      console.log('🔄 setState callback - prev:', prev?.name, 'new:', princess.name);
+                      return princess;
+                    });
+                  }}
             selectedPrincess={selectedExplorePrincess}
             reducedMotion={true}
             className="main-results-graph graph-section"

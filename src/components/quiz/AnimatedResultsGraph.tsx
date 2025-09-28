@@ -73,8 +73,13 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
 
   // Handle user interactions (click/keyboard)
   const handleUserInteraction = (princess: Princess) => {
+    console.log('🎯 Marker clicked!', princess.name);
+    console.log('🔍 onUserInteraction callback exists?', !!onUserInteraction);
     if (onUserInteraction) {
+      console.log('✅ Calling onUserInteraction with:', princess.name);
       onUserInteraction(princess);
+    } else {
+      console.log('❌ No onUserInteraction callback provided');
     }
   };
 
@@ -364,6 +369,11 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
               const princessX = scaleX(princess.heroineScore);
               const princessY = scaleY(princess.bitchScore);
               
+              // Debug log for selection state
+              if (isSelected) {
+                console.log('🎯 Princess is selected:', princess.name, 'selectedPrincess:', selectedPrincess?.name);
+              }
+              
               return (
                 <circle
                   key={`${princess.id}-dot`}
@@ -385,7 +395,10 @@ const AnimatedResultsGraph: React.FC<AnimatedResultsGraphProps> = ({
                   }}
                   data-testid={isMatched ? "matched-princess-dot" : "other-princess-dot"}
                   aria-label={getPrincessAriaLabel(princess, princess.heroineScore, princess.bitchScore)}
-                  onClick={() => handleUserInteraction(princess)}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent event from bubbling to SVG
+                    handleUserInteraction(princess);
+                  }}
                   onMouseEnter={() => setHoveredPrincess(princess)}
                   onMouseLeave={() => setHoveredPrincess(null)}
                 />
