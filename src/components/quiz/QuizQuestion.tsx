@@ -22,16 +22,18 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
 }) => {
   const [selectedOption, setSelectedOption] = useState<number | undefined>(selectedValue);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
   // Update selected option when prop changes (navigation between questions)
   useEffect(() => {
     setSelectedOption(selectedValue);
   }, [selectedValue, question.id]);
 
-  // Animation effect when question changes
+  // Animation in effect when question changes
   useEffect(() => {
+    setIsAnimatingOut(false);
     setIsAnimating(true);
-    const timer = setTimeout(() => setIsAnimating(false), 300);
+    const timer = setTimeout(() => setIsAnimating(false), 400);
     return () => clearTimeout(timer);
   }, [question.id]);
 
@@ -41,11 +43,17 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
     setSelectedOption(option.value);
     onAnswerSelect(question.id, option.value);
     
-    // Auto-advance to next question after a short delay
+    // Auto-advance to next question with proper animation sequence
     if (onAutoAdvance) {
+      // First animate out the current question
+      setTimeout(() => {
+        setIsAnimatingOut(true);
+      }, 300); // Short delay to show selection
+      
+      // Then advance to next question
       setTimeout(() => {
         onAutoAdvance();
-      }, 800); // 800ms delay to show selection feedback
+      }, 600); // Total delay for smooth transition
     }
   };
 
@@ -151,7 +159,7 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
 
   return (
     <div 
-      className={`quiz-question-container ${isAnimating ? 'animating' : ''} theme-${getQuestionTheme()}`}
+      className={`quiz-question-container ${isAnimating ? 'animating-in' : ''} ${isAnimatingOut ? 'animating-out' : ''} theme-${getQuestionTheme()}`}
       role="main"
       aria-live="polite"
     >
